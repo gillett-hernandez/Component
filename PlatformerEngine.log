@@ -1,0 +1,649 @@
+DEBUG:root:adding handler with hear, react, and data = jump, kick, and <function <lambda> at 0x7fa634671230>
+DEBUG:root:adding handler with hear, react, and data = left, move, and <function <lambda> at 0x7fa634671488>
+DEBUG:root:adding handler with hear, react, and data = right, move, and <function <lambda> at 0x7fa62dcd3140>
+DEBUG:root:adding handler with hear, react, and data = up, move, and <function <lambda> at 0x7fa62dcd32a8>
+DEBUG:root:dispatching event update with data {'dt': 0.016666666666666666}
+DEBUG:root:dispatching event update with data {'dt': 0.051}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:dispatching event update with data {'dt': 0.024}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:dispatching event update with data {'dt': 0.019}
+DEBUG:root:dispatching event update with data {'dt': 0.104}
+DEBUG:root:dispatching event update with data {'dt': 0.023}
+DEBUG:root:dispatching event update with data {'dt': 0.026}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(2-KeyDown {'scancode': 39, 'key': 115, 'unicode': u's', 'mod': 0})> from mainloop
+INFO:root:keydown 115 from InputController.keydown
+INFO:root:s
+INFO:root:down
+INFO:root:True
+DEBUG:root:dispatching event down with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 115}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(3-KeyUp {'scancode': 39, 'key': 115, 'mod': 0})> from mainloop
+INFO:root:keyup s from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 115}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.023}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.028}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.022}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.019}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.022}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.019}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.023}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.019}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.019}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.021}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.026}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.025}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.019}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
+INFO:root:keydown 119 from InputController.keydown
+INFO:root:w
+INFO:root:up
+INFO:root:True
+DEBUG:root:dispatching reaction with hear =  up,
+DEBUG:root:                          react = move,
+DEBUG:root:                          data =  {'dy': -5}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': -5}
+DEBUG:root:dispatching event up with data {'press': True}
+DEBUG:root:dispatching event keydown with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
+INFO:root:keyup w from InputController.keyup
+DEBUG:root:dispatching event keyup with data {'key': 119}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.018}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.017}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
+DEBUG:root:dy in kwargs
+DEBUG:root:dispatching event move with data {'dy': 5}
+DEBUG:root:dispatching event update with data {'dt': 0.016}
+INFO:root:notify <Event(2-KeyDown {'scancode': 37, 'key': 306, 'unicode': u'', 'mod': 0})> from mainloop
+INFO:root:keydown 306 from InputController.keydown
+INFO:root:left ctrl
+INFO:root:END
+
