@@ -1,649 +1,1706 @@
-DEBUG:root:adding handler with hear, react, and data = jump, kick, and <function <lambda> at 0x7fa634671230>
-DEBUG:root:adding handler with hear, react, and data = left, move, and <function <lambda> at 0x7fa634671488>
-DEBUG:root:adding handler with hear, react, and data = right, move, and <function <lambda> at 0x7fa62dcd3140>
-DEBUG:root:adding handler with hear, react, and data = up, move, and <function <lambda> at 0x7fa62dcd32a8>
-DEBUG:root:dispatching event update with data {'dt': 0.016666666666666666}
-DEBUG:root:dispatching event update with data {'dt': 0.051}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:dispatching event update with data {'dt': 0.024}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:dispatching event update with data {'dt': 0.019}
-DEBUG:root:dispatching event update with data {'dt': 0.104}
-DEBUG:root:dispatching event update with data {'dt': 0.023}
-DEBUG:root:dispatching event update with data {'dt': 0.026}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(2-KeyDown {'scancode': 39, 'key': 115, 'unicode': u's', 'mod': 0})> from mainloop
-INFO:root:keydown 115 from InputController.keydown
-INFO:root:s
-INFO:root:down
-INFO:root:True
-DEBUG:root:dispatching event down with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 115}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(3-KeyUp {'scancode': 39, 'key': 115, 'mod': 0})> from mainloop
-INFO:root:keyup s from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 115}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.023}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.028}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.022}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.019}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.022}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.019}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.023}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.019}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.019}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.021}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.026}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.025}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.019}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(2-KeyDown {'scancode': 25, 'key': 119, 'unicode': u'w', 'mod': 0})> from mainloop
-INFO:root:keydown 119 from InputController.keydown
-INFO:root:w
-INFO:root:up
-INFO:root:True
-DEBUG:root:dispatching reaction with hear =  up,
-DEBUG:root:                          react = move,
-DEBUG:root:                          data =  {'dy': -5}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': -5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': -5}
-DEBUG:root:dispatching event up with data {'press': True}
-DEBUG:root:dispatching event keydown with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(3-KeyUp {'scancode': 25, 'key': 119, 'mod': 0})> from mainloop
-INFO:root:keyup w from InputController.keyup
-DEBUG:root:dispatching event keyup with data {'key': 119}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.018}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.017}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-DEBUG:root:move called in PhysicsComponent with kwargs as {'dy': 5}
-DEBUG:root:dy in kwargs
-DEBUG:root:dispatching event move with data {'dy': 5}
-DEBUG:root:dispatching event update with data {'dt': 0.016}
-INFO:root:notify <Event(2-KeyDown {'scancode': 37, 'key': 306, 'unicode': u'', 'mod': 0})> from mainloop
-INFO:root:keydown 306 from InputController.keydown
-INFO:root:left ctrl
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([16, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([32, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([48, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([64, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([80, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([96, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([128, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([144, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([160, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([176, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([192, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([208, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([224, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([240, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([256, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([272, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([288, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([320, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([336, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([384, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([400, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([416, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([432, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([448, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([464, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([480, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([496, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([512, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([528, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([544, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([560, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([576, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([592, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([608, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([624, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([640, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([656, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([672, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([688, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([704, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([720, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([736, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([752, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 0],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 16],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 16],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 16],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([128, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([144, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([160, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([176, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([192, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([208, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 32],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([224, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([416, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([432, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([528, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([544, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([560, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([576, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 48],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 64],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 64],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([240, 64],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 64],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 64],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 80],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 80],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([240, 80],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 80],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 80],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([240, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([320, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([336, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([384, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([400, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([496, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([512, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 96],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 112],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 112],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([240, 112],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 112],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 112],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 128],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 128],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([240, 128],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 128],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 128],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([256, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([384, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([496, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([512, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([528, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([544, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 144],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 160],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 160],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([272, 160],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 160],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 160],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 176],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 176],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([192, 176],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([208, 176],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 176],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([592, 176],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 176],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([128, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([144, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([160, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([176, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([336, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([576, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([592, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 192],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([320, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([336, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([384, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([560, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([576, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([592, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 208],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 224],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([208, 224],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 224],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 224],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([160, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([176, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([192, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([208, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([288, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([464, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([480, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([496, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([512, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 240],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 256],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([288, 256],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 256],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 256],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 256],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 272],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([288, 272],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 272],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 272],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([592, 272],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 272],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([256, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([272, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([288, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([400, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([416, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([432, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([448, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([464, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([480, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([576, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 288],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 304],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([560, 304],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 304],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 320],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([544, 320],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 320],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 336],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([528, 336],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 336],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 352],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([512, 352],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 352],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 368],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([496, 368],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 368],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 384],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([480, 384],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 384],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 400],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([464, 400],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 400],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 416],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([448, 416],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 416],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 432],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([432, 432],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 432],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 448],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([416, 448],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 448],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 464],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([400, 464],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 464],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 480],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([384, 480],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 480],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 496],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 496],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 496],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 512],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 512],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 512],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 528],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([336, 528],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 528],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 544],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([320, 544],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 544],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 560],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 560],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 560],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 576],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([288, 576],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 576],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 592],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([272, 592],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 592],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 608],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 608],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([0, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([16, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([32, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([48, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([64, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([80, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([96, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([112, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([128, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([144, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([160, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([176, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([192, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([208, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([224, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([240, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([256, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([272, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([288, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([304, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([320, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([336, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([352, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([368, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([384, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([400, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([416, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([432, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([448, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([464, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([480, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([496, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([512, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([528, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([544, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([560, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([576, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([592, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([608, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([624, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([640, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([656, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([672, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([688, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([704, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([720, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([736, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([752, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([768, 624],)
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 16),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Block>>
+DEBUG:root:attaching component with name: position <class 'component.PositionComponent'>([32, 16],)
+DEBUG:root:attaching component with name: physics <class 'component.PhysicsComponent'>()
+DEBUG:root:attaching event update with callback <bound method PhysicsComponent.update of <PhysicsComponent attached to Player>>
+DEBUG:root:attaching event nearby with callback <bound method PhysicsComponent.collidelist of <PhysicsComponent attached to Player>>
+DEBUG:root:attaching event move with callback <bound method PhysicsComponent.move of <PhysicsComponent attached to Player>>
+DEBUG:root:attaching event kick with callback <bound method PhysicsComponent.kick of <PhysicsComponent attached to Player>>
+DEBUG:root:attaching event turn with callback <bound method PhysicsComponent.turn of <PhysicsComponent attached to Player>>
+DEBUG:root:attaching component with name: input <class 'component.InputController'>()
+DEBUG:root:{32: ['jump', {'jumpspeed': 245.06694}], 97: ['left', {}], 115: ['down', {}], 100: ['right', {}], 119: ['up', {}]}
+DEBUG:root:attaching event keydown with callback <bound method InputController.keydown of <InputController attached to Player>>
+DEBUG:root:attaching event keyup with callback <bound method InputController.keyup of <InputController attached to Player>>
+DEBUG:root:attaching component with name: handler <class '__main__.PlayerEventHandler'>()
+DEBUG:root:attaching event jump with callback <function reaction at 0x7f570ac70050>
+DEBUG:root:attaching event left with callback <function reaction at 0x7f57044fcde8>
+DEBUG:root:attaching event right with callback <function reaction at 0x7f57044fced8>
+DEBUG:root:attaching component with name: image <class 'component.SimpleSprite'>((16, 32),)
+DEBUG:root:attaching event update with callback <bound method SimpleSprite.update of <SimpleSprite attached to Player>>
+DEBUG:root:attaching component with name: proximity_UserGroup <class 'component.ProximitySensor'>(<UserGroup(296 sprites)>, 42)
+DEBUG:root:ProximitySensor init
+DEBUG:root:attaching event update with callback <bound method ProximitySensor.update of <ProximitySensor attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+INFO:root:notifying <Event(2-KeyDown {'scancode': 114, 'key': 275, 'unicode': u'', 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keydown and data: {'key': 275}>
+DEBUG:root:keydown 275 from InputController.keydown
+DEBUG:root:right
+DEBUG:root:False
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+INFO:root:notifying <Event(3-KeyUp {'scancode': 114, 'key': 275, 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keyup and data: {'key': 275}>
+DEBUG:root:keyup 275 from InputController.keyup
+DEBUG:root:right
+DEBUG:root:False
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+INFO:root:notifying <Event(2-KeyDown {'scancode': 40, 'key': 100, 'unicode': u'd', 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keydown and data: {'key': 100}>
+DEBUG:root:keydown 100 from InputController.keydown
+DEBUG:root:d
+DEBUG:root:True
+DEBUG:root:['right', {}]
+DEBUG:root:['right', {'press': True}]
+DEBUG:root:dispatching event <Event instance with keyword: right and data: {'press': True}>
+DEBUG:root:reaction with pressed as True
+DEBUG:root:reaction if branch right before attach_component
+DEBUG:root:attaching component with name: right_kick_repeater <class 'component.Repeater'>('kick', 1, {'dv_x': 20})
+DEBUG:root:attaching event update with callback <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [20.0, 45.20708]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [38.0, 45.27637]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [54.2, 45.33873]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [68.78, 46.20486]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [81.902, 45.90437]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [93.7118, 45.63393]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [104.34062, 45.93054]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [113.90656, 45.92749]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [122.5159, 45.65474]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [130.26431, 45.94927]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [137.23788000000002, 46.48434]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(3-KeyUp {'scancode': 40, 'key': 100, 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keyup and data: {'key': 100}>
+DEBUG:root:keyup 100 from InputController.keyup
+DEBUG:root:d
+DEBUG:root:True
+DEBUG:root:['right', {'press': True}]
+DEBUG:root:['right', {'press': False}]
+DEBUG:root:dispatching event <Event instance with keyword: right and data: {'press': False}>
+DEBUG:root:reaction with pressed as False
+DEBUG:root:reaction else branch right before detach_component
+DEBUG:root:calling detach_component on right_kick_repeater
+DEBUG:root:called remove_events from Repeater
+DEBUG:root:calling detach_event on <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(2-KeyDown {'scancode': 38, 'key': 97, 'unicode': u'a', 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keydown and data: {'key': 97}>
+DEBUG:root:keydown 97 from InputController.keydown
+DEBUG:root:a
+DEBUG:root:True
+DEBUG:root:['left', {}]
+DEBUG:root:['left', {'press': True}]
+DEBUG:root:dispatching event <Event instance with keyword: left and data: {'press': True}>
+DEBUG:root:reaction with pressed as True
+DEBUG:root:reaction if branch right before attach_component
+DEBUG:root:attaching component with name: left_kick_repeater <class 'component.Repeater'>('kick', 1, {'dv_x': -20})
+DEBUG:root:attaching event update with callback <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [11.39563, 45.21293]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-9.74393, 45.55164]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-28.76954, 45.31648]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-45.89259, 45.37483]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-61.30333, 46.23735]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-75.173, 46.20361]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-87.6557, 45.90325]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-98.89013, 45.63293]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-109.00112, 45.38964]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-118.10101, 45.17068]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-126.29091, 45.24361]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(3-KeyUp {'scancode': 38, 'key': 97, 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keyup and data: {'key': 97}>
+DEBUG:root:keyup 97 from InputController.keyup
+DEBUG:root:a
+DEBUG:root:True
+DEBUG:root:['left', {'press': True}]
+DEBUG:root:['left', {'press': False}]
+DEBUG:root:dispatching event <Event instance with keyword: left and data: {'press': False}>
+DEBUG:root:reaction with pressed as False
+DEBUG:root:reaction else branch right before detach_component
+DEBUG:root:calling detach_component on left_kick_repeater
+DEBUG:root:called remove_events from Repeater
+DEBUG:root:calling detach_event on <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(2-KeyDown {'scancode': 40, 'key': 100, 'unicode': u'd', 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keydown and data: {'key': 100}>
+DEBUG:root:keydown 100 from InputController.keydown
+DEBUG:root:d
+DEBUG:root:True
+DEBUG:root:['right', {'press': False}]
+DEBUG:root:['right', {'press': True}]
+DEBUG:root:dispatching event <Event instance with keyword: right and data: {'press': True}>
+DEBUG:root:reaction with pressed as True
+DEBUG:root:reaction if branch right before attach_component
+DEBUG:root:attaching component with name: right_kick_repeater <class 'component.Repeater'>('kick', 1, {'dv_x': 20})
+DEBUG:root:attaching event update with callback <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [-40.40455, 45.09492]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [-16.364089999999997, 44.90543]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [5.272320000000001, 44.73489]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [24.74509, 44.8514]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [42.270579999999995, 44.68626]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [58.04352, 44.53763]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [72.23917, 44.40387]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [85.01525, 45.09348]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [96.51372, 45.17413]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [106.86235, 44.97672]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [116.17612, 44.79905]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [124.55851, 44.63914]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(3-KeyUp {'scancode': 40, 'key': 100, 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keyup and data: {'key': 100}>
+DEBUG:root:keyup 100 from InputController.keyup
+DEBUG:root:d
+DEBUG:root:True
+DEBUG:root:['right', {'press': True}]
+DEBUG:root:['right', {'press': False}]
+DEBUG:root:dispatching event <Event instance with keyword: right and data: {'press': False}>
+DEBUG:root:reaction with pressed as False
+DEBUG:root:reaction else branch right before detach_component
+DEBUG:root:calling detach_component on right_kick_repeater
+DEBUG:root:called remove_events from Repeater
+DEBUG:root:calling detach_event on <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+INFO:root:notifying <Event(2-KeyDown {'scancode': 38, 'key': 97, 'unicode': u'a', 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keydown and data: {'key': 97}>
+DEBUG:root:keydown 97 from InputController.keydown
+DEBUG:root:a
+DEBUG:root:True
+DEBUG:root:['left', {'press': False}]
+DEBUG:root:['left', {'press': True}]
+DEBUG:root:dispatching event <Event instance with keyword: left and data: {'press': True}>
+DEBUG:root:reaction with pressed as True
+DEBUG:root:reaction if branch right before attach_component
+DEBUG:root:attaching component with name: left_kick_repeater <class 'component.Repeater'>('kick', 1, {'dv_x': -20})
+DEBUG:root:attaching event update with callback <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-8.96046, 45.6965]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block, Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-28.064410000000002, 45.44685]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-45.25797, 45.22216]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-60.73217, 46.36994]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': [Block]}>
+DEBUG:root:collide in PhysicsComponent
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-74.65895, 46.05295]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': -20}>
+INFO:root:kick called in PhysicsComponent [-20, 0]. current vector is [-87.19306, 48.46766]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(3-KeyUp {'scancode': 38, 'key': 97, 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keyup and data: {'key': 97}>
+DEBUG:root:keyup 97 from InputController.keyup
+DEBUG:root:a
+DEBUG:root:True
+DEBUG:root:['left', {'press': True}]
+DEBUG:root:['left', {'press': False}]
+DEBUG:root:dispatching event <Event instance with keyword: left and data: {'press': False}>
+DEBUG:root:reaction with pressed as False
+DEBUG:root:reaction else branch right before detach_component
+DEBUG:root:calling detach_component on left_kick_repeater
+DEBUG:root:called remove_events from Repeater
+DEBUG:root:calling detach_event on <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(2-KeyDown {'scancode': 40, 'key': 100, 'unicode': u'd', 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keydown and data: {'key': 100}>
+DEBUG:root:keydown 100 from InputController.keydown
+DEBUG:root:d
+DEBUG:root:True
+DEBUG:root:['right', {'press': False}]
+DEBUG:root:['right', {'press': True}]
+DEBUG:root:dispatching event <Event instance with keyword: right and data: {'press': True}>
+DEBUG:root:reaction with pressed as True
+DEBUG:root:reaction if branch right before attach_component
+DEBUG:root:attaching component with name: right_kick_repeater <class 'component.Repeater'>('kick', 1, {'dv_x': 20})
+DEBUG:root:attaching event update with callback <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [3.8429600000000015, 45.50366]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [23.458660000000002, 45.54329]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [41.112790000000004, 45.30896]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [57.00151, 45.09806]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv_x': 20}>
+INFO:root:kick called in PhysicsComponent [20, 0]. current vector is [71.30136, 44.90825]
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:notifying <Event(3-KeyUp {'scancode': 40, 'key': 100, 'mod': 0})> from mainloop
+DEBUG:root:dispatching event <Event instance with keyword: keyup and data: {'key': 100}>
+DEBUG:root:keyup 100 from InputController.keyup
+DEBUG:root:d
+DEBUG:root:True
+DEBUG:root:['right', {'press': True}]
+DEBUG:root:['right', {'press': False}]
+DEBUG:root:dispatching event <Event instance with keyword: right and data: {'press': False}>
+DEBUG:root:reaction with pressed as False
+DEBUG:root:reaction else branch right before detach_component
+DEBUG:root:calling detach_component on right_kick_repeater
+DEBUG:root:called remove_events from Repeater
+DEBUG:root:calling detach_event on <bound method Repeater.update1 of <Repeater attached to Player>>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+DEBUG:root:dispatching event <Event instance with keyword: nearby and data: {'spritelist': []}>
+INFO:root:event K_ESCAPE
 INFO:root:END
 
