@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import logging
+from math import hypot
 
 import constants
 import keyconfig
@@ -8,7 +9,6 @@ import keyconfig
 import pygame
 
 logging.basicConfig(**constants.logging_setup)
-from math import hypot
 
 
 def void(*args, **kwargs):
@@ -23,30 +23,31 @@ def sign(n):
     return int(n/abs(n))
 
 
-def vadd(x, y):
-    return [x[0]+y[0], x[1]+y[1]]
+def vadd(v1, v2):
+    return [v1[0]+v2[0], v1[1]+v2[1]]
 
 
-def vsub(x, y):
-    return [x[0]-y[0], x[1]-y[1]]
+def vsub(v1, v2):
+    return [v1[0]-v2[0], v1[1]-v2[1]]
 
 
-def vmul(x, m):
-    return [x[0]*m, x[1]*m]
+def vmul(v1, m):
+    return [v1[0]*m, v1[1]*m]
 
 
-def vdot(x, y):
-    return x[0]*y[0]+x[1]*y[1]
+def vdot(v1, v2):
+    return v1[0]*v2[0]+v1[1]*v2[1]
 
 from miscfunc import lengthdir_x, lengthdir_y
 
 
-def distance(x, y=[0, 0]):
-    return hypot(x[0]-y[0], x[1]-y[1])
+def distance(v1, v2=[0, 0]):
+    return hypot(v1[0]-v2[0], v1[1]-v2[1])
 
 
 class Component(object):
     def __init__(self, obj):
+        super(Component, self).__init__()
         self.obj = obj
         self.attached_events = []
 
@@ -256,7 +257,7 @@ class PhysicsComponent(Component):
         self.p = obj.get_component('position')
         self.gravity = kwargs['gravity']\
             if 'gravity' in kwargs else constants.GRAVITY
-        self.vector = [0, 0]
+        self.vector = kwargs['vector'] if 'vector' in kwargs else [0, 0]
         self.dir = -90
         self.attach_event('update', self.update)
         self.attach_event('nearby', self.collidelist)
@@ -374,7 +375,6 @@ class PhysicsComponent(Component):
 
     def accel(self, dv):
         v = [lengthdir_x(dv, self.dir), lengthdir_y(dv, self.dir)]
-        print(v)
         self.kick(dv=v)
 
     def bounce_horizontal(self):
@@ -396,7 +396,6 @@ class PhysicsComponent(Component):
         self.on_ground = not self.on_ground
 
     def update(self, **kwargs):
-        print(self.dir, 'phys')
         dt = kwargs['dt']
         x, y = self.p.pos
         # if self is outside screen ceiling or floor
@@ -478,13 +477,16 @@ class SpriteFromImage(Component):
     def turn(self, d0):
         self.dir += d0
         logging.debug("d0 is {d0}, dir is {self.dir}".format(d0=d0, self=self))
-        self.obj.image = pygame.transform.rotate(self.image, self.dir)
-        # self.obj.rect = self.obj.image.get_rect(center=self.obj.rect.center)
+        # transform image
+        self.obj.image = pygame.transform.rotozoom(self.image, self.dir, 1)
+        # obj.rect should be the rect of the new image
+        # obj.rect.center should be self.rect.center
+        self.obj.rect = self.obj.image.get_rect(center=self.rect.center)
 
     def update(self, **kwargs):
-        print(self.dir)
         if self.obj.rect.topleft is not self.p.pos:
             self.obj.rect.topleft = self.p.pos
+            self.rect.topleft = self.p.pos
 
 
 class Object(pygame.sprite.Sprite):

@@ -19,7 +19,7 @@ SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT
 
 FRAMERATE = 60
 
-friction = .9
+friction = .99
 
 strength_or_speed = 'strength'
 
