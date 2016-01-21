@@ -17,11 +17,11 @@ import logging
 import math
 
 from composite import *
-import constants
+import lf_constants as constants
 # import sound
 import kwargsGroup
 
-import miscfunc
+import miscfunc as mf
 
 import pygame
 from pygame.locals import *
