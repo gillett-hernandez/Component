@@ -1,0 +1,731 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"obj",
+				"obj_ballT"
+			],
+			[
+				"ima",
+				"images"
+			],
+			[
+				"re",
+				"resources"
+			],
+			[
+				"image",
+				"imageName"
+			],
+			[
+				"red",
+				"redBall"
+			],
+			[
+				"updat",
+				"updating"
+			],
+			[
+				"Move",
+				"MovableObject"
+			],
+			[
+				"mo",
+				"move"
+			],
+			[
+				"rect",
+				"rect"
+			],
+			[
+				"outside",
+				"outsideForce"
+			],
+			[
+				"varia",
+				"variables"
+			],
+			[
+				"y",
+				"y_offset"
+			],
+			[
+				"c",
+				"cl	class"
+			],
+			[
+				"sw",
+				"switch"
+			],
+			[
+				"right",
+				"rightValue"
+			],
+			[
+				"con",
+				"conditionalExp"
+			],
+			[
+				"array",
+				"array"
+			],
+			[
+				"po",
+				"point_slope"
+			],
+			[
+				"ve",
+				"Vector"
+			],
+			[
+				"de",
+				"degToRad"
+			],
+			[
+				"create",
+				"createArray"
+			],
+			[
+				"set",
+				"setTimer"
+			],
+			[
+				"callback",
+				"callback"
+			],
+			[
+				"ca",
+				"Callback"
+			],
+			[
+				"dec",
+				"decToBin"
+			],
+			[
+				"merge",
+				"mergeSort"
+			],
+			[
+				"point",
+				"point_slope"
+			],
+			[
+				"Vector",
+				"Vector"
+			],
+			[
+				"Angle",
+				"Angle"
+			],
+			[
+				"range",
+				"range"
+			],
+			[
+				"j",
+				"j"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"Grid",
+				"Grid"
+			],
+			[
+				"args",
+				"args"
+			],
+			[
+				"list",
+				"list"
+			],
+			[
+				"str",
+				"strOrList"
+			],
+			[
+				"val",
+				"val"
+			],
+			[
+				"fibonacci",
+				"fibonacciN"
+			],
+			[
+				"get",
+				"get	Get Elements"
+			],
+			[
+				"deg",
+				"degToRad"
+			],
+			[
+				"pr",
+				"prototype"
+			],
+			[
+				"rad",
+				"radToDeg"
+			],
+			[
+				"rand",
+				"random"
+			],
+			[
+				"y2",
+				"y2-y1"
+			],
+			[
+				"x",
+				"x2-x1"
+			],
+			[
+				"if",
+				"if	if"
+			],
+			[
+				"table",
+				"table.concat	table.concat"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/media/gillett/ECDE2E93DE2E565C1/Users/Documents/Code/Python/miscfunc.py",
+			"settings":
+			{
+				"buffer_size": 26797,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "sound.py",
+			"settings":
+			{
+				"buffer_size": 590,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "composite.py",
+			"settings":
+			{
+				"buffer_size": 28794,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"html",
+				"HTML: Encode Special Characters"
+			],
+			[
+				"ja",
+				"Set Syntax: JavaScript"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 211.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/media/gillett/ECDE2E93DE2E565C1/Users/Documents/Code/Python/PlatformerEngine"
+	],
+	"file_history":
+	[
+		"/media/gillett/ECDE2E93DE2E565C1/Users/Documents/Code/Python/PlatformerEngine/luftrausers_constants.py",
+		"/media/gillett/ECDE2E93DE2E565C1/Users/Documents/Code/Python/PlatformerEngine/luftrausersclone.py",
+		"/media/gillett/ECDE2E93DE2E565C1/Users/Documents/Code/Python/PlatformerEngine/constants.py",
+		"/media/gillett/ECDE2E93DE2E565C1/Users/Documents/Code/Python/PlatformerEngine/platformerEngine.py",
+		"/C/Python27/Lib/site-packages/myfunc.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/PlatformerEngine/functions.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/PlatformerEngine/governer.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/PlatformerEngine/eventHandlers.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/PlatformerEngine/classes.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/engines/trajectory.py",
+		"/C/Documents and Settings/Tino/Desktop/testHomepage.html",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/Trajectory/governor.py",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/ModPacks/Thing/Item/Rifle.ini",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/ModPacks/Thing/Item/Fire Bullet.ini",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/ModPacks/Thing/Projectile/Fire Bullet.cs",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/ModPacks/Thing/Projectile/Fire Bullet.ini",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/Defaults/Defaults/Projectile/Fire Arrow.ini",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/Examples/Examples/Projectile/Hellfire Chakram.cs",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/Examples/Examples/Projectile/Hellfire Chakram.ini",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/Defaults/Defaults/Projectile/Dirt Ball.ini",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/ModPacks/Thing/Item/Fire Bullet.cs",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/ModPacks/Thing/Item/Obsidian Sword.ini",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/Defaults/Defaults/Item/Adamantite Drill.ini",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/ModPacks/Thing/Item/Strange Orb.cs",
+		"/C/Documents and Settings/Tino/Desktop/fileEditor.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/Platformer Engine/eventHandlers.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/Platformer Engine/classes.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/Platformer Engine/functions.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/Platformer Engine/governer.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/Platformer Engine/event.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/physics box/physics.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/myfunc.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/trajectorytest.py",
+		"/C/Documents and Settings/Tino/Desktop/Code/Python/guessingGame.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/Trajectory/governor.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/Platformer Engine/governer.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/myfunc.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/entities/Structures.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/averager.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/Platformer Engine/guv'nr.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/Platformer Engine/governor.py",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Documents and Settings/Tino/My Documents/My Games/Terraria/Worlds/The Cursed Return.wld",
+		"/C/Documents and Settings/Tino/Desktop/Python/Trajectory/myfunc.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/SandCastleDefense.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/entities/Characters.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/entities/Menu.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/entities/map.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/entities/base.py",
+		"/C/Documents and Settings/Tino/Desktop/JavaScript/myFunk.js",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/entities/Aspects.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/engines/wave.py",
+		"/C/Documents and Settings/Tino/My Documents/GitHub/SandCastleDefense/python/DI.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/thing.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/colorScreen.py",
+		"/C/Documents and Settings/Tino/My Documents/Terraria deComp/Terraria/Projectile.cs",
+		"/C/Documents and Settings/Tino/My Documents/Terraria 1.1/Content/TerrariaMusic.xgs",
+		"/C/Documents and Settings/Tino/My Documents/Terraria 1.1/Content/Wave Bank.xwb",
+		"/C/Documents and Settings/Tino/My Documents/Terraria 1.1/Content/Sound Bank.xsb",
+		"/C/Documents and Settings/Tino/Desktop/C++/newFile.bin",
+		"/C/Documents and Settings/Tino/Desktop/C++/newFile.exe",
+		"/C/Documents and Settings/Tino/Desktop/Python/sinGen.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/vehicalMaker.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/test1.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/volume.py",
+		"/C/Documents and Settings/Tino/Desktop/Python/fileEditor.py",
+		"/C/Documents and Settings/Tino/Desktop/Java/Game in java/screen.java",
+		"/C/Documents and Settings/Tino/Desktop/C++/newFile.cpp",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/Java/syso.sublime-snippet",
+		"/G/Music/Mumford And Sons/Mumford And Sons/12 Mumford And Sons - After the Storm.mp3",
+		"/C/Documents and Settings/Tino/Desktop/Python/myfunc.pyc",
+		"/C/Documents and Settings/Tino/Desktop/index.js",
+		"/C/Documents and Settings/Tino/Desktop/Project1.dev",
+		"/C/Documents and Settings/Tino/Desktop/main.o",
+		"/C/Documents and Settings/Tino/Desktop/CutTheRope2.0/AndroidManifest.xml",
+		"/C/Documents and Settings/Tino/Desktop/test.java",
+		"/C/Documents and Settings/Tino/Desktop/lame_enc.dll",
+		"/C/Documents and Settings/Tino/Desktop/myFunk.js",
+		"/C/Documents and Settings/Tino/Desktop/Powder/Mods/powder.pref",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/AStar.gml",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/PjOde.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/PgVecFld.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/PgVecFld_IP.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/PaOde.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/ImageSelection.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/PjOde_IP.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/PuDomain.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GrapherODE/PuDomain_IP.java",
+		"/C/Documents and Settings/Tino/My Documents/new.cpp",
+		"/C/Documents and Settings/Tino/Desktop/golly-2.4-win/Rules/WireWorld.tree",
+		"/C/Documents and Settings/Tino/Desktop/golly-2.4-win/Rules/WireWorld.table",
+		"/C/Documents and Settings/Tino/Desktop/A Slower Speed of Light/Crash_2012-11-20_025722/report.ini",
+		"/C/Documents and Settings/Tino/Desktop/golly-2.4-win/Rules/Life.tree",
+		"/C/Program Files/CA_Explorer5_0/userRules/Rule30.java",
+		"/C/Program Files/CA_Explorer5_0/userRules/MinimumRule.java",
+		"/C/Program Files/CA_Explorer5_0/userRules/Copy of myRule.java",
+		"/C/Documents and Settings/Tino/Desktop/gmk's/lightning.gmk",
+		"/C/Documents and Settings/Tino/Desktop/Powder/powder.def",
+		"/C/Documents and Settings/Tino/Desktop/Powder/powder.pref",
+		"/C/Documents and Settings/Tino/Desktop/NO$GBA/2002 - Professor Layton and the Curious Village (U)(Micronauts).nds",
+		"/C/WINDOWS/system32/notepad.exe",
+		"/C/Documents and Settings/Tino/Desktop/sylvester.src.js",
+		"/C/Documents and Settings/Tino/Desktop/sylvester.js",
+		"/C/Documents and Settings/Tino/Desktop/thing.bin",
+		"/C/Documents and Settings/Tino/My Documents/range_finder.gml",
+		"/C/Documents and Settings/Tino/Desktop/newFile.cpp",
+		"/C/Documents and Settings/Tino/Desktop/baybooksSettings.lib",
+		"/C/Documents and Settings/Tino/Desktop/myfunc.py",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/GameFAQs  Fire Emblem (GBA) Codebreaker Codes by guru2012_files/simplejax.js",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/[kat.ph]doctor.who.2005.season.3.dvdrip.x264.dolby.5.1.mch.torrent",
+		"/C/Documents and Settings/Tino/My Documents/Doctor.Who.2005.Season.4.DVDrip.x264.Dolby.5.1-MCH/Doctor.Who.2005-s04e01.Partners.in.Crime.srt",
+		"/C/Documents and Settings/Tino/Desktop/canvas.html",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/move_and_jump.lib",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/MergeSortAlgorithm.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/QSortAlgorithm.java",
+		"/C/Documents and Settings/Tino/My Documents/Downloads/backbone.js",
+		"/C/Documents and Settings/Tino/Desktop/main.class",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/Java/class.sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/Java/java_math.sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/Haskell/Haskell.tmLanguage",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/JavaScript/for-()-{}.sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/JavaScript/Completion Rules.tmPreferences.cache",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/JavaScript/Prototype-(proto).sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/JavaScript/function.sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/JavaScript/if-___-else.sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/JavaScript/for-()-{}-(faster).sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/JavaScript/function-(fun).sublime-snippet",
+		"/C/Documents and Settings/Tino/Application Data/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"([^d][^e][^f] )?translate_event\\(.*?\\)[^:]",
+			"[^def] translate_event\\(.*?\\)[^:]",
+			"[^def] translate_event\\(.*?\\)",
+			"translate_event\\(.*?\\)",
+			"logging",
+			"self.containers",
+			"applyfriction",
+			"screenUpdateList",
+			"get_num_channels",
+			"v",
+			"vector",
+			"point\\[0\\]",
+			"	\"\"\".*(\\n	.*)*\"\"\"",
+			"\"\"\".*\"\"\"",
+			"image",
+			"+=",
+			"=",
+			"optimalAngle",
+			"point_direction",
+			"point_distance",
+			"projectileMotion",
+			"\"\"\".*\\n?.*\\n?.*\\n?.*\\n?\"\"\"",
+			"\"\"\"(.*\\n*)\"\"\"",
+			"		",
+			"=",
+			"==",
+			"if",
+			"=",
+			"world",
+			"range",
+			"canvas",
+			"Quadratic",
+			"degrees",
+			"radians",
+			"cos",
+			"sin",
+			"degrees",
+			"radians",
+			"arccos",
+			"sqrt",
+			"tan",
+			"cos",
+			"sin",
+			"to_radians",
+			"print \\\"+.\\\"",
+			"x",
+			"obj_ballT",
+			"projectile",
+			"distancePoint",
+			";",
+			"to_radians",
+			"from math import .+",
+			"  ",
+			"for\\s?\\(var i = 0.*\\)\\s*\\{",
+			"for\\s?\\(var\\s+i\\s*=\\s*\\d\\)",
+			"  ",
+			"\\n\\n",
+			"^\\s",
+			"function",
+			"var .+ = exports\\..+ = function .+\\(.*\\) \\{",
+			"var .* = function",
+			"exports\\..+ =",
+			"exports\\..+ = fun",
+			"= function .*",
+			"= function .+\\(.*\\) \\{",
+			"Grid",
+			"var .+ = function .+",
+			"var .+ = function .+\\( .* \\)",
+			"var .+ = function",
+			"var .* = function",
+			"for\\s\\(var i =",
+			"function .*\\(.*\\)\\s*\\{",
+			".+\\.prototype\\..* =",
+			"\\};",
+			"array\\.prototype\\.",
+			"\\d\\d:\\d\\d:\\d\\d,\\d\\d\\d\\+",
+			"\\d\\d:\\d\\d:\\d\\d,\\d\\d\\d",
+			"mod",
+			"/*;*/a",
+			"forEach",
+			".forEach",
+			".add",
+			".prototype.add",
+			"Angle",
+			"point2",
+			"point1",
+			"forEach",
+			"curPoint",
+			"forEach",
+			"};",
+			"map",
+			"for (var ",
+			"    ",
+			"vector.direction",
+			"var",
+			"= function",
+			"var ",
+			";",
+			"obj",
+			"function ",
+			"\\",
+			"<?",
+			"function(",
+			"var",
+			"x",
+			"  ",
+			"console.log"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"functionn"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/media/gillett/ECDE2E93DE2E565C1/Users/Documents/Code/Python/miscfunc.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 26797,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "sound.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 590,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "composite.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 28794,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1069,
+								1069
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1014.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 207.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 390.0
+	},
+	"pinned_build_system": "",
+	"project": "platformerEngine.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Documents and Settings\\Tino\\Desktop\\Code\\Python\\Trajectory\\trajectory.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 213.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
