@@ -1,0 +1,16 @@
+{
+    'GRAVITY': 300,
+    'SCREEN_WIDTH': 800,
+    'SCREEN_HEIGHT': 640,
+    'SCREEN_SIZE': [800, 640],
+    'FRAMERATE': 60,
+    'friction': -0.2,
+    'strength_or_speed': 'strength',
+    'runspeed': 200,
+    'runaccel': 10,
+    'jumpstrength': 5*16,
+    'jumpspeed': 70,
+    'logging_setup': {"filename": './PlatformerEngine.log',
+                      "filemode": 'w',
+                      "level": 'logging.DEBUG'}
+}

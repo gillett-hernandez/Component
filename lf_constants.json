@@ -1,0 +1,44 @@
+{
+    /*"logging_setup": {
+        "handlers": {
+            "console": {
+                "class": "logging.StreamHandler",
+                "formatter": "brief",
+                "level": "INFO",
+                "filters": ["allow_foo"],
+                "stream": "ext://sys.stdout"
+            },
+            "file": {
+                "class": "logging.handlers.RotatingFileHandler",
+                "formatter": "precise",
+                "filename": "LuftrausersClone.log",
+                "maxBytes": 1024,
+                "backupCount": 3
+            }
+        }
+    }*/
+
+    'GRAVITY': 5,
+    'SCREEN_WIDTH': 800,
+    'SCREEN_HEIGHT': 640,
+    'SCREEN_SIZE': [800, 640],
+    'LEVEL_WIDTH': 1000,
+    'LEVEL_HEIGHT': 800,
+    'FRAMERATE': 60,
+    'bulletspeed': 10,
+    'friction': -0.2,
+    'strength_or_speed': 'strength',
+    'turnspeed': 4,
+    'accelturnspeed': 3,
+    'always_restrict_velocity': false,
+    'maxspeed': 300,
+    'accel': 15,
+    'friction': 0.01,
+    'runspeed': 200,
+    'runaccel': 10,
+    'jumpstrength': 80,
+    'jumpspeed': 70,
+    'logging_setup': {"filename": './LuftrausersClone.log',
+                      "filemode": 'w',
+                      "level": 'logging.DEBUG'}
+}
