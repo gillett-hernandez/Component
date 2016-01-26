@@ -14,6 +14,7 @@ logging.basicConfig(**constants.logging_setup)
 
 VERSION = [0, 1, 0]
 
+
 def void(*args, **kwargs):
     return
 
@@ -43,7 +44,7 @@ def distance(v1, v2=[0, 0]):
 
 
 def vproj(v1, v2):
-    return distance(v1)*math.cos((math.atan2(v2[1],v2[0])-math.atan2(v1[1],v1[0])))
+    return distance(v1)*math.cos((math.atan2(v2[1], v2[0])-math.atan2(v1[1], v1[0])))
 
 
 class Event:
@@ -52,9 +53,9 @@ class Event:
         self.data = data
 
     def __repr__(self):
-        return "<Event instance with keyword:" +\
-            " {keyword} and data: {data}>".format(keyword=str(self.keyword),
-                                                  data=str(self.data))
+        return ("<Event instance with keyword:"
+                " {keyword} and data: {data}>".format(keyword=str(self.keyword),
+                                                      data=str(self.data)))
 
 
 class Component(object):
@@ -108,9 +109,6 @@ class Component(object):
         for eventid in self.attached_events:
             self.obj.detach_event(eventid)
 
-    def break_event(self):
-        pass
-
 
 class Composite(Component):
     def __init__(self):
@@ -136,6 +134,7 @@ class Composite(Component):
                       "{name} {component!r}{initargs!s}".format(
                           name=name, component=component, initargs=initargs))
         self.components[name] = component(self, *initargs)
+
     def get_component(self, name):
         return self.components[name]
 
@@ -151,10 +150,11 @@ class Composite(Component):
                 cname = self.components[name].dispatch_event(event)
                 if cname is not None:
                     newcomponents.append(cname)
-            except KeyError as e:  # catches the case of a dispatched event causing a component to be removed.
+            except KeyError:  # catches the case of a dispatched event causing a component to be removed.
+                #               really janky
                 pass
                 # raise e
-        while len(newcomponents)>0:  # this should take care of new components who like to add new components. although could present a vulnerability.
+        while len(newcomponents) > 0:  # this should take care of new components who like to add new components. although could present a vulnerability.
             for name in newcomponents[:]:
                 cname = self.components[name].dispatch_event(event)
                 if cname is not None:
@@ -170,16 +170,21 @@ class Reaction:
         self.defhold(f)
         self.start = self.void
         self.end = self.void
+
     def void(self, *args, **kwargs):
         pass
+
     def defhold(self, f):
         self.hold = f
+
     def defstart(self, f):
         self.start = f
         return self
+
     def defend(self, f):
         self.end = f
         return self
+
     def __str__(self):
         return " ".join([str(self.start), str(self.hold), str(self.end)])
 
@@ -192,6 +197,7 @@ class EventHandler(Component):
 
     def add_tap(self, hear, react, func):
         print("add_tap called", hear, react, func)
+
         def reaction(**kwargs):
             # print("reaction called ")
             if kwargs['press'] is True:
@@ -200,9 +206,14 @@ class EventHandler(Component):
         self.attach_event(hear, reaction)
 
     def add_hold(self, hear, react, reaction):
+        # hear is the event keyword that this reaction reacts to
+        # react is the event keyword that the reaction emits
+        # reaction is the reaction object
+        #
         print("add_hold called", hear, react, reaction)
         assert isinstance(reaction, Reaction)
         print(reaction)
+
         def holdreaction(**kwargs):
             assert isinstance(reaction, Reaction)
             pressed = kwargs['press']
@@ -225,6 +236,7 @@ class EventHandler(Component):
                 reaction.end(**kwargs)
                 self.obj.detach_component(
                     "{hear}_{react}_repeater".format(hear=hear, react=react))
+        holdreaction.__name__ = "{hear}_{react}_repeater".format(hear=hear, react=react)
         self.attach_event(hear, holdreaction)
 
 
@@ -266,7 +278,6 @@ assuming that update gets called every frame."""
         self.t = timeout
         self.attach_event('update', self.update)
 
-
     def update(self, **kwargs):
         if self.t > 0:
             self.t -= 1
@@ -286,7 +297,8 @@ class InputController(Component):
         key = kwargs["key"]
         logging.debug(("keydown {key} from " +
                       "InputController.keydown").format(key=pygame.key.name(key)))
-        if key not in self.reactions: logging.warn("{key} does not have a mapped reaction in InputController".format(key=pygame.key.name(key)))
+        if key not in self.reactions:
+            logging.warn("{key} does not have a mapped reaction in InputController".format(key=pygame.key.name(key)))
         if key in self.reactions:
             logging.debug(self.reactions[key])
             reaction = self.reactions[key]
@@ -298,8 +310,8 @@ class InputController(Component):
         key = kwargs['key']
         logging.debug(("keydown {key} from " +
                       "InputController.keydown").format(key=pygame.key.name(key)))
-        if key not in self.reactions: logging.warn("{key} does not have a mapped reaction in InputController".format(key=pygame.key.name(key)))
-
+        if key not in self.reactions:
+            logging.warn("{key} does not have a mapped reaction in InputController".format(key=pygame.key.name(key)))
         if key in self.reactions:
             logging.debug(self.reactions[key])
             reaction = self.reactions[key]
@@ -419,56 +431,21 @@ class PhysicsComponent(Component):
         self.move(dr=[c2*nx, c2*ny])
         return
 
-    def move(self, **kwargs):
-        dr = [0, 0]
-        # logging.debug(("move called in {self.__class__.__name__}" +
-        #               " with kwargs as {kwargs}").format(
-        #               self=self, kwargs=kwargs))
-        if "dx" in kwargs:
-            dr[0] += kwargs['dx']
-        if "dy" in kwargs:
-            dr[1] += kwargs['dy']
-        if "dr" in kwargs:
-            dr[0] += kwargs["dr"][0]
-            dr[1] += kwargs["dr"][1]
-
+    def move(self, dr=[0, 0]):
         self.p.pos = vadd(self.p.pos, dr)
 
-    def kick(self, **kwargs):
-        dv = [0, 0]
-        if "dv" in kwargs:
-            if isinstance(kwargs["dv"], int):
-                self.accel(kwargs["dv"])
-                return
-            elif isinstance(kwargs["dv"], list) or isinstance(kwargs["dv"], tuple):
-                dv = kwargs['dv']
-            else:
-                raise TypeError
-        if "dv_x" in kwargs:
-            dv[0] = kwargs['dv_x']
+    def kick(self, dv=[0, 0], restrict_velocity=True):
 
-        if "dv_y" in kwargs:
-            dv[1] = kwargs['dv_y']
-
-        if "vector" in kwargs:
-            dv = kwargs['vector']
-
-        if "impulse" in kwargs:
-            dv = kwargs['impulse']
-
-        if constants.always_restrict_velocity:
+        if restrict_velocity:
             raise NotImplementedError
-            logging.debug(":")
-            logging.debug(":before add: {v1}+{v2}".format(v1=self.vector, v2=dv))
-            v = vadd(self.vector, dv)  # add the current vector and the acceleration vector and convert to [magnitude, angle] form
-            logging.debug(":after add, before transform: {vector}".format(vector=v))
-            v = to_mag_dir(v[0],v[1])  # add the current vector and the acceleration vector and convert to [magnitude, angle] form
-            logging.debug(":after transform, before normalize: {vector}".format(vector=v))
-            v = normalize(v, constants.maxspeed)  # normalize to the maxspeed
-            logging.debug(":after normalize, before transform back: {vector}".format(vector=v))
-            self.vector = vector_transform(v[0], v[1])  # convert back
-            logging.debug(":after transform back: {vector}".format(vector=self.vector))
-            logging.debug(":")
+            # add the current vector and the acceleration vector and convert to [magnitude, angle] form
+            v = vadd(self.vector, dv)
+            # add the current vector and the acceleration vector and convert to [magnitude, angle] form
+            v = to_mag_dir(v[0], v[1])
+            # normalize to the maxspeed
+            v = normalize(v, constants.maxspeed)
+            # convert back
+            self.vector = vector_transform(v[0], v[1])
         else:
             self.vector = vadd(self.vector, dv)
 
@@ -479,14 +456,13 @@ class PhysicsComponent(Component):
         logging.debug("calling turn from PhysicsComponent, d0={0}".format(d0))
         self.dir -= d0
 
-    def accel(self, **kwargs):
-        assert "dv" in kwargs
-        dv = kwargs["dv"]
-        if "dir" in kwargs:
-            v = [lengthdir_x(dv, kwargs["dir"]), lengthdir_y(dv, kwargs["dir"])]
-        else:
-            v = [lengthdir_x(dv, self.dir), lengthdir_y(dv, self.dir)]
-        logging.debug("dv = {dv}, angle = {dir}".format(dv=dv, dir=self.dir))
+    def accel(self, dv=None, dir=None):
+        assert dv is not None
+        if dir is None:
+            dir = self.dir
+
+        v = [lengthdir_x(dv, dir), lengthdir_y(dv, dir)]
+
         self.kick(dv=v)
 
     def bounce_horizontal(self):
@@ -501,13 +477,17 @@ class PhysicsComponent(Component):
     def change_gravity(self, g):
         self.gravity = g
 
-    def outside_top_or_bottom(self):
+    def outside_top(self):
+        pass
+
+    def outside_bottom(self):
         # self.p.pos = [self.p.xstart, self.p.ystart]
-        if self.p.pos[1]>constants.SCREEN_HEIGHT:
+        if self.p.pos[1] > constants.SCREEN_HEIGHT:
             self.change_gravity(-constants.GRAVITY*4)
 
     def outside_sides(self):
-        if self.vector[0]>0:
+        raise NotImplementedError
+        if self.vector[0] > 0:
             self.p.pos[0] = 0
         else:
             self.p.pos[0] = constants.LEVEL_WIDTH
@@ -516,13 +496,10 @@ class PhysicsComponent(Component):
         self.pdir = self.dir
         dt = kwargs['dt']
         x, y = self.p.pos
-        # self.change_gravity(constants.GRAVITY)
-        # if self is outside screen ceiling or floor
         if not (0 < y < constants.SCREEN_HEIGHT):
             self.outside_top_or_bottom()
         else:
             self.change_gravity(constants.GRAVITY)
-            
 
         # if self is outside screen side barriers
         if not (0 < x < constants.SCREEN_WIDTH):
@@ -530,7 +507,6 @@ class PhysicsComponent(Component):
 
         if not self.weightless:
             self.kick(dv_y=constants.GRAVITY)
-
 
         if self.vector is not [0, 0]:
             self.move(dr=list(vmul(self.vector, dt/1000.)))
