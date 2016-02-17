@@ -5,10 +5,23 @@ import json
 import math
 
 from miscfunc import lengthdir_x, lengthdir_y, point_distance, point_direction, to_mag_dir, vector_transform, normalize
-import constants
-import keyconfig
 
 import pygame
+
+
+class DotDict:
+    def __init__(self, d={}):
+        self.__dict__.update(d)
+
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
+    def __setitem__(self, key, item):
+        self.__dict__[key] = item
+
+
+with open("./constants.json", 'r') as fd:
+    constants = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)
 
