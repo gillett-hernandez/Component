@@ -1,5 +1,8 @@
 *.py[cod]
 
+# sublime text config files
+*.sublime-*
+
 # C extensions
 *.so
 
