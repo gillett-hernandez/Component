@@ -1,4 +1,5 @@
 *.py[cod]
+__init__.py
 
 # sublime text config files
 *.sublime-*
@@ -30,6 +31,9 @@ pip-log.txt
 .tox
 nosetests.xml
 
+# backups of files
+*.*~
+
 # Translations
 *.mo
 
@@ -37,3 +41,6 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+#windows specific
+Thumbs.db
