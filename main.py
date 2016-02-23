@@ -1,12 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import sys
 # import os
+import json
 import logging
 
-from component import *
-import constants
-# import sound
+from composite import *
+import sound
 import kwargsGroup
 
 # import miscfunc
@@ -14,10 +14,26 @@ import kwargsGroup
 import pygame
 from pygame.locals import *
 
-VERSION = [0, 0, 0]
-POSTMESSAGE = USEREVENT+1
+class DotDict:
+    def __init__(self, d={}):
+        self.__dict__.update(d)
+
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
+    def __setitem__(self, key, item):
+        self.__dict__[key] = item
+
+
+with open("./constants.json", 'r') as fd:
+    constants = DotDict(json.load(fd))
+
+with open("./keyconfig.json", 'r') as fd:
+    keyconfig = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)
+
+POSTMESSAGE = USEREVENT+1
 
 
 def outputInfo(info, pos=None, color=(0, 0, 0)):

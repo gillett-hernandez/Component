@@ -4,7 +4,7 @@ import logging
 import json
 import math
 
-from miscfunc import lengthdir_x, lengthdir_y, point_distance, point_direction, to_mag_dir, vector_transform, normalize
+# from miscfunc import lengthdir_x, lengthdir_y, point_distance, point_direction, to_mag_dir, vector_transform, normalize
 
 import pygame
 
@@ -23,7 +23,24 @@ class DotDict:
 with open("./lf_constants.json", 'r') as fd:
     constants = DotDict(json.load(fd))
 
+with open("./lf_keyconfig.json", 'r') as fd:
+    keyconfig = DotDict(json.load(fd))
+
 logging.basicConfig(**constants.logging_setup)
+
+
+def lengthdir_x(v):
+    # assert v.type == v.types.magdir
+    # v[0] is magnitude
+    # v[1] is angle
+    return v[0] * math.cos(v[1])
+
+
+def lengthdir_y():
+    # assert v.type == v.types.magdir
+    # v[0] is magnitude
+    # v[1] is angle
+    return v[0] * math.sin(v[1])
 
 
 def void(*args, **kwargs):
@@ -56,6 +73,17 @@ def distance(v1, v2=[0, 0]):
 
 def vproj(v1, v2):
     return distance(v1)*math.cos((math.atan2(v2[1], v2[0])-math.atan2(v1[1], v1[0])))
+
+
+def normalize(v, euclidean=True):
+    if euclidean:  # euclidean vectors are vectors in the form magnitude, direction
+        return [1, v[1]]
+    else:
+        x, y = v
+        m = math.sqrt(x**2+y**2)
+        if m == 0:
+            return [x, y]
+        return [x/m, y/m]
 
 
 class Event:
@@ -448,15 +476,11 @@ class PhysicsComponent(Component):
     def kick(self, dv=[0, 0], restrict_velocity=True):
 
         if restrict_velocity:
-            raise NotImplementedError
-            # add the current vector and the acceleration vector and convert to [magnitude, angle] form
             v = vadd(self.vector, dv)
-            # add the current vector and the acceleration vector and convert to [magnitude, angle] form
-            v = to_mag_dir(v[0], v[1])
             # normalize to the maxspeed
-            v = normalize(v, constants.maxspeed)
-            # convert back
-            self.vector = vector_transform(v[0], v[1])
+            v = normalize(v, False)
+            v = vmul(v, constants.maxspeed**0.5)
+            self.vector = v
         else:
             self.vector = vadd(self.vector, dv)
 
@@ -682,10 +706,10 @@ def test():
     player.toggle_gravity()
     player.update(dt=1000)
     print(player.pos)
-    player.notify(Event("move", {"dx": 10}))
+    player.notify(Event("move", {"dr": [10,0]}))
     player.update(dt=1000)
     print(player.pos)
-    player.notify(Event("kick", {"dv_x": 10}))
+    player.notify(Event("kick", {"dv": [10,0]}))
     player.update(dt=1000)
     print(player.pos)
     player.update(dt=1000)

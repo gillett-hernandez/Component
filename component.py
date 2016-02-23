@@ -1,14 +1,42 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import logging
-from math import hypot
+import json
+from math import hypot, sin, cos, radians, degrees
 
-import constants
-import keyconfig
+# from miscfunc import lengthdir_x, lengthdir_y
 
 import pygame
 
+class DotDict:
+    def __init__(self, d={}):
+        self.__dict__.update(d)
+
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
+    def __setitem__(self, key, item):
+        self.__dict__[key] = item
+
+
+with open("./lf_constants.json", 'r') as fd:
+    constants = DotDict(json.load(fd))
+
 logging.basicConfig(**constants.logging_setup)
+
+
+def lengthdir_x(v):
+    # assert v.type == v.types.magdir
+    # v[0] is magnitude
+    # v[1] is angle
+    return v[0] * cos(v[1])
+
+
+def lengthdir_y():
+    # assert v.type == v.types.magdir
+    # v[0] is magnitude
+    # v[1] is angle
+    return v[0] * sin(v[1])
 
 
 def void(*args, **kwargs):
@@ -38,7 +66,6 @@ def vmul(v1, m):
 def vdot(v1, v2):
     return v1[0]*v2[0]+v1[1]*v2[1]
 
-from miscfunc import lengthdir_x, lengthdir_y
 
 
 def distance(v1, v2=[0, 0]):
@@ -184,7 +211,7 @@ assuming that update gets called every frame."""
 
 
 class InputController(Component):
-    def __init__(self, obj):
+    def __init__(self, obj, keyconfig):
         super(InputController, self).__init__(obj)
         self.reactions = keyconfig.keys
         logging.debug(self.reactions)
@@ -535,9 +562,6 @@ class Object(pygame.sprite.Sprite):
                        "with callback {callback}").format(
                       keyword=keyword, callback=callback))
         return _id
-
-    def break_event(self):
-        pass
 
     def detach_event(self, _hash):
         for keyword in self.callbacks:
