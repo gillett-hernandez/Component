@@ -20,7 +20,7 @@ class DotDict:
         self.__dict__[key] = item
 
 
-with open("./constants.json", 'r') as fd:
+with open("./lf_constants.json", 'r') as fd:
     constants = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)
