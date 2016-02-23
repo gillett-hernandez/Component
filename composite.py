@@ -36,7 +36,7 @@ def lengthdir_x(v):
     return v[0] * math.cos(v[1])
 
 
-def lengthdir_y():
+def lengthdir_y(v):
     # assert v.type == v.types.magdir
     # v[0] is magnitude
     # v[1] is angle
@@ -509,8 +509,11 @@ class PhysicsComponent(Component):
     def toggle_gravity(self):
         self.weightless = not self.weightless
 
-    def change_gravity(self, g):
-        self.gravity = g
+    def change_gravity(self, g=None):
+        if g is None:
+            self.gravity = constants.GRAVITY
+        else:
+            self.gravity = g
 
     def outside_top(self):
         pass
@@ -521,18 +524,15 @@ class PhysicsComponent(Component):
             self.change_gravity(-constants.GRAVITY*4)
 
     def outside_sides(self):
-        raise NotImplementedError
-        if self.vector[0] > 0:
-            self.p.pos[0] = 0
-        else:
-            self.p.pos[0] = constants.LEVEL_WIDTH
+        self.p.pos = [0, 0]
+        self.vector = [0, 0]
 
     def update(self, **kwargs):
         self.pdir = self.dir
         dt = kwargs['dt']
         x, y = self.p.pos
         if not (0 < y < constants.SCREEN_HEIGHT):
-            self.outside_top_or_bottom()
+            self.outside_sides()
         else:
             self.change_gravity(constants.GRAVITY)
 
@@ -541,7 +541,7 @@ class PhysicsComponent(Component):
             self.outside_sides()
 
         if not self.weightless:
-            self.kick(dv_y=constants.GRAVITY)
+            self.kick(dv=[0, constants.GRAVITY])
 
         if self.vector is not [0, 0]:
             self.move(dr=list(vmul(self.vector, dt/1000.)))

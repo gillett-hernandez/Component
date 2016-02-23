@@ -17,16 +17,29 @@ import logging
 import math
 
 from composite import *
-import lf_constants as constants
 # import sound
 import kwargsGroup
-
-import miscfunc as mf
-
 import pygame
 from pygame.locals import *
 
 POSTMESSAGE = USEREVENT+1
+
+class DotDict:
+    def __init__(self, d={}):
+        self.__dict__.update(d)
+
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
+    def __setitem__(self, key, item):
+        self.__dict__[key] = item
+
+
+with open("./lf_constants.json", 'r') as fd:
+    constants = DotDict(json.load(fd))
+
+with open("./lf_keyconfig.json", 'r') as fd:
+    keyconfig = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)
 
@@ -46,7 +59,6 @@ def translate_event(event):
         return Event('mousebuttondown', {'key': event.key})
 
 
-
 class ScreenLocator(object):
     _screen = None
 
@@ -55,11 +67,12 @@ class ScreenLocator(object):
 
     @staticmethod
     def getScreen():
-        return ScreenLocator._screen
+        return ScreenLocator._screen, ScreenLocator._camera
 
     @staticmethod
-    def provide(screen):
+    def provide(screen, camera):
         ScreenLocator._screen = screen
+        ScreenLocator._camera = camera
 
 
 class Bullet(Composite):
@@ -69,14 +82,13 @@ class Bullet(Composite):
         if 'vector' in kwargs:
             vector = kwargs['vector']
             assert isinstance(vector, list), "vector is "+str(vector)
-            assert all(isinstance(elem, (float,int)) for elem in vector)
+            assert all(isinstance(elem, (float, int)) for elem in vector)
         elif 'velocity' in kwargs:
             vector = [lengthdir_x(kwargs['velocity'][0], kwargs['velocity'][1]), lengthdir_y(kwargs['velocity'][0], kwargs['velocity'][1])]
         elif 'speed' in kwargs and 'direction' in kwargs:
             vector = [lengthdir_x(kwargs['speed'], kwargs['direction']), lengthdir_y(kwargs['speed'], kwargs['direction'])]
         self.attach_component('physics', PhysicsComponent, vector)
         self.attach_component('sprite', SimpleSprite)
-
 
 
 class PlayerEventHandler(EventHandler):
@@ -96,21 +108,20 @@ class PlayerEventHandler(EventHandler):
 
         @accel.defstart
         def accel(**kwargs):
-            self.obj.dispatch_event(Event("change_gravity", {'g':constants.GRAVITY/8.}))
+            self.obj.dispatch_event(Event("change_gravity", {'g': constants.GRAVITY/8.}))
             self.obj.accelerating = True
 
         @accel.defend
         def accel(**kwargs):
-            self.obj.dispatch_event(Event("change_gravity", {'g':constants.GRAVITY}))
+            self.obj.dispatch_event(Event("change_gravity", {}))
             self.obj.accelerating = False
-
 
         self.add_hold("accelerate", "accel", accel)
 
         @Reaction
         def turnleft(**kwargs):
             if self.obj.accelerating:
-                return {"d0":constants.accelturnspeed}
+                return {"d0": constants.accelturnspeed}
             return {"d0": constants.turnspeed}
         print(turnleft.start)
         self.add_hold("left", "turn", turnleft)
@@ -118,7 +129,7 @@ class PlayerEventHandler(EventHandler):
         @Reaction
         def turnright(**kwargs):
             if self.obj.accelerating:
-                return {"d0":-constants.accelturnspeed}
+                return {"d0": -constants.accelturnspeed}
             return {"d0": -constants.turnspeed}
         self.add_hold("right", "turn", turnright)
 
@@ -141,7 +152,7 @@ class Player(Composite, pygame.sprite.Sprite):
                                             "images",
                                             "playerimage.png")))
         # where to attach the special behavior for the sprite logic.
-        # here? nvm, just use multi-inheritance
+        # here?
         self.mask = pygame.mask.from_surface(self.image)
         assert(self.mask.count() > 0)
 
@@ -155,16 +166,19 @@ class Player(Composite, pygame.sprite.Sprite):
         self.attach_component('proximity_{group.__class__.__name__}'.format(group=group), ProximitySensor, group, proximity)
 
     def update(self, **kwargs):
-        # logging.debug('update in Player')
+        logging.debug('update in Player')
         dt = kwargs['dt']
-        # print("gravity is {g}".format(g=self.get_component("physics").gravity))
         self.dispatch_event(Event("update", {"dt": dt}))
         vector = self.get_component('physics').vector
-        # print("velocity", distance(vector))
         pdir = self.get_component('physics').dir
-        print(vector, self.get_component("physics").gravity, self.accelerating)
-        pygame.draw.line(ScreenLocator.getScreen(), (255, 0, 0), self.rect.center, [self.rect.center[0]+lengthdir_x(100, pdir), self.rect.center[1]+lengthdir_y(100, pdir)])
-        pygame.draw.line(ScreenLocator.getScreen(), (0, 0, 255), self.rect.center, [self.rect.center[0]+vector[0], self.rect.center[1]+vector[1]])
+        logging.debug('vga', vector, self.get_component("physics").gravity, self.accelerating)
+        screen, camera = ScreenLocator.getScreen()
+        altered_center = camera.apply(self.rect).center
+        selfcenter_plus_100_len_vector = [self.rect.center[0]+lengthdir_x([100, pdir]), self.rect.center[1]+lengthdir_y([100, pdir])]
+        selfcenter_plus_current_vector = [self.rect.center[0]+vector[0], self.rect.center[1]+vector[1]]
+
+        pygame.draw.line(screen, (255, 0, 0), altered_center, camera.apply(selfcenter_plus_100_len_vector).topleft)
+        pygame.draw.line(screen, (0, 0, 255), altered_center, camera.apply(selfcenter_plus_current_vector).topleft)
 
     @property
     def pos(self):
@@ -207,7 +221,16 @@ class Camera(object):
         self.state = Rect(0, 0, width, height)
 
     def apply(self, target):
-        return target.rect.move(self.state.topleft)
+        if isinstance(target, pygame.Rect):
+            return target.move(self.state.topleft)
+        elif isinstance(target, pygame.Surface):
+            return target.get_rect().move(self.state.topleft)
+        elif isinstance(target, pygame.sprite.Sprite):
+            return target.rect.move(self.state.topleft)
+        elif isinstance(target, list):
+            return pygame.Rect(vadd(target, self.state.topleft),[0,0])
+        else:
+            raise ValueError("target is not something that can be 'move'd")
 
     def update(self, target):
         self.state = self.camera_func(self.state, target.rect)
@@ -237,7 +260,6 @@ def main():
     bestdepth = pygame.display.mode_ok(constants.SCREEN_SIZE, winstyle, 32)
     screen = pygame.display.set_mode(constants.SCREEN_SIZE,
                                      winstyle, bestdepth)
-    ScreenLocator.provide(screen)
 
     bg = pygame.Surface((constants.SCREEN_WIDTH,
                         constants.SCREEN_HEIGHT)).convert()
@@ -284,6 +306,7 @@ def main():
 
     camera = Camera(simple_camera, constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2)
 
+    ScreenLocator.provide(screen, camera)
     # camera = pygame.Rect(0,0,constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2)
 
     clock = pygame.time.Clock()

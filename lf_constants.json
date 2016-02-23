@@ -2,6 +2,8 @@
     "GRAVITY": 5,
     "SCREEN_WIDTH": 800,
     "SCREEN_HEIGHT": 640,
+    "HALF_WIDTH": 400,
+    "HALF_HEIGHT": 320, 
     "SCREEN_SIZE": [800, 640],
     "LEVEL_WIDTH": 1000,
     "LEVEL_HEIGHT": 800,
