@@ -10,7 +10,7 @@
     "runaccel": 10,
     "jumpstrength": 80,
     "jumpspeed": 70,
-    "logging_setup": {"filename": "./PlatformerEngine.log",
+    "logging_setup": {"filename": "./Platformer.log",
                       "filemode": "w",
                       "level": "DEBUG"}
 }

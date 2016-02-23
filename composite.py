@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import logging
 import json
@@ -24,8 +24,6 @@ with open("./constants.json", 'r') as fd:
     constants = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)
-
-VERSION = [0, 1, 0]
 
 
 def void(*args, **kwargs):
