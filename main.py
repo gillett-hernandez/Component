@@ -98,7 +98,6 @@ class Player(Object):
         self.dispatch_event(Event("update", {"dt": dt}))
         vector = self['physics'].vector
         pdir = self['physics'].dir
-        pygame.draw.line(ScreenLocator.getScreen(), (255, 0, 0), self.rect.center, [self.rect.center[0]+lengthdir_x(100, pdir), self.rect.center[1]+lengthdir_y(100, pdir)])
         pygame.draw.line(ScreenLocator.getScreen(), (0, 0, 255), self.rect.center, [self.rect.center[0]+vector[0], self.rect.center[1]+vector[1]])
 
     @property
@@ -189,7 +188,6 @@ def main():
     clock = pygame.time.Clock()
     pygame.display.update()  # update with no args is equivalent to flip
 
-    print(player.image, player.rect, "player image and rect")
     while True:
         events = pygame.event.get()
         for event in events:
@@ -197,8 +195,8 @@ def main():
                 logging.info('event QUIT')
                 sys.exit(0)
                 return
-            elif event.type in [KEYDOWN, KEYUP,
-                                MOUSEBUTTONDOWN, MOUSEBUTTONUP]:
+            elif event.type in [KEYDOWN, KEYUP]:
+                                # MOUSEBUTTONDOWN, MOUSEBUTTONUP]:
                 if event.type is KEYDOWN and (event.key in [K_ESCAPE, K_q]):
                     logging.info('event K_ESCAPE')
                     sys.exit(0)

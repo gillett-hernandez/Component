@@ -16,6 +16,6 @@ accel = 12
 friction = .99
 
 import logging
-logging_setup = {"filename": './LuftrausersClone.log',
+logging_setup = {"filename": './lfclone.log',
                  "filemode": 'w',
                  "level": logging.DEBUG}

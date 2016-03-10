@@ -2,6 +2,7 @@
 
 import logging
 from math import hypot
+import math
 
 import constants
 import keyconfig
@@ -38,7 +39,7 @@ def vmul(v1, m):
 def vdot(v1, v2):
     return v1[0]*v2[0]+v1[1]*v2[1]
 
-from miscfunc import lengthdir_x, lengthdir_y
+# from miscfunc import lengthdir_x, lengthdir_y
 
 
 def distance(v1, v2=[0, 0]):
@@ -187,6 +188,7 @@ class InputController(Component):
     def __init__(self, obj):
         super(InputController, self).__init__(obj)
         self.reactions = keyconfig.keys
+        # self.reactions = {}
         logging.debug(self.reactions)
         self.attach_event('keydown', self.keydown)
         self.attach_event('keyup', self.keyup)
@@ -374,7 +376,7 @@ class PhysicsComponent(Component):
         self.dir -= d0
 
     def accel(self, dv):
-        v = [lengthdir_x(dv, self.dir), lengthdir_y(dv, self.dir)]
+        v = [dv * math.cos(self.dir), dv * math.sin(self.dir)]
         self.kick(dv=v)
 
     def bounce_horizontal(self):

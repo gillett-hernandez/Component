@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 class Component(object):
     def __init__(self, *args, **kw):
         pass
@@ -11,7 +13,7 @@ class ConcreteComponent(Component):
         Component.__init__(self, *args, **kw)
 
     def component_function(self):
-        print "some function"
+        print("some function")
 
 
 class Composite(Component):
@@ -37,8 +39,9 @@ class Composite(Component):
                 if not i == len(self.children)-1:
                     print(n*"|  "+"|->"+child.__class__.__name__)
                 else:
-                    print(n*"|  "+"-->"+child.__class__.__name__)
-        print(n*"|  ")
+                    print(n*"|  "+"+->"+child.__class__.__name__)
+        if n != 0:
+            print(n*"|  ")
 
 c = Composite()
 child_leaf = Composite()
