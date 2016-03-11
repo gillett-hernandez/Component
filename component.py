@@ -6,6 +6,7 @@ import math
 
 import constants
 import keyconfig
+from vector import Vector
 
 import pygame
 
@@ -22,28 +23,6 @@ def yvel_to_jump(jumpspeed):
 
 def sign(n):
     return int(n/abs(n))
-
-
-def vadd(v1, v2):
-    return [v1[0]+v2[0], v1[1]+v2[1]]
-
-
-def vsub(v1, v2):
-    return [v1[0]-v2[0], v1[1]-v2[1]]
-
-
-def vmul(v1, m):
-    return [v1[0]*m, v1[1]*m]
-
-
-def vdot(v1, v2):
-    return v1[0]*v2[0]+v1[1]*v2[1]
-
-# from miscfunc import lengthdir_x, lengthdir_y
-
-
-def distance(v1, v2=[0, 0]):
-    return hypot(v1[0]-v2[0], v1[1]-v2[1])
 
 
 class Component(object):
@@ -227,16 +206,8 @@ class InputController(Component):
 class PositionComponent(Component):
     def __init__(self, obj, pos=(0, 0)):
         super(PositionComponent, self).__init__(obj)
-        self.x, self.y = pos
+        self.pos = Vector(*pos)
         self.xstart, self.ystart = pos
-
-    @property
-    def pos(self):
-        return [self.x, self.y]
-
-    @pos.setter
-    def pos(self, value):
-        self.x, self.y = value
 
 
 class ProximitySensor(Component):
@@ -248,7 +219,7 @@ class ProximitySensor(Component):
         self.attach_event('update', self.update)
 
     def update(self, **kwargs):
-        sprlist = filter(lambda spr: distance(self.obj.rect.center, spr.rect.center) < self.r, self.group.sprites())
+        sprlist = filter(lambda spr: (Vector(l=self.obj.rect.center) - Vector(l=spr.rect.center)).magnitude < self.r, self.group.sprites())
         self.obj.dispatch_event(Event("nearby", data={"spritelist": sprlist}))
 
 
@@ -259,7 +230,7 @@ class PhysicsComponent(Component):
         self.p = obj.get_component('position')
         self.gravity = kwargs['gravity']\
             if 'gravity' in kwargs else constants.GRAVITY
-        self.vector = kwargs['vector'] if 'vector' in kwargs else [0, 0]
+        self.vector = kwargs['vector'] if 'vector' in kwargs else Vector(0, 0)
         self.dir = -90
         self.attach_event('update', self.update)
         self.attach_event('nearby', self.collidelist)
@@ -274,58 +245,10 @@ class PhysicsComponent(Component):
             self.collide(sprite=s)
 
     def collide(self, **kwargs):
-        s = kwargs["sprite"]
-        logging.debug("collide in PhysicsComponent")
-        """Test if the sprites are colliding and
-        resolve the collision in this case."""
-        offset = [int(x) for x in vsub(s.pos, self.obj.pos)]
-        # print(self.obj.mask.count(), s.mask.count())
-        overlap = self.obj.mask.overlap_area(s.mask, offset)
-        # print(overlap)
+        raise NotImplementedError
 
-        if overlap == 0:
-            # print("overlap == 0")
-            return
-        # """Calculate collision normal"""
-        nx = (self.obj.mask.overlap_area(s.mask, (offset[0]+1, offset[1])) -
-              self.obj.mask.overlap_area(s.mask, (offset[0]-1, offset[1])))
-        ny = (self.obj.mask.overlap_area(s.mask, (offset[0], offset[1]+1)) -
-              self.obj.mask.overlap_area(s.mask, (offset[0], offset[1]-1)))
-        logging.debug("overlapping, {nx}, {ny}".format(nx=nx, ny=ny))
-        if nx == 0 and ny == 0:
-            # """One sprite is inside another"""
-            return
-        n = [nx, ny]
-        # dv = vsub(s.vel, self.vel)
-        dv = vsub([0, 0], self.vector)
-        J = vdot(dv, n)/(2*vdot(n, n))
-        if J > 0:
-            logging.debug("J>0")
-            # """Can scale up to 2*J here to get bouncy collisions"""
-            J *= 1.9
-            # special resolution of collisions in case of
-            # one being a static, immovable object
-
-            # raise NotImplementedError
-            # because im in physics component,
-            # should i even use dispatch_event?
-            # or should i just call self.kick and self.move?
-
-            # self.obj.dispatch_event(Event("kick",
-            # data={"vector": [nx*J, ny*J]}))
-            self.kick(vector=[nx*J, ny*J])
-            # s.kick([-J*nx, -J*ny])
-            return
-        # """Separate the sprites"""
-        c1 = -overlap/vdot(n, n)
-        c2 = -c1/2
-        # self.obj.dispatch_event(Event("move", data={"dr": [c2*nx, c2*ny]}))
-        # s.move([(c1+c2)*nx, (c1+c2)*ny])
-        logging.debug("moving in collision")
-        self.move(dr=[c2*nx, c2*ny])
-        return
-
-    def move(self, **kwargs):
+    def move(self, dx=None, dy=None, dr=None, **kwargs):
+        # legacy capturing **kwargs until its purged
         dr = [0, 0]
         # logging.debug(("move called in {self.__class__.__name__}" +
         #               " with kwargs as {kwargs}").format(
@@ -338,7 +261,12 @@ class PhysicsComponent(Component):
             dr[0] += kwargs["dr"][0]
             dr[1] += kwargs["dr"][1]
 
-        self.p.pos = vadd(self.p.pos, dr)
+        if not isinstance(self.p.pos, Vector):
+            raise NotImplementedError
+        if not isinstance(dr, Vector):
+            self.p.pos += Vector(l=dr)
+        else:
+            self.p.pos += dr
 
     def kick(self, **kwargs):
         dv = [0, 0]
@@ -399,7 +327,7 @@ class PhysicsComponent(Component):
 
     def update(self, **kwargs):
         dt = kwargs['dt']
-        x, y = self.p.pos
+        x, y = self.p.pos.components
         # if self is outside screen ceiling or floor
         # if abs(self.p.pos[1]-h2) > h2:
         if y > constants.SCREEN_HEIGHT or y < 0:
@@ -409,21 +337,21 @@ class PhysicsComponent(Component):
             # y > h or y < 0 is better
             # self.bounce_vertical()
             # self.vector[1] *= .9
-            self.p.pos = [self.p.xstart, self.p.ystart]
-            self.vector = [0, 0]
+            self.p.reset()
+            self.vector = Vector(0, 0)
 
         # if self is outside screen side barriers
         # if abs(self.p.pos[0]-w2) > w2:
         if x > constants.SCREEN_WIDTH or x < 0:
             # self.bounce_horizontal()
             # self.vector[0] *= .9
-            self.p.pos = [self.p.xstart, self.p.ystart]
-            self.vector = [0, 0]
+            self.p.reset()
+            self.vector = Vector(0, 0)
 
         self.vector[1] += self.gravity*dt/1000.
 
-        if self.vector is not [0, 0]:
-            self.move(dr=list(vmul(self.vector, dt/1000.)))
+        if not self.vector.is_zero_vector():
+            self.move(dr=self.vector*dt/1000)
         # on ground code should not go here.
         # if not self.place_free(x, y+1) and self.place_free(x, y):
             # self.on_ground = True
@@ -471,7 +399,7 @@ class SpriteFromImage(Component):
         self.rect = self.image.get_rect()
         self.obj.image = self.image
         self.obj.rect = self.obj.image.get_rect()
-        self.obj.rect.topleft = self.p.pos
+        self.obj.rect.topleft = self.p.pos.components
 
         self.dir = 0
         logging.warning("using turn may result in a slowdown due to the use of an expensive operation: pygame.transform.rotate")
@@ -486,9 +414,9 @@ class SpriteFromImage(Component):
         self.obj.rect = self.obj.image.get_rect(center=self.rect.center)
 
     def update(self, **kwargs):
-        if self.obj.rect.topleft is not self.p.pos:
-            self.obj.rect.topleft = self.p.pos
-            self.rect.topleft = self.p.pos
+        if self.obj.rect.topleft != self.p.pos.components:
+            self.obj.rect.topleft = self.p.pos.components
+            self.rect.topleft = self.p.pos.components
 
 
 class Object(pygame.sprite.Sprite):
