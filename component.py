@@ -38,9 +38,6 @@ def vmul(v1, m):
 def vdot(v1, v2):
     return v1[0]*v2[0]+v1[1]*v2[1]
 
-from miscfunc import lengthdir_x, lengthdir_y
-
-
 def distance(v1, v2=[0, 0]):
     return hypot(v1[0]-v2[0], v1[1]-v2[1])
 

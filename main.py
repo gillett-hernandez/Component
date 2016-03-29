@@ -166,8 +166,8 @@ def main():
         pygame.display.update()
 
         dt = clock.tick(constants.FRAMERATE)
-        assert dt < 34, dt
-        # logging.info(str(dt)+' dt\n')d
+        # assert dt < 34, dt
+        # logging.info(str(dt)+' dt\n')
 
 
 if __name__ == '__main__':

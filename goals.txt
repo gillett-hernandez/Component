@@ -1,0 +1,19 @@
+- Memory Game
+- Match Colors Block
+- Bejeweled
+- Bubble Shooter
+- Minesweeper
+- Solitaire
+- Pacman
+- Roguelike
+- Bomberman
+- Pinball
+- Platformer
+- Retro Shooter
+- Tetris
+- Pong
+- Rock Paper Scissors
+- Tic-tac-toe
+- Hangman
+- Guess the Number
+- Two-player versions

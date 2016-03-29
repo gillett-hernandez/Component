@@ -21,14 +21,12 @@ FRAMERATE = 60
 
 friction = .99
 
-strength_or_speed = 'strength'
+strength_or_speed = 'speed'
 
 runspeed = 200  # run max 200px/s
 runaccel = 10  # take 10 frames to accelerate to top speed
 
 jumpstrength = 5*16  # jump ten blocks high, assuming 16px block height
-
-from miscfunc import vel_to_go_height
 
 
 if strength_or_speed == 'strength':
