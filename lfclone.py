@@ -16,13 +16,17 @@ import os
 import logging
 import math
 
-from composite import *
+from component import *
 # import sound
 import kwargsGroup
+from animation import SpriteComponent
+
 import pygame
 from pygame.locals import *
 
-POSTMESSAGE = USEREVENT+1
+global resources
+resources = {}
+
 
 class DotDict:
     def __init__(self, d={}):
@@ -34,6 +38,10 @@ class DotDict:
     def __setitem__(self, key, item):
         self.__dict__[key] = item
 
+    def items(self):
+        return self.__dict__.items()
+
+POSTMESSAGE = USEREVENT+1
 
 with open("./lf_constants.json", 'r') as fd:
     constants = DotDict(json.load(fd))
@@ -75,22 +83,6 @@ class ScreenLocator(object):
         ScreenLocator._camera = camera
 
 
-class Bullet(Composite):
-    def __init__(self, pos, **kwargs):
-        super(Bullet, self).__init__(pos)
-        self.attach_component('position', PositionComponent, pos)
-        if 'vector' in kwargs:
-            vector = kwargs['vector']
-            assert isinstance(vector, list), "vector is "+str(vector)
-            assert all(isinstance(elem, (float, int)) for elem in vector)
-        elif 'velocity' in kwargs:
-            vector = [lengthdir_x(kwargs['velocity'][0], kwargs['velocity'][1]), lengthdir_y(kwargs['velocity'][0], kwargs['velocity'][1])]
-        elif 'speed' in kwargs and 'direction' in kwargs:
-            vector = [lengthdir_x(kwargs['speed'], kwargs['direction']), lengthdir_y(kwargs['speed'], kwargs['direction'])]
-        self.attach_component('physics', PhysicsComponent, vector)
-        self.attach_component('sprite', SimpleSprite)
-
-
 class PlayerEventHandler(EventHandler):
     def __init__(self, obj):
         super(PlayerEventHandler, self).__init__(obj)
@@ -108,7 +100,7 @@ class PlayerEventHandler(EventHandler):
 
         @accel.defstart
         def accel(**kwargs):
-            self.obj.dispatch_event(Event("change_gravity", {'g': constants.GRAVITY/8.}))
+            self.obj.dispatch_event(Event("change_gravity", {'g': constants.FLIGHTGRAVITY}))
             self.obj.accelerating = True
 
         @accel.defend
@@ -137,7 +129,7 @@ class PlayerEventHandler(EventHandler):
             return {"dv": constants.bulletspeed}
 
 
-class Player(Composite, pygame.sprite.Sprite):
+class Player(Object, pygame.sprite.Sprite):
     width, height = 16, 16
 
     def __init__(self, pos):
@@ -146,11 +138,7 @@ class Player(Composite, pygame.sprite.Sprite):
         self.attach_component('physics', PhysicsComponent)
         self.attach_component('input', InputController)
         self.attach_component('handler', PlayerEventHandler)
-        self.attach_component('sprite', SpriteFromImage,
-                              (os.path.join(".",
-                                            "resources",
-                                            "images",
-                                            "playerimage.png")))
+        self.attach_component('sprite', SpriteComponent, get_resource("playerimage"), 64, 64)
         # where to attach the special behavior for the sprite logic.
         # here?
         self.mask = pygame.mask.from_surface(self.image)
@@ -161,54 +149,23 @@ class Player(Composite, pygame.sprite.Sprite):
             return getattr(self.get_component("position"), name)
         return super(Player, self).__getattr__(name)
 
-    def add_collision_check(self, group, **kwargs):
-        proximity = kwargs.get('proximity', self.height+10)
-        self.attach_component('proximity_{group.__class__.__name__}'.format(group=group), ProximitySensor, group, proximity)
-
     def update(self, **kwargs):
         logging.debug('update in Player')
         dt = kwargs['dt']
-        self.dispatch_event(Event("update", {"dt": dt}))
         vector = self.get_component('physics').vector
         pdir = self.get_component('physics').dir
-        logging.debug('vga', vector, self.get_component("physics").gravity, self.accelerating)
+
+        # start of wonky code
+        logging.info("vector = {0!r}, {1}, {2}".format(vector.components,
+                                                       self.get_component("physics").gravity,
+                                                       self.accelerating))
         screen, camera = ScreenLocator.getScreen()
         altered_center = camera.apply(self.rect).center
-        selfcenter_plus_100_len_vector = [self.rect.center[0]+lengthdir_x([100, pdir]), self.rect.center[1]+lengthdir_y([100, pdir])]
-        selfcenter_plus_current_vector = [self.rect.center[0]+vector[0], self.rect.center[1]+vector[1]]
+        selfcenter_plus_100_len_vector = (Vector(l=self.rect.center) + Vector.from_euclidean(100, pdir)).components
+        selfcenter_plus_current_vector = (Vector(l=self.rect.center) + Vector(l=vector)).components
 
         pygame.draw.line(screen, (255, 0, 0), altered_center, camera.apply(selfcenter_plus_100_len_vector).topleft)
         pygame.draw.line(screen, (0, 0, 255), altered_center, camera.apply(selfcenter_plus_current_vector).topleft)
-
-    @property
-    def pos(self):
-        return self.get_component('position').pos
-
-
-class AIComponent(Component):
-    def __init__(self, obj):
-        super(AIComponent, self).__init__(obj)
-
-
-class Enemy(Composite, pygame.sprite.Sprite):
-    width, height = 16, 16
-
-    def __init__(self, pos):
-        super(Enemy, self).__init__()
-        self.attach_component('position', PositionComponent, pos)
-        self.attach_component('physics', PhysicsComponent)
-        self.attach_component('image', SpriteFromImage, (os.path.join('.', 'resources', 'images', 'playerimage.png')))
-        self.attach_component('ai', AIComponent)
-        # self.get_component('image').image = pygame.transform.scale(self.get_component('image').image, (self.get_component('image').rect.width//4*3, self.get_component('image').rect.height))
-        self.mask = pygame.mask.from_surface(self.image)
-        assert(self.mask.count() > 0)
-
-    def __getattr__(self, name):
-        return getattr(self.spriteref,name)
-
-    def update(self, **kwargs):
-        dt = kwargs['dt']
-        self.dispatch_event(Event("update", {"dt": dt}))
 
     @property
     def pos(self):
@@ -228,17 +185,19 @@ class Camera(object):
         elif isinstance(target, pygame.sprite.Sprite):
             return target.rect.move(self.state.topleft)
         elif isinstance(target, list):
-            return pygame.Rect(vadd(target, self.state.topleft),[0,0])
+            return pygame.Rect((Vector(l=target) + Vector(l=self.state.topleft)).components, [0, 0])
         else:
             raise ValueError("target is not something that can be 'move'd")
 
     def update(self, target):
         self.state = self.camera_func(self.state, target.rect)
 
+
 def simple_camera(camera, target_rect):
     l, t, _, _ = target_rect
     _, _, w, h = camera
     return Rect(-l+constants.HALF_WIDTH, -t+constants.HALF_HEIGHT, w, h)
+
 
 def complex_camera(camera, target_rect):
     l, t, _, _ = target_rect
@@ -252,19 +211,47 @@ def complex_camera(camera, target_rect):
     return Rect(l, t, w, h)
 
 
+def load_basic_resources():
+    """loads basic resources into ram"""
+    global resources
+    print(dir(DotDict))
+    with open("resources.json", 'r') as fd:
+        _resources = DotDict(json.load(fd))
+    print(dir(_resources.playerimage))
+    for name, data in _resources.items():
+        if data["type"] == constants.IMAGE:
+            with open(data["path"], 'rb') as fd:
+                resources[name] = pygame.image.load(fd)
+        elif data["type"] in [constants.SFX, constants.MUSIC]:
+            with open(data["path"], 'rb') as fd:
+                resources[name] = sound.load(fd)
+
+
+def get_resource(name):
+    global resources
+    return resources[name]
+
+
+def do_prep():
+    pygame.init()
+    load_basic_resources()
+
+
 def main():
-    # try:
-    # font = pygame.font.Font(None, 12)
+    do_prep()
     dt = 1000/constants.FRAMERATE
     winstyle = 0
     bestdepth = pygame.display.mode_ok(constants.SCREEN_SIZE, winstyle, 32)
     screen = pygame.display.set_mode(constants.SCREEN_SIZE,
                                      winstyle, bestdepth)
 
-    bg = pygame.Surface((constants.SCREEN_WIDTH,
-                        constants.SCREEN_HEIGHT)).convert()
+    camera = Camera(simple_camera, constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2)
+
+    bg = pygame.Surface((constants.LEVEL_WIDTH,
+                        constants.LEVEL_HEIGHT)).convert()
+
     bg.fill((255, 255, 255))
-    pygame.draw.rect(bg, (128, 128, 128), pygame.Rect(0, constants.SCREEN_HEIGHT-100, constants.SCREEN_WIDTH, 100))
+    pygame.draw.rect(bg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
 
     screen.blit(bg, (0, 0))
 
@@ -301,12 +288,8 @@ def main():
     locations.append((w2, h2*2-16))
     locations.append((w2*2-16, h2*2-16))
 
-
-    all.add([Enemy(locations[i]) for i in range(len(locations))])
-
-    camera = Camera(simple_camera, constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2)
-
     ScreenLocator.provide(screen, camera)
+
     # camera = pygame.Rect(0,0,constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2)
 
     clock = pygame.time.Clock()
@@ -314,6 +297,7 @@ def main():
 
     print(player.image, player.rect, "player image and rect")
     while True:
+        logging.debug("at top of main loop")
         events = pygame.event.get([QUIT, KEYDOWN, KEYUP])
         for event in events:
             if event.type is QUIT:
@@ -330,26 +314,23 @@ def main():
                              event=event))
                 player.notify(translate_event(event))
         pygame.event.pump()
-        # all.clear(screen, bg)
-        screen.fill((255,255,255))
-        # screen.blit(bg, (0, 0))
+
+        screen.blit(bg, (0, 0), camera.apply(bg.get_rect()))
 
         camera.update(player)
-        # screen.blit(bg, camera.camera_func(camera.state, bg.get_rect(topleft=(0,0))))
+
         all.update(dt=dt)
-        screen.blit(bg, bg.get_rect(topleft=camera.state.topleft))
-        # screen.blit(bg, bg.get_rect(center=(0,0)))
-        # all.draw()
+
         for e in all:
             screen.blit(e.image, camera.apply(e))
-
-        # if screen.
 
         pygame.display.update()
 
         dt = clock.tick(constants.FRAMERATE)
-        # assert dt < 100, dt
-        # logging.info(str(dt)+' dt\n')d
+        if dt > 34:
+            dt = 34
+
+        logging.debug("at bottom of main loop\n")
     # except Exception as e:
         # for sprite in iter(all):
             # sprite.dumpstate()
@@ -357,7 +338,6 @@ def main():
 
 
 if __name__ == '__main__':
-    pygame.init()
     try:
         main()
     finally:

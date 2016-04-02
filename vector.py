@@ -3,12 +3,15 @@
 import math
 
 
-class Vector:
+class Vector(object):
     """class representing a vector"""
     def __init__(self, xcomponent=None, ycomponent=None, l=None):
         if xcomponent is None and ycomponent is None:
-            assert all(isinstance(e, (int, float)) for e in l)
-            self.components = l
+            if l is not None:
+                assert all(isinstance(e, (int, float)) for e in l)
+                self.components = l
+            else:
+                self.components = [0, 0]
         else:
             if xcomponent is None:
                 xcomponent = 0
@@ -49,8 +52,16 @@ class Vector:
         assert isinstance(other, Vector)
         return Vector(self.x-other.x, self.y-other.y)
 
-    def __mul__(self, m):
-        return Vector(self.x*m, self.y*m)
+    def __mul__(self, other):
+        if isinstance(other, Vector):
+            return self.dot(other)
+        else:
+            assert isinstance(other, (int, float))
+            return Vector(self.x*other, self.y*other)
+
+    def __div__(self, other):
+        assert not isinstance(other, Vector)
+        return self*(1./other)
 
     def dot(self, other):
         assert isinstance(other, Vector)
@@ -60,18 +71,23 @@ class Vector:
         return Vector(self.x/self.magnitude, self.y/self.magnitude)
 
     def __iadd__(self, other):
+        print("iadd being called", self, other)
         assert isinstance(other, Vector)
         self.x += other.x
         self.y += other.y
+        # ????
+        return self
 
     def __isub__(self, other):
         assert isinstance(other, Vector)
         self.x -= other.x
         self.y -= other.y
+        return self
 
     def __imul__(self, m):
         self.x *= m
         self.y *= m
+        return self
 
     def normalize_ip(self):
         m = self.magnitude
@@ -82,6 +98,17 @@ class Vector:
 
     def __setitem__(self, key, value):
         self.components[key] = value
+
+    @classmethod
+    def from_euclidean(cls, magnitude, direction):
+        return Vector(math.cos(direction), math.sin(direction))*magnitude
+
+    @classmethod
+    def from_vector(cls, vector):
+        return cls.from_euclidean(vector.magnitude, vector.components[1])
+
+    def __repr__(self):
+        return "vector with components {}".format(self.components)
 
 
 class EuclideanVector2D(Vector):
@@ -117,13 +144,14 @@ class EuclideanVector2D(Vector):
         self.components[1] = math.radians(value)
 
     @classmethod
-    def from_vector(cls, vector):
-        assert hasattr(vector, "x")
-        assert hasattr(vector, "y")
-        assert hasattr(vector, "components")
-        magnitude = math.sqrt(math.hypot(vector.x, vector.y))
-        direction = math.arctan2(vector.y, vector.x)
+    def from_cartesian(cls, x, y):
+        magnitude = math.sqrt(math.hypot(x, y))
+        direction = math.arctan2(y, x)
         return cls(magnitude, direction)
+
+    @classmethod
+    def from_vector(cls, vector):
+        return cls.from_cartesian(vector.x, vector.y)
 
 
 def test():
@@ -162,9 +190,11 @@ def test():
     ev2.magnitude = 100
     assert ev2.magnitude == 100
 
-    assert abs(ev2.x - 100*math.sqrt(2)/2) < 0.00005
+    print(ev2, ev2.x, ev2.y, ev2.magnitude, ev2.direction)
+
+    assert abs(ev2.x - 100*math.sqrt(2)/2) < 0.00005, ev2.x
     ev2.magnitude = 10
-    assert abs(ev2.x - 10*math.sqrt(2)/2) < 0.00005
+    assert abs(ev2.x - 10*math.sqrt(2)/2) < 0.00005, ev2.x
 
 if __name__ == '__main__':
     test()

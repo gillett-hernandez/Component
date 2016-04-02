@@ -1,5 +1,6 @@
 {
     "GRAVITY": 5,
+    "FLIGHTGRAVITY": 0.625,
     "SCREEN_WIDTH": 800,
     "SCREEN_HEIGHT": 640,
     "HALF_WIDTH": 400,
@@ -21,7 +22,11 @@
     "runaccel": 10,
     "jumpstrength": 80,
     "jumpspeed": 70,
+    "formatter": "%(name)s %(filename)s %(lineno)s %(levelname)s  %(message)s",
     "logging_setup": {"filename": "./lfclone.log",
                       "filemode": "w",
-                      "level": "DEBUG"}
+                      "level": "DEBUG"},
+    "IMAGE": "data.image",
+    "SFX": "data.sfx",
+    "MUSIC": "data.music"
 }

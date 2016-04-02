@@ -4,8 +4,6 @@ import sys
 import os
 import logging
 
-from composite import *
-import constants
 # import sound
 import kwargsGroup
 
@@ -15,22 +13,34 @@ import pygame
 from pygame.locals import *
 
 
+class Camera(object):
+    def __init__(self):
+        self.offset = [0, 0]
+
+    def move(self, dx=0, dy=0):
+        self.offset[0] += dx
+        self.offset[1] += dy
+
+    def set_camera_topleft(self, x, y):
+        self.offset = [x, y]
+
+    def apply(self, rect):
+        return rect.move(self.offset[0], self.offset[1])
+
 
 def main():
     # try:
     # font = pygame.font.Font(None, 12)
     winstyle = 0
-    bestdepth = pygame.display.mode_ok((10000, 6000), winstyle, 32)
-    screen = pygame.display.set_mode((10000, 6000),
+    bestdepth = pygame.display.mode_ok((800, 600), winstyle, 32)
+    screen = pygame.display.set_mode((800, 600),
                                      winstyle, bestdepth)
 
-    screen = screen.subsurface(pygame.Rect((0, 0), constants.SCREEN_SIZE))
-
-    bg = pygame.Surface((constants.SCREEN_WIDTH,
-                        constants.SCREEN_HEIGHT)).convert()
-    bg.fill((255, 255, 255))
+    bg = pygame.image.load("./resources/images/startBG.jpg").convert()
+    bg = pygame.transform.scale2x(bg)
 
     screen.blit(bg, (0, 0))
+    camera = Camera()
 
     clock = pygame.time.Clock()
     pygame.display.update()  # update with no args is equivalent to flip
@@ -49,17 +59,19 @@ def main():
                         logging.info('event K_ESCAPE')
                         sys.exit(0)
                         return
-                    elif event.key is K_RIGHT:
-                        screen.scroll(dx=100)
-                    elif event.key is K_DOWN:
-                        screen.scroll(dy=100)
+                    directions = {K_RIGHT: {"dx": 10},
+                                  K_DOWN: {"dy": 10},
+                                  K_UP: {"dy": -10},
+                                  K_LEFT: {"dx": -10}}
+                    if event.key in [K_RIGHT, K_LEFT, K_DOWN, K_UP]:
+                        camera.move(**directions[event.key])
 
         # all.clear(screen, bg)
-        screen.blit(bg, (0, 0))
+        screen.blit(bg, (0, 0), camera.apply(bg.get_rect()))
 
         pygame.display.update()
 
-        dt = clock.tick(constants.FRAMERATE)
+        dt = clock.tick(60)
         # assert dt < 100, dt
         # logging.info(str(dt)+' dt\n')d
     # except Exception as e:

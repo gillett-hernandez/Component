@@ -1,5 +1,9 @@
-DEBUG:root:attaching component with name: position <class '__main__.PositionComponent'>((100, 100),)
-DEBUG:root:attaching component with name: physics <class '__main__.PhysicsComponent'>()
+DEBUG:root:attaching component with name: position <class 'components.PositionComponent'>((100, 100),)
+DEBUG:root:PositionComponent being instantiated now
+DEBUG:root:PositionComponent being instantiated now
+DEBUG:root:attaching component with name: physics <class 'components.PhysicsComponent'>()
+DEBUG:root:PhysicsComponent being instantiated now
+DEBUG:root:PhysicsComponent being instantiated now
 DEBUG:root:attaching event update with callback <bound method PhysicsComponent.update of <PhysicsComponent attached to Player>>
 DEBUG:root:attaching event nearby with callback <bound method PhysicsComponent.collidelist of <PhysicsComponent attached to Player>>
 DEBUG:root:attaching event move with callback <bound method PhysicsComponent.move of <PhysicsComponent attached to Player>>
@@ -8,14 +12,30 @@ DEBUG:root:attaching event turn with callback <bound method PhysicsComponent.tur
 DEBUG:root:attaching event accel with callback <bound method PhysicsComponent.accel of <PhysicsComponent attached to Player>>
 DEBUG:root:attaching event toggle_gravity with callback <bound method PhysicsComponent.toggle_gravity of <PhysicsComponent attached to Player>>
 DEBUG:root:attaching event change_gravity with callback <bound method PhysicsComponent.change_gravity of <PhysicsComponent attached to Player>>
-DEBUG:root:attaching component with name: input <class '__main__.InputController'>()
-DEBUG:root:{u'K_DOWN': [u'down', {}], u'K_UP': [u'accelerate', {}], u'K_LEFT': [u'left', {}], u'K_SPACE': [u'space', {}], u'K_RIGHT': [u'right', {}]}
+DEBUG:root:attaching component with name: input <class 'components.InputController'>()
+DEBUG:root:InputController being instantiated now
+DEBUG:root:InputController being instantiated now
 DEBUG:root:attaching event keydown with callback <bound method InputController.keydown of <InputController attached to Player>>
 DEBUG:root:attaching event keyup with callback <bound method InputController.keyup of <InputController attached to Player>>
 DEBUG:root:attaching component with name: handler <class '__main__.PlayerEventHandler'>()
-DEBUG:root:attaching event accelerate with callback <function accelerate_accel_repeater at 0x7fdfe93c5500>
-DEBUG:root:attaching event left with callback <function left_turn_repeater at 0x7fdfe93c55f0>
-DEBUG:root:attaching event right with callback <function right_turn_repeater at 0x7fdfe93c56e0>
+DEBUG:root:PlayerEventHandler being instantiated now
+DEBUG:root:PlayerEventHandler being instantiated now
+DEBUG:root:Reaction being instantiated now
+DEBUG:root:attaching event accelerate with callback <function accelerate_accel_repeater at 0x7faaf97c6320>
+DEBUG:root:Reaction being instantiated now
+DEBUG:root:attaching event left with callback <function left_turn_repeater at 0x7faaf97c6410>
+DEBUG:root:Reaction being instantiated now
+DEBUG:root:attaching event right with callback <function right_turn_repeater at 0x7faaf97c6500>
+DEBUG:root:update in Player
+DEBUG:root:Event being instantiated now
+INFO:root:vector = [0, 0], 5, vector with components [100, 100]
+DEBUG:root:Event being instantiated now
 DEBUG:root:dispatching event <Event instance with keyword: move and data: {'dr': [10, 0]}>
+DEBUG:root:dispatching event <Event instance with keyword: move and data: {'dr': [10, 0]}>
+DEBUG:root:move called in PhysicsComponent with kwargs as {}
+DEBUG:root:update in Player
+DEBUG:root:Event being instantiated now
+INFO:root:vector = [0, 0], 5, vector with components [110, 100]
+DEBUG:root:Event being instantiated now
 DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv': [10, 0]}>
-INFO:root:kick called in PhysicsComponent [10, 0]. current vector is [17.320508075688775, 0.0]
+DEBUG:root:dispatching event <Event instance with keyword: kick and data: {'dv': [10, 0]}>
