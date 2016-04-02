@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import math
 
@@ -9,7 +9,7 @@ class Vector(object):
         if xcomponent is None and ycomponent is None:
             if l is not None:
                 assert all(isinstance(e, (int, float)) for e in l)
-                self.components = l
+                self.components = list(l)
             else:
                 self.components = [0, 0]
         else:
@@ -60,23 +60,26 @@ class Vector(object):
             return Vector(self.x*other, self.y*other)
 
     def __div__(self, other):
+        return self.__truediv__(other)
+
+    def __truediv__(self, other):
         assert not isinstance(other, Vector)
         return self*(1./other)
 
-    def dot(self, other):
-        assert isinstance(other, Vector)
-        return self.x*other.x + self.y*other.y
-
-    def normalize(self):
-        return Vector(self.x/self.magnitude, self.y/self.magnitude)
+    def __floordiv__(self, other):
+        assert not isinstance(other, Vector)
+        return Vector(self.x // other, self.y // other)
 
     def __iadd__(self, other):
-        print("iadd being called", self, other)
-        assert isinstance(other, Vector)
-        self.x += other.x
-        self.y += other.y
-        # ????
-        return self
+        try:
+            assert isinstance(other, Vector)
+            self.x += other.x
+            self.y += other.y
+            # ????
+            return self
+        except TypeError:
+            print(self.x, self.y, other.x, other.y)
+            raise
 
     def __isub__(self, other):
         assert isinstance(other, Vector)
@@ -89,15 +92,43 @@ class Vector(object):
         self.y *= m
         return self
 
-    def normalize_ip(self):
+    def __idiv__(self, other):
+        return self.__itruediv__(other)
+
+    def __itruediv__(self, other):
+        assert not isinstance(other, Vector)
+        self.x /= other
+        self.y /= other
+        return self
+
+    def __ifloordiv__(self, other):
+        assert not isinstance(other, Vector)
+        self.x //= other
+        self.y //= other
+
+    def dot(self, other):
+        assert isinstance(other, Vector)
+        return self.x*other.x + self.y*other.y
+
+    def normalize(self):
+        assert hasattr(self, "__div__")
         m = self.magnitude
-        self.mul_ip(1/m)
+        return self / m
+
+    def normalize_ip(self):
+        assert hasattr(self, "__idiv__")
+        m = self.magnitude
+        self /= m
 
     def __getitem__(self, key):
         return self.components[key]
 
     def __setitem__(self, key, value):
-        self.components[key] = value
+        try:
+            self.components[key] = value
+        except TypeError:
+            print(self, key, value)
+            raise
 
     @classmethod
     def from_euclidean(cls, magnitude, direction):
@@ -185,6 +216,12 @@ def test():
     assert v2.y == 3
     v2.y = 0.5
     assert v2.y == 0.5
+
+    v3 * 20
+    v3 *= 10
+
+    v3 / 10
+    v3 /= 20
 
     assert ev2.magnitude == 10
     ev2.magnitude = 100

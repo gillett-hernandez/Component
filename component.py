@@ -4,8 +4,8 @@ import logging
 import json
 import math
 
-
 import pygame
+import pygame.locals
 from math import hypot
 
 from vector import Vector
@@ -47,9 +47,9 @@ def vproj(v1, v2):
 
 class Event:
     def __init__(self, keyword, data):
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.keyword = keyword
         self.data = data
+        logging.debug("created {0!r}".format(self))
 
     def __repr__(self):
         return ("<Event instance with keyword:"
@@ -77,6 +77,14 @@ class Component(object):
             self.callbacks[keyword] = {}
         _id = hash(callback)
         self.callbacks[keyword][_id] = callback
+        # callbacks = {
+        #     "update": {
+        #         12312412: function1,
+        #         432323: function2,
+        #         95984: function3
+        #     },
+        #     "etc"
+        # }
         logging.debug(("attaching event {keyword} " +
                        "with callback {callback}").format(
                       keyword=keyword, callback=callback))
@@ -91,6 +99,7 @@ class Component(object):
                     return
 
     def dispatch_event(self, event):
+        func = None
         try:
             assert event.data is not None
             if event.keyword not in self.callbacks:
@@ -118,7 +127,7 @@ class Component(object):
 class Object(object):
     def __init__(self):
         super(Object, self).__init__()
-        self.callbacks = {}
+        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.components = {}
 
     def __getitem__(self, key):
@@ -153,37 +162,13 @@ class Object(object):
     def dispatch_event(self, event):
         assert(event.data is not None)
         c = 0
-        if event.keyword is not "update":
-            logging.debug("dispatching event {event!r}".format(event=event))
-            for component in self.components.values():
-                rvalue = component.dispatch_event(event)
-                if rvalue == -1:
-                    c += 1
-            return
-        if event.keyword in self.callbacks:
-            for _id, func in self.callbacks[event.keyword].items():
-                func(**event.data)
-        else:
-            if c == len(self.components):
-                raise RuntimeError("CallbackNotFoundError")
-
-    def attach_event(self, keyword, callback):
-        if keyword not in self.callbacks:
-            self.callbacks[keyword] = {}
-        _id = hash(callback)
-        self.callbacks[keyword][_id] = callback
-        logging.debug(("attaching event {keyword} " +
-                       "with callback {callback}").format(
-                      keyword=keyword, callback=callback))
-        return _id
-
-    def detach_event(self, _hash):
-        for keyword in self.callbacks:
-            for _id in self.callbacks[keyword]:
-                if _id == _hash:
-                    logging.debug("calling detach_event on {callback}".format(callback=self.callbacks[keyword][_id]))
-                    del self.callbacks[keyword][_id]
-                    return
+        logging.debug("dispatching event {event!r}".format(event=event))
+        for component in self.components.values():
+            rvalue = component.dispatch_event(event)
+            if rvalue == -1:
+                c += 1
+        if c == len(self.components):
+            raise RuntimeError("CallbackNotFoundError")
 
     def detach_component(self, name):
         logging.debug("calling detach_component on {name}".format(name=name))
@@ -196,7 +181,6 @@ class Object(object):
     def __repr__(self):
         return self.__class__.__name__
 
-
 from components import *
 
 
@@ -204,9 +188,7 @@ def test():
     class PlayerEventHandler(EventHandler):
         def __init__(self, obj):
             super(PlayerEventHandler, self).__init__(obj)
-
-            # raise NotImplementedError
-
+            self.attach_event("update", self.update)
             @Reaction
             def accel(**kwargs):
                 # print("gravity is {g}".format(g=self.obj.get_component("physics").gravity))
@@ -232,7 +214,6 @@ def test():
                 if self.obj.accelerating:
                     return {"d0":constants.accelturnspeed}
                 return {"d0": constants.turnspeed}
-            print(turnleft.start)
             self.add_hold("left", "turn", turnleft)
 
             @Reaction
@@ -241,6 +222,14 @@ def test():
                     return {"d0":-constants.accelturnspeed}
                 return {"d0": -constants.turnspeed}
             self.add_hold("right", "turn", turnright)
+
+        def update(self, **kwargs):
+            logging.debug('update in Player')
+            vector = self.obj.get_component('physics').vector
+            # start of wonky code
+            logging.info("vector = {0!r}, {1}, {2}".format(vector.components,
+                                                           self.obj.get_component("physics").gravity,
+                                                           self.obj.pos))
 
     class Player(Object, pygame.sprite.Sprite):
         width, height = 16, 16
@@ -260,28 +249,22 @@ def test():
             return super(Player, self).__getattr__(name)
 
         def update(self, **kwargs):
-            logging.debug('update in Player')
-            vector = self.get_component('physics').vector
-            pdir = self.get_component('physics').dir
-            self.dispatch_event(Event("update", kwargs))
-            # start of wonky code
-            logging.info("vector = {0!r}, {1}, {2}".format(vector.components,
-                                                           self.get_component("physics").gravity,
-                                                           self.pos))
+            self.notify(Event("update", kwargs))
 
         @property
         def pos(self):
             return self.get_component('position').pos
 
-
     player = Player((100, 100))
-    print(dir(player.get_component("physics")))
     player.update(dt=1000)
     print(player.pos.components)
     player.notify(Event("move", {"dr": [10, 0]}))
+    assert(player.pos[0] == 110)
     player.update(dt=1000)
     print(player.pos.components)
-    player.notify(Event("kick", {"dv": [10, 0]}))
+    # import pdb
+    # pdb.set_trace()
+    player.notify(Event("kick", {"dv": Vector(10, 0)}))
     assert(player.get_component("physics").vector[0] == 10)
     player.update(dt=1000)
     print(player.pos.components)

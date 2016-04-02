@@ -4,6 +4,7 @@
         "K_DOWN": ["down", {}],
         "K_LEFT": ["left", {}],
         "K_RIGHT": ["right", {}],
-        "K_SPACE": ["space", {}]
+        "K_SPACE": ["space", {}],
+        "K_x": ["fire", {}]
     }
 }

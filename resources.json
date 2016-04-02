@@ -9,6 +9,6 @@
     },
     "background1":{
         "type": "data.image",
-        "path": "./resources/images/startBG.jpg"
+        "path": "./resources/images/clouds2.jpg"
     }
 }

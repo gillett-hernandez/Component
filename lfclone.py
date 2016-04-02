@@ -28,26 +28,13 @@ global resources
 resources = {}
 
 
-class DotDict:
-    def __init__(self, d={}):
-        self.__dict__.update(d)
-
-    def __getitem__(self, key):
-        return self.__dict__[key]
-
-    def __setitem__(self, key, item):
-        self.__dict__[key] = item
-
-    def items(self):
-        return self.__dict__.items()
-
 POSTMESSAGE = USEREVENT+1
 
-with open("./lf_constants.json", 'r') as fd:
-    constants = DotDict(json.load(fd))
+# with open("./lf_constants.json", 'r') as fd:
+#     constants = DotDict(json.load(fd))
 
-with open("./lf_keyconfig.json", 'r') as fd:
-    keyconfig = DotDict(json.load(fd))
+# with open("./lf_keyconfig.json", 'r') as fd:
+#     keyconfig = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)
 
@@ -64,14 +51,13 @@ def translate_event(event):
     elif event.type == pygame.KEYUP:
         return Event('keyup', {'key': event.key})
     elif event.type == pygame.MOUSEBUTTONDOWN:
-        return Event('mousebuttondown', {'key': event.key})
+        return Event('mousebuttondown', {})
+    else:
+        return Event("unknown", {})
 
 
 class ScreenLocator(object):
     _screen = None
-
-    def __init__(self):
-        super(ScreenLocator, self).__init__()
 
     @staticmethod
     def getScreen():
@@ -87,15 +73,11 @@ class PlayerEventHandler(EventHandler):
     def __init__(self, obj):
         super(PlayerEventHandler, self).__init__(obj)
 
-        # raise NotImplementedError
+        # reactions and everything in the code below manage events through this object
         self.obj.accelerating = False
 
         @Reaction
         def accel(**kwargs):
-            # print("gravity is {g}".format(g=self.obj.get_component("physics").gravity))
-            # if distance(self.obj.get_component("physics").vector)>constants.maxspeed:
-                # if not vproj(self.obj.get_component("physics").vector, miscfunc.vector_transform(constants.accel, self.obj.get_component("physics").dir))<0:
-                    # return {"dv": 0}
             return {"dv": constants.accel}
 
         @accel.defstart
@@ -125,8 +107,10 @@ class PlayerEventHandler(EventHandler):
             return {"d0": -constants.turnspeed}
         self.add_hold("right", "turn", turnright)
 
+        @Reaction
         def shoot(**kwargs):
             return {"dv": constants.bulletspeed}
+        self.add_hold("fire", "shoot", shoot)
 
 
 class Player(Object, pygame.sprite.Sprite):
@@ -150,22 +134,7 @@ class Player(Object, pygame.sprite.Sprite):
         return super(Player, self).__getattr__(name)
 
     def update(self, **kwargs):
-        logging.debug('update in Player')
-        dt = kwargs['dt']
-        vector = self.get_component('physics').vector
-        pdir = self.get_component('physics').dir
-
-        # start of wonky code
-        logging.info("vector = {0!r}, {1}, {2}".format(vector.components,
-                                                       self.get_component("physics").gravity,
-                                                       self.accelerating))
-        screen, camera = ScreenLocator.getScreen()
-        altered_center = camera.apply(self.rect).center
-        selfcenter_plus_100_len_vector = (Vector(l=self.rect.center) + Vector.from_euclidean(100, pdir)).components
-        selfcenter_plus_current_vector = (Vector(l=self.rect.center) + Vector(l=vector)).components
-
-        pygame.draw.line(screen, (255, 0, 0), altered_center, camera.apply(selfcenter_plus_100_len_vector).topleft)
-        pygame.draw.line(screen, (0, 0, 255), altered_center, camera.apply(selfcenter_plus_current_vector).topleft)
+        self.notify(Event("update", kwargs))
 
     @property
     def pos(self):
@@ -190,7 +159,7 @@ class Camera(object):
             raise ValueError("target is not something that can be 'move'd")
 
     def update(self, target):
-        self.state = self.camera_func(self.state, target.rect)
+        self.state = self.camera_func(self.state, target)
 
 
 def simple_camera(camera, target_rect):
@@ -202,12 +171,12 @@ def simple_camera(camera, target_rect):
 def complex_camera(camera, target_rect):
     l, t, _, _ = target_rect
     _, _, w, h = camera
-    l, t, _, _ = -l+constants.HALF_WIDTH, -t+constants.HALF_HEIGHT, w, h
+    l, t, _, _ = -l+constants.LEVEL_WIDTH//2, -t+constants.LEVEL_HEIGHT//2, w, h
 
-    l = min(0, l)                           # stop scrolling at the left edge
-    l = max(-(camera.width-constants.SCREEN_WIDTH), l)   # stop scrolling at the right edge
-    t = max(-(camera.height-constants.SCREEN_HEIGHT), t) # stop scrolling at the bottom
-    t = min(0, t)                           # stop scrolling at the top
+    l = min(0, l)                                       # stop scrolling at the left edge
+    l = max(-(camera.width-constants.LEVEL_WIDTH), l)   # stop scrolling at the right edge
+    t = max(-(camera.height-constants.LEVEL_HEIGHT), t) # stop scrolling at the bottom
+    t = min(0, t)                                       # stop scrolling at the top
     return Rect(l, t, w, h)
 
 
@@ -245,15 +214,27 @@ def main():
     screen = pygame.display.set_mode(constants.SCREEN_SIZE,
                                      winstyle, bestdepth)
 
-    camera = Camera(simple_camera, constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2)
+    camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
 
-    bg = pygame.Surface((constants.LEVEL_WIDTH,
-                        constants.LEVEL_HEIGHT)).convert()
+    testPlayerPos1 = pygame.Rect((400, 290), (64, 64))
+    testPlayerPos2 = pygame.Rect((402, 291), (64, 64))
 
-    bg.fill((255, 255, 255))
-    pygame.draw.rect(bg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
+    camera.update(testPlayerPos1)
+    tpp1 = camera.apply(testPlayerPos1)
+    tpp2 = camera.apply(testPlayerPos2)
+    print(tpp1, tpp2)
+    return
 
-    screen.blit(bg, (0, 0))
+    bg = get_resource("background1")
+    truebg = pygame.Surface((constants.LEVEL_WIDTH, constants.LEVEL_HEIGHT)).convert()
+
+    bg = pygame.transform.scale2x(bg)
+    truebg.fill((255, 255, 255))
+    truebg.blit(bg, (0, 0)) 
+
+    pygame.draw.rect(truebg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
+
+    screen.blit(truebg, (0, 0), screen.get_rect())
 
     all = kwargsGroup.UserGroup()
 
@@ -261,6 +242,7 @@ def main():
 
     player = Player((w2, h2))
 
+    camera.update(player)
     all.add(player)
 
     locations = []
@@ -290,17 +272,16 @@ def main():
 
     ScreenLocator.provide(screen, camera)
 
-    # camera = pygame.Rect(0,0,constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2)
-
     clock = pygame.time.Clock()
     pygame.display.update()  # update with no args is equivalent to flip
 
     print(player.image, player.rect, "player image and rect")
     while True:
         logging.debug("at top of main loop")
-        events = pygame.event.get([QUIT, KEYDOWN, KEYUP])
+        events = pygame.event.get()
         for event in events:
             if event.type is QUIT:
+                print("got event quit")
                 logging.info('event QUIT')
                 sys.exit(0)
                 return
@@ -315,9 +296,9 @@ def main():
                 player.notify(translate_event(event))
         pygame.event.pump()
 
-        screen.blit(bg, (0, 0), camera.apply(bg.get_rect()))
+        screen.blit(truebg, (0, 0), camera.apply(screen.get_rect()))
 
-        camera.update(player)
+        camera.update(player.rect)
 
         all.update(dt=dt)
 
@@ -327,8 +308,8 @@ def main():
         pygame.display.update()
 
         dt = clock.tick(constants.FRAMERATE)
-        if dt > 34:
-            dt = 34
+        if dt > 16:
+            dt = 16
 
         logging.debug("at bottom of main loop\n")
     # except Exception as e:

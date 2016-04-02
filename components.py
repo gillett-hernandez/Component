@@ -2,15 +2,11 @@
 import pygame
 import logging
 import json
-from component import Component, Event, DotDict
+from component import Component, Event, DotDict, constants, keyconfig
 from vector import Vector
 import math
 
-with open("./lf_constants.json", 'r') as fd:
-    constants = DotDict(json.load(fd))
-
-with open("./lf_keyconfig.json", 'r') as fd:
-    keyconfig = DotDict(json.load(fd))
+logging.basicConfig(**constants.logging_setup)
 
 
 class EventHandler(Component):
@@ -42,6 +38,7 @@ class EventHandler(Component):
                     "reaction if branch right before attach_component")
                 # print(reaction)
                 reaction.start(**kwargs)
+                # timing for a hold reaction goes here
                 self.obj.attach_component(
                     "{hear}_{react}_repeater".format(hear=hear, react=react),
                     Repeater, react, 1, reaction.hold
@@ -64,12 +61,9 @@ class Repeater(Component):
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.i = 0
         self.keyword = keyword
-        self.n = n
+        self.n = n # default 1
         self.data = data
-        if n == 1:
-            self.attach_event("update", self.update1)
-        else:
-            self.attach_event("update", self.update)
+        self.attach_event("update", self.update)
 
     def update(self, **kwargs):
         self.i += 1
@@ -127,16 +121,19 @@ class InputController(Component):
     def __init__(self, obj):
         super(InputController, self).__init__(obj)
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
-        self.reactions = keyconfig.keys
+        self.reactions = {}
+        logging.debug("reactions = {0.reactions}".format(self))
+        for key, data in keyconfig.keys.items():
+            self.reactions[getattr(pygame.locals, key)] = data
         self.attach_event('keydown', self.keydown)
         self.attach_event('keyup', self.keyup)
 
     def keydown(self, **kwargs):
         key = kwargs["key"]
         logging.debug(("keydown {key} from " +
-                      "InputController.keydown").format(key=pygame.key.name(key)))
+                      "InputController.keydown").format(key=(pygame.key.name(key), key)))
         if key not in self.reactions:
-            logging.warn("{key} does not have a mapped reaction in InputController".format(key=pygame.key.name(key)))
+            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(pygame.key.name(key), key)))
         if key in self.reactions:
             logging.debug(self.reactions[key])
             reaction = self.reactions[key]
@@ -147,9 +144,9 @@ class InputController(Component):
     def keyup(self, **kwargs):
         key = kwargs['key']
         logging.debug(("keydown {key} from " +
-                      "InputController.keydown").format(key=pygame.key.name(key)))
+                      "InputController.keydown").format(key=(pygame.key.name(key), key)))
         if key not in self.reactions:
-            logging.warn("{key} does not have a mapped reaction in InputController".format(key=pygame.key.name(key)))
+            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(pygame.key.name(key), key)))
         if key in self.reactions:
             logging.debug(self.reactions[key])
             reaction = self.reactions[key]
@@ -184,6 +181,9 @@ class PositionComponent(Component):
     def y(self, value):
         self.pos.y = value
 
+    def reset(self):
+        self.pos.components = [self.xstart, self.ystart]
+
 
 class ProximitySensor(Component):
     def __init__(self, obj, group, r):
@@ -201,7 +201,6 @@ class ProximitySensor(Component):
 
 
 class PhysicsComponent(Component):
-    """docstring for PhysicsComponent"""
     def __init__(self, obj, **kwargs):
         super(PhysicsComponent, self).__init__(obj)
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
@@ -213,7 +212,7 @@ class PhysicsComponent(Component):
         # for some reason vector is being set to None
         self.vector = Vector(0, 0)
         assert self.vector is not None
-        self.dir = -90
+        self.dir = 90
         self.attach_event('update', self.update)
         self.attach_event('nearby', self.collidelist)
         self.attach_event('move', self.move)
@@ -257,31 +256,29 @@ class PhysicsComponent(Component):
     def kick(self, dv=Vector(0, 0), restrict_velocity=True):
         if isinstance(dv, (list, tuple)):
             dv = Vector(l=dv)
+        logging.debug("vector before kick is {}".format(self.vector))
+        self.vector += dv
         if restrict_velocity:
             if self.vector.magnitude > constants.maxspeed - Vector(l=dv).magnitude:
-                self.vector += dv
+                logging.debug("normalized velocity")
                 self.vector.normalize_ip()
-                self.vector *= constants.maxspeed**0.5
-                logging.info(("kick called in PhysicsComponent {dv}." +
-                             " current vector is {v}").format(dv=dv, v=self.vector))
-                return
-        else:
-            print(self.vector, dv)
-            self.vector += dv
-            logging.info(("kick called in PhysicsComponent {dv}." +
-                         " current vector is {v}").format(dv=dv, v=self.vector))
+                self.vector *= constants.maxspeed
+        logging.info("kick called in PhysicsComponent {dv}")
+        logging.info("current vector is {v}".format(dv=dv, v=self.vector))
 
     def turn(self, d0):
-        logging.debug("calling turn from PhysicsComponent, d0={0}".format(d0))
-        self.dir -= d0
+        logging.debug("calling turn from PhysicsComponent, d0={0}, current angle is {1}".format(d0, self.dir))
+        self.dir += d0
+        self.dir %= 360
 
     def accel(self, dv=None, dir=None):
         assert dv is not None
+        logging.debug("before kick current angle is {}".format(self.dir))
         if dir is None:
             dir = self.dir
 
-        v = Vector(dv * math.cos(self.dir), dv * math.sin(self.dir))
-
+        v = Vector(dv * math.cos(math.radians(self.dir)), dv * math.sin(math.radians(self.dir)))
+        logging.debug("accel {}".format(v))
         self.kick(dv=v)
 
     def bounce_horizontal(self):
@@ -300,11 +297,12 @@ class PhysicsComponent(Component):
             self.gravity = g
 
     def outside_top(self):
-        pass
+        if self.p.pos[1] > constants.LEVEL_HEIGHT:
+            self.change_gravity(constants.GRAVITY*4)
 
     def outside_bottom(self):
         # self.p.pos = [self.p.xstart, self.p.ystart]
-        if self.p.pos[1] > constants.SCREEN_HEIGHT:
+        if self.p.pos[1] < 0:
             self.change_gravity(-constants.GRAVITY*4)
 
     def outside_sides(self):
@@ -316,19 +314,21 @@ class PhysicsComponent(Component):
         self.pdir = self.dir
         dt = kwargs['dt']
         x, y = self.p.pos
+        logging.debug("data dump: {}".format((x, y)))
+        logging.debug("         : {}".format(self.gravity))
+        logging.debug("         : {}".format(self.vector))
+        logging.debug("         : {}".format(self.dir))
         if y < 0:
             self.outside_top()
         elif y > constants.LEVEL_HEIGHT:
-            self.outside_bottom
-        else:
-            self.change_gravity(constants.GRAVITY)
+            self.outside_bottom()
 
         # if self is outside screen side barriers
-        if not (0 < x < constants.SCREEN_WIDTH):
+        if not (0 < x < constants.LEVEL_WIDTH):
             self.outside_sides()
 
         if not self.weightless:
-            self.kick(dv=Vector(0, constants.GRAVITY), restrict_velocity=False)
+            self.kick(dv=Vector(0, -self.gravity), restrict_velocity=False)
 
         if not self.vector.is_zero_vector():
             self.move(dr=(self.vector * dt/1000.))

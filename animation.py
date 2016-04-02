@@ -37,13 +37,21 @@ class Sprite(object):
 
 class SpriteComponent(Sprite, Component, pygame.sprite.Sprite):
     def __init__(self, obj, strip, uwidth=None, uheight=None, sprite_count=None):
-        self.obj = obj
-        super(SpriteComponent, self).__init__(strip, uwidth, uheight, sprite_count)
+        Component.__init__(self, obj)
+        Sprite.__init__(self, strip, uwidth, uheight, sprite_count)
+        self.po = self.obj.get_component('position')
+        self.ph = self.obj.get_component('physics')
+        self.obj.rect = self.obj.image.get_rect()
+        self.obj.rect.topleft = self.po.pos.components
+        self.attach_event('update', self.update)
+
+    def update(self, **kwargs):
+        self.obj.rect.topleft = self.po.pos.components
+        self.set_image(((90-self.ph.dir)//6) % self.sprite_count)
 
     def set_image(self, ind):
         super(SpriteComponent, self).set_image(ind)
         self.obj.image = self.image
-
 
 
 class Animation(Sprite):
