@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 import sys
 
-from component import Component
+from component import Component, constants
 
 
 class Sprite(object):
@@ -49,7 +49,7 @@ class SpriteComponent(Sprite, Component, pygame.sprite.Sprite):
 
     def update(self, **kwargs):
         x, y = self.po.pos.components
-        self.obj.rect.topleft = [x, -y]
+        self.obj.rect.topleft = [x, constants.LEVEL_HEIGHT-y]
         self.set_image(((self.dir-90)//6) % self.sprite_count)
 
     def turn(self, d0=0):

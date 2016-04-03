@@ -240,7 +240,7 @@ def main():
 
     w2, h2 = constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2
 
-    player = Player((50, -50))
+    player = Player((50, constants.LEVEL_HEIGHT-50))
 
     camera.update(player.rect)
     all.add(player)
