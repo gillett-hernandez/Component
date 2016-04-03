@@ -44,10 +44,17 @@ class SpriteComponent(Sprite, Component, pygame.sprite.Sprite):
         self.obj.rect = self.obj.image.get_rect()
         self.obj.rect.topleft = self.po.pos.components
         self.attach_event('update', self.update)
+        self.attach_event('turn', self.turn)
+        self.dir = 90
 
     def update(self, **kwargs):
-        self.obj.rect.topleft = self.po.pos.components
-        self.set_image(((90-self.ph.dir)//6) % self.sprite_count)
+        x, y = self.po.pos.components
+        self.obj.rect.topleft = [x, -y]
+        self.set_image(((self.dir-90)//6) % self.sprite_count)
+
+    def turn(self, d0=0):
+        self.dir -= d0
+        self.dir %= 360
 
     def set_image(self, ind):
         super(SpriteComponent, self).set_image(ind)

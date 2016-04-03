@@ -268,12 +268,11 @@ def test():
     assert(player.get_component("physics").vector[0] == 10)
     player.update(dt=1000)
     print(player.pos.components)
+    player.notify(Event("turn", {"d0": -90}))
+    player.notify(Event("accel", {"dv": 100}))
     player.update(dt=1000)
     print(player.pos.components)
-    player.update(dt=1000)
-    print(player.pos.components)
-    player.update(dt=1000)
-    print(player.pos.components)
+    print(player.get_component("physics").vector.components)
 
 if __name__ == '__main__':
     try:

@@ -134,6 +134,13 @@ class Player(Object, pygame.sprite.Sprite):
         return super(Player, self).__getattr__(name)
 
     def update(self, **kwargs):
+        screen, camera = ScreenLocator.getScreen()
+        acenter = camera.apply(self.rect).center
+        vec = self.get_component("physics").vector.components[:]
+        vec[1] = -vec[1]
+        pygame.draw.line(screen, (255, 0, 0),
+                         acenter,
+                         (Vector(l=acenter)+Vector(l=vec)).components)
         self.notify(Event("update", kwargs))
 
     @property
@@ -145,6 +152,7 @@ class Camera(object):
     def __init__(self, camera_func, width, height):
         self.camera_func = camera_func
         self.state = Rect(0, 0, width, height)
+        self.startstate = Rect(0, 0, width, height)
 
     def apply(self, target):
         if isinstance(target, pygame.Rect):
@@ -159,7 +167,7 @@ class Camera(object):
             raise ValueError("target is not something that can be 'move'd")
 
     def update(self, target):
-        self.state = self.camera_func(self.state, target)
+        self.state = self.camera_func(self.startstate, target)
 
 
 def simple_camera(camera, target_rect):
@@ -214,16 +222,8 @@ def main():
     screen = pygame.display.set_mode(constants.SCREEN_SIZE,
                                      winstyle, bestdepth)
 
-    camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
-
-    testPlayerPos1 = pygame.Rect((400, 290), (64, 64))
-    testPlayerPos2 = pygame.Rect((402, 291), (64, 64))
-
-    camera.update(testPlayerPos1)
-    tpp1 = camera.apply(testPlayerPos1)
-    tpp2 = camera.apply(testPlayerPos2)
-    print(tpp1, tpp2)
-    return
+    # camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+    camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height), constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
 
     bg = get_resource("background1")
     truebg = pygame.Surface((constants.LEVEL_WIDTH, constants.LEVEL_HEIGHT)).convert()
@@ -240,9 +240,9 @@ def main():
 
     w2, h2 = constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2
 
-    player = Player((w2, h2))
+    player = Player((50, -50))
 
-    camera.update(player)
+    camera.update(player.rect)
     all.add(player)
 
     locations = []
@@ -295,6 +295,10 @@ def main():
                              event=event))
                 player.notify(translate_event(event))
         pygame.event.pump()
+
+        print(player.pos)
+
+        screen.fill((255, 255, 255))
 
         screen.blit(truebg, (0, 0), camera.apply(screen.get_rect()))
 

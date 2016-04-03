@@ -263,8 +263,8 @@ class PhysicsComponent(Component):
                 logging.debug("normalized velocity")
                 self.vector.normalize_ip()
                 self.vector *= constants.maxspeed
-        logging.info("kick called in PhysicsComponent {dv}")
-        logging.info("current vector is {v}".format(dv=dv, v=self.vector))
+        logging.info("kick called in PhysicsComponent {dv}".format(dv=dv))
+        logging.info("current vector is {v}".format(v=self.vector))
 
     def turn(self, d0):
         logging.debug("calling turn from PhysicsComponent, d0={0}, current angle is {1}".format(d0, self.dir))
@@ -276,6 +276,11 @@ class PhysicsComponent(Component):
         logging.debug("before kick current angle is {}".format(self.dir))
         if dir is None:
             dir = self.dir
+
+        # direction of 0 degrees has a sin of 1 and a cos of 0
+        # direction of +90 degrees has a sin of 0 and cos of 1
+        # direction of +180 degrees has a sin of -1 and cos of 0
+        # direction of +270 degrees has a sin of 0 and cos of -1
 
         v = Vector(dv * math.cos(math.radians(self.dir)), dv * math.sin(math.radians(self.dir)))
         logging.debug("accel {}".format(v))
@@ -314,10 +319,10 @@ class PhysicsComponent(Component):
         self.pdir = self.dir
         dt = kwargs['dt']
         x, y = self.p.pos
-        logging.debug("data dump: {}".format((x, y)))
-        logging.debug("         : {}".format(self.gravity))
-        logging.debug("         : {}".format(self.vector))
-        logging.debug("         : {}".format(self.dir))
+        logging.debug("physics xy: {}".format((x, y)))
+        logging.debug("gravity   : {}".format(self.gravity))
+        logging.debug("vector    : {}".format(self.vector))
+        logging.debug("dir       : {}".format(self.dir))
         if y < 0:
             self.outside_top()
         elif y > constants.LEVEL_HEIGHT:
@@ -328,7 +333,8 @@ class PhysicsComponent(Component):
             self.outside_sides()
 
         if not self.weightless:
-            self.kick(dv=Vector(0, -self.gravity), restrict_velocity=False)
+            # self.kick(dv=Vector(0, -self.gravity), restrict_velocity=False)
+            self.kick(dv=Vector(0, -self.gravity))
 
         if not self.vector.is_zero_vector():
             self.move(dr=(self.vector * dt/1000.))
