@@ -1,11 +1,9 @@
 #!/usr/bin/python
 
 import sys
-import os
 import logging
 
 # import sound
-import kwargsGroup
 
 # import miscfunc
 
@@ -71,13 +69,8 @@ def main():
 
         pygame.display.update()
 
-        dt = clock.tick(60)
-        # assert dt < 100, dt
-        # logging.info(str(dt)+' dt\n')d
-    # except Exception as e:
-        # for sprite in iter(all):
-            # sprite.dumpstate()
-        # raise e
+        # dt = clock.tick(60)
+        clock.tick(60)
 
 
 if __name__ == '__main__':

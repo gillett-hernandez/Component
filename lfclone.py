@@ -179,12 +179,12 @@ def simple_camera(camera, target_rect):
 def complex_camera(camera, target_rect):
     l, t, _, _ = target_rect
     _, _, w, h = camera
-    l, t, _, _ = -l+constants.LEVEL_WIDTH//2, -t+constants.LEVEL_HEIGHT//2, w, h
+    l, t = -l+constants.LEVEL_WIDTH//2, -t+constants.LEVEL_HEIGHT//2
 
-    l = min(0, l)                                       # stop scrolling at the left edge
-    l = max(-(camera.width-constants.LEVEL_WIDTH), l)   # stop scrolling at the right edge
-    t = max(-(camera.height-constants.LEVEL_HEIGHT), t) # stop scrolling at the bottom
-    t = min(0, t)                                       # stop scrolling at the top
+    l = min(0, l)                                        # stop scrolling at the left edge
+    l = max(-(camera.width-constants.LEVEL_WIDTH), l)    # stop scrolling at the right edge
+    t = max(-(camera.height-constants.LEVEL_HEIGHT), t)  # stop scrolling at the bottom
+    t = min(0, t)                                        # stop scrolling at the top
     return Rect(l, t, w, h)
 
 
@@ -231,14 +231,14 @@ def prep_background(resources):
 
     bg = pygame.transform.scale2x(bg)
     truebg.fill((255, 255, 255))
-    truebg.blit(bg, (0, 0)) 
+    truebg.blit(bg, (0, 0))
 
     pygame.draw.rect(truebg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
     resources["truebg"] = truebg
 
 
 def prep_font(resources):
-    font = pygame.font.Font(None, 16) # 16 pt font
+    font = pygame.font.Font(None, 16)  # 16 pt font
     resources["font"] = font
 
 offset = 0
@@ -304,8 +304,6 @@ def main():
     global resources
 
     screen = get_resource("screen")
-
-    font = get_resource("font")
 
     # camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
     camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height),

@@ -6,7 +6,6 @@ import math
 
 import pygame
 import pygame.locals
-from math import hypot
 
 from vector import Vector
 
@@ -189,22 +188,23 @@ def test():
         def __init__(self, obj):
             super(PlayerEventHandler, self).__init__(obj)
             self.attach_event("update", self.update)
+
             @Reaction
             def accel(**kwargs):
                 # print("gravity is {g}".format(g=self.obj.get_component("physics").gravity))
-                if distance(self.obj.get_component("physics").vector)>constants.maxspeed:
-                    if not vproj(self.obj.get_component("physics").vector, miscfunc.vector_transform(constants.accel, self.obj.get_component("physics").dir))<0:
+                if distance(self.obj.get_component("physics").vector) > constants.maxspeed:
+                    if not vproj(self.obj.get_component("physics").vector, miscfunc.vector_transform(constants.accel, self.obj.get_component("physics").dir)) < 0:
                         return {"dv": 0}
                 return {"dv": constants.accel}
 
             @accel.defstart
             def accel(**kwargs):
-                self.obj.dispatch_event(Event("change_gravity", {'g':constants.GRAVITY/4.}))
+                self.obj.dispatch_event(Event("change_gravity", {'g': constants.GRAVITY/4.}))
                 self.obj.accelerating = True
 
             @accel.defend
             def accel(**kwargs):
-                self.obj.dispatch_event(Event("change_gravity", {'g':constants.GRAVITY}))
+                self.obj.dispatch_event(Event("change_gravity", {'g': constants.GRAVITY}))
                 self.obj.accelerating = False
 
             self.add_hold("accelerate", "accel", accel)
@@ -212,14 +212,14 @@ def test():
             @Reaction
             def turnleft(**kwargs):
                 if self.obj.accelerating:
-                    return {"d0":constants.accelturnspeed}
+                    return {"d0": constants.accelturnspeed}
                 return {"d0": constants.turnspeed}
             self.add_hold("left", "turn", turnleft)
 
             @Reaction
             def turnright(**kwargs):
                 if self.obj.accelerating:
-                    return {"d0":-constants.accelturnspeed}
+                    return {"d0": -constants.accelturnspeed}
                 return {"d0": -constants.turnspeed}
             self.add_hold("right", "turn", turnright)
 

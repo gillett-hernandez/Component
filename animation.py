@@ -72,7 +72,7 @@ class Animation(Sprite):
     def add_cycle(self, name, frameids, timestops):
         l = list(zip(frameids, timestops))
         self.cycles[name] = l
-        if self.add_cycle_firstcalled == True:
+        if self.add_cycle_firstcalled is True:
             self.set_cycle(name)
             self.add_cycle_firstcalled = False
 
@@ -106,7 +106,6 @@ def test():
     spr_anim.add_cycle("run", list(range(swidth//64)), [1]*(swidth//64))
 
     clock = pygame.time.Clock()
-
 
     bg = pygame.Surface((64, 64)).convert()
     bg.fill((255, 255, 255))

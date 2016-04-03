@@ -1,8 +1,7 @@
 
 import pygame
 import logging
-import json
-from component import Component, Event, DotDict, constants, keyconfig
+from component import Component, Event, constants, keyconfig
 from vector import Vector
 import math
 
@@ -14,7 +13,6 @@ class EventHandler(Component):
     def __init__(self, obj):
         super(EventHandler, self).__init__(obj)
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
-
 
         # obj.attach_event('update', self.update)
 
@@ -61,7 +59,7 @@ class Repeater(Component):
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.i = 0
         self.keyword = keyword
-        self.n = n # default 1
+        self.n = n  # default 1
         self.data = data
         self.attach_event("update", self.update)
 
@@ -130,10 +128,11 @@ class InputController(Component):
 
     def keydown(self, **kwargs):
         key = kwargs["key"]
+        keyname = pygame.key.name(key)
         logging.debug(("keydown {key} from " +
-                      "InputController.keydown").format(key=(pygame.key.name(key), key)))
+                      "InputController.keydown").format(key=(keyname, key)))
         if key not in self.reactions:
-            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(pygame.key.name(key), key)))
+            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(keyname, key)))
         if key in self.reactions:
             logging.debug(self.reactions[key])
             reaction = self.reactions[key]
@@ -143,10 +142,11 @@ class InputController(Component):
 
     def keyup(self, **kwargs):
         key = kwargs['key']
+        keyname = pygame.key.name(key)
         logging.debug(("keydown {key} from " +
-                      "InputController.keydown").format(key=(pygame.key.name(key), key)))
+                      "InputController.keydown").format(key=(keyname, key)))
         if key not in self.reactions:
-            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(pygame.key.name(key), key)))
+            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(keyname, key)))
         if key in self.reactions:
             logging.debug(self.reactions[key])
             reaction = self.reactions[key]
