@@ -188,9 +188,8 @@ def complex_camera(camera, target_rect):
     return Rect(l, t, w, h)
 
 
-def load_basic_resources():
+def load_basic_resources(resources):
     """loads basic resources into ram"""
-    global resources
     print(dir(DotDict))
     with open("resources.json", 'r') as fd:
         _resources = DotDict(json.load(fd))
@@ -211,20 +210,22 @@ def get_resource(name):
 
 def do_prep():
     pygame.init()
-    load_basic_resources()
+    global resources
+    load_basic_resources(resources)
+    prep_screen(resources)
+    prep_background(resources)
+    prep_font(resources)
 
 
-def main():
-    do_prep()
-    dt = 1000/constants.FRAMERATE
+def prep_screen(resources):
     winstyle = 0
     bestdepth = pygame.display.mode_ok(constants.SCREEN_SIZE, winstyle, 32)
     screen = pygame.display.set_mode(constants.SCREEN_SIZE,
                                      winstyle, bestdepth)
+    resources["screen"] = screen
 
-    # camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
-    camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height), constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
 
+def prep_background(resources):
     bg = get_resource("background1")
     truebg = pygame.Surface((constants.LEVEL_WIDTH, constants.LEVEL_HEIGHT)).convert()
 
@@ -233,18 +234,38 @@ def main():
     truebg.blit(bg, (0, 0)) 
 
     pygame.draw.rect(truebg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
+    resources["truebg"] = truebg
 
-    screen.blit(truebg, (0, 0), screen.get_rect())
 
-    all = kwargsGroup.UserGroup()
+def prep_font(resources):
+    font = pygame.font.Font(None, 16) # 16 pt font
+    resources["font"] = font
 
+offset = 0
+text_to_render = []
+
+
+def render_text(text, color=(0, 0, 0)):
+    global offset
+    global text_to_render
+    font = get_resource("font")
+    size = font.size(text)
+    h = size[1]
+    size = pygame.Rect((0, offset), size)
+    offset += h
+    text = font.render(text, False, color)
+    text_to_render.append((text, size))
+
+
+def clear_text_buffer():
+    global offset
+    global text_to_render
+    offset = 0
+    text_to_render = []
+
+
+def make_enemies(resources):
     w2, h2 = constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2
-
-    player = Player((50, constants.LEVEL_HEIGHT-50))
-
-    camera.update(player.rect)
-    all.add(player)
-
     locations = []
 
     # locations should be like this
@@ -270,57 +291,94 @@ def main():
     locations.append((w2, h2*2-16))
     locations.append((w2*2-16, h2*2-16))
 
+    enemies = []
+    for location in locations:
+        enemies.append(Enemy(location))
+    return enemies
+
+
+def main():
+    do_prep()
+    dt = 1000/constants.FRAMERATE
+
+    global resources
+
+    screen = get_resource("screen")
+
+    font = get_resource("font")
+
+    # camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+    camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height),
+                    constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+
+    truebg = get_resource("truebg")
+    screen.blit(truebg, (0, 0), screen.get_rect())
+
+    All = kwargsGroup.UserGroup()
+
+    player = Player((50, constants.LEVEL_HEIGHT-50))
+
+    camera.update(player.rect)
+    All.add(player)
+
     ScreenLocator.provide(screen, camera)
 
     clock = pygame.time.Clock()
     pygame.display.update()  # update with no args is equivalent to flip
 
     print(player.image, player.rect, "player image and rect")
-    while True:
-        logging.debug("at top of main loop")
-        events = pygame.event.get()
-        for event in events:
-            if event.type is QUIT:
-                print("got event quit")
-                logging.info('event QUIT')
-                sys.exit(0)
-                return
-            elif event.type in [KEYDOWN, KEYUP,
-                                MOUSEBUTTONDOWN, MOUSEBUTTONUP]:
-                if event.type is KEYDOWN and (event.key in [K_ESCAPE, K_q]):
-                    logging.info('event K_ESCAPE')
+    try:
+        while True:
+            logging.debug("at top of main loop")
+            events = pygame.event.get()
+            for event in events:
+                if event.type is QUIT:
+                    print("got event quit")
+                    logging.info('event QUIT')
                     sys.exit(0)
                     return
-                logging.info("notifying player of {event} from mainloop".format(
-                             event=event))
-                player.notify(translate_event(event))
-        pygame.event.pump()
+                elif event.type in [KEYDOWN, KEYUP,
+                                    MOUSEBUTTONDOWN, MOUSEBUTTONUP]:
+                    if event.type is KEYDOWN and (event.key in [K_ESCAPE, K_q]):
+                        logging.info('event K_ESCAPE')
+                        sys.exit(0)
+                        return
+                    logging.info("notifying player of {event} from mainloop".format(
+                                 event=event))
+                    player.notify(translate_event(event))
+                elif event.type is POSTMESSAGE:
+                    render_text(event.info, event.color)
 
-        print(player.pos)
+            pygame.event.pump()
 
-        screen.fill((255, 255, 255))
+            render_text(str(player.rect.topleft))
 
-        screen.blit(truebg, (0, 0), camera.apply(screen.get_rect()))
+            screen.fill((255, 255, 255))
 
-        camera.update(player.rect)
+            screen.blit(truebg, (0, 0), camera.apply(screen.get_rect()))
 
-        all.update(dt=dt)
+            for text_surface, pos in text_to_render:
+                screen.blit(text_surface, pos)
 
-        for e in all:
-            screen.blit(e.image, camera.apply(e))
+            camera.update(player.rect)
 
-        pygame.display.update()
+            All.update(dt=dt)
 
-        dt = clock.tick(constants.FRAMERATE)
-        if dt > 16:
-            dt = 16
+            for e in All:
+                screen.blit(e.image, camera.apply(e))
 
-        logging.debug("at bottom of main loop\n")
-    # except Exception as e:
-        # for sprite in iter(all):
-            # sprite.dumpstate()
-        # raise e
+            pygame.display.update()
 
+            dt = clock.tick(constants.FRAMERATE)
+            if dt > 16:
+                dt = 16
+
+            clear_text_buffer()
+            logging.debug("at bottom of main loop\n")
+    except NotImplementedError:
+        for sprite in iter(All):
+            sprite.dumpstate()
+        raise
 
 if __name__ == '__main__':
     try:
