@@ -1,9 +1,11 @@
 
-import pygame
+import math
 import logging
+
 from component import Component, Event, constants, keyconfig
 from vector import Vector
-import math
+
+import pygame
 
 logging.basicConfig(**constants.logging_setup)
 
@@ -316,13 +318,16 @@ class PhysicsComponent(Component):
 
     def update(self, **kwargs):
         logging.debug("top of physics update call")
-        self.pdir = self.dir
         dt = kwargs['dt']
         x, y = self.p.pos
-        logging.debug("physics xy: {}".format((x, y)))
-        logging.debug("gravity   : {}".format(self.gravity))
-        logging.debug("vector    : {}".format(self.vector))
-        logging.debug("dir       : {}".format(self.dir))
+        # logging.debug("physics xy: {}".format((x, y)))
+        # logging.debug("gravity   : {}".format(self.gravity))
+        # logging.debug("vector    : {}".format(self.vector))
+        # logging.debug("dir       : {}".format(self.dir))
+        self.obj.render_text("x, y = ({:3.1f}, {:3.1f})".format(x, y))
+        self.obj.render_text("gravity = {0.gravity}".format(self))
+        self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
+        self.obj.render_text("direction = {0.dir}".format(self))
         if y < 0:
             self.outside_top()
         elif y > constants.LEVEL_HEIGHT:
