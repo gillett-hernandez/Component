@@ -56,6 +56,117 @@ def translate_event(event):
         return Event("unknown", {})
 
 
+def load_basic_resources(resources):
+    """loads basic resources into ram"""
+    print(dir(DotDict))
+    with open("resources.json", 'r') as fd:
+        _resources = DotDict(json.load(fd))
+    print(dir(_resources.playerimage))
+    for name, data in _resources.items():
+        if data["type"] == constants.IMAGE:
+            with open(data["path"], 'rb') as fd:
+                resources[name] = pygame.image.load(fd)
+        elif data["type"] in [constants.SFX, constants.MUSIC]:
+            with open(data["path"], 'rb') as fd:
+                resources[name] = sound.load(fd)
+
+
+def get_resource(name):
+    global resources
+    return resources[name]
+
+
+def do_prep():
+    pygame.init()
+    global resources
+    load_basic_resources(resources)
+    prep_screen(resources)
+    prep_background(resources)
+    prep_font(resources)
+
+
+def prep_screen(resources):
+    winstyle = 0
+    bestdepth = pygame.display.mode_ok(constants.SCREEN_SIZE, winstyle, 32)
+    screen = pygame.display.set_mode(constants.SCREEN_SIZE,
+                                     winstyle, bestdepth)
+    resources["screen"] = screen
+
+
+def prep_background(resources):
+    bg = get_resource("background1")
+    truebg = pygame.Surface((constants.LEVEL_WIDTH, constants.LEVEL_HEIGHT)).convert()
+
+    bg = pygame.transform.scale2x(bg)
+    truebg.fill((255, 255, 255))
+    truebg.blit(bg, (0, 0))
+
+    pygame.draw.rect(truebg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
+    resources["truebg"] = truebg
+
+
+def prep_font(resources):
+    font = pygame.font.Font(None, 16)  # 16 pt font
+    resources["font"] = font
+
+offset = 0
+text_to_render = []
+
+
+def render_text(text, color=(0, 0, 0)):
+    global offset
+    global text_to_render
+    if not isinstance(text, str):
+        text = str(text)
+    font = get_resource("font")
+    size = font.size(text)
+    h = size[1]
+    size = pygame.Rect((0, offset), size)
+    offset += h
+    text = font.render(text, False, color)
+    text_to_render.append((text, size))
+
+
+def clear_text_buffer():
+    global offset
+    global text_to_render
+    offset = 0
+    text_to_render = []
+
+
+def make_enemies(resources):
+    w2, h2 = constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2
+    locations = []
+
+    # locations should be like this
+    # *______________*______________*
+    # |                             |
+    # |                             |
+    # |                             |
+    # |                             |
+    # *                             *
+    # |                             |
+    # |                             |
+    # |                             |
+    # *______________*______________*
+    # thus
+    locations.append((0, 0))
+    locations.append((w2, 0))
+    locations.append((w2*2-16, 0))
+
+    locations.append((0, h2))
+    locations.append((w2*2-16, h2))
+
+    locations.append((0, h2*2-16))
+    locations.append((w2, h2*2-16))
+    locations.append((w2*2-16, h2*2-16))
+
+    enemies = []
+    for location in locations:
+        enemies.append(Enemy(location))
+    return enemies
+
+
 class ScreenLocator(object):
     _screen = None
 
@@ -128,6 +239,9 @@ class Player(Object, pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         assert(self.mask.count() > 0)
 
+    def render_text(self, text):
+        outputInfo(text)
+
     def __getattr__(self, name):
         if name == "pos" or name == "x" or name == "y":
             return getattr(self.get_component("position"), name)
@@ -152,28 +266,41 @@ class Camera(object):
     def __init__(self, camera_func, width, height):
         self.camera_func = camera_func
         self.state = Rect(0, 0, width, height)
-        self.startstate = Rect(0, 0, width, height)
 
     def apply(self, target):
         if isinstance(target, pygame.Rect):
-            return target.move(self.state.topleft)
+            rect = target
+            topleft = rect.topleft
+            w, h = rect.size
         elif isinstance(target, pygame.Surface):
-            return target.get_rect().move(self.state.topleft)
-        elif isinstance(target, pygame.sprite.Sprite):
-            return target.rect.move(self.state.topleft)
+            rect = target.get_rect()
+            topleft = rect.topleft
+            w, h = rect.size
+        elif isinstance(target, (pygame.sprite.Sprite, Object)):
+            rect = target.rect
+            topleft = rect.topleft
+            w, h = rect.size
         elif isinstance(target, list):
-            return pygame.Rect((Vector(l=target) + Vector(l=self.state.topleft)).components, [0, 0])
+            topleft = target
+            w, h = 0, 0
         else:
             raise ValueError("target is not something that can be 'move'd")
+        vector = (Vector(l=topleft) - Vector(l=self.state.topleft)).components
+        rect = pygame.Rect(vector, (w, h))
+        return rect
 
     def update(self, target):
-        self.state = self.camera_func(self.startstate, target)
+        self.camera_func(self.state, target)
+        outputInfo("state topleft = {}".format(self.state.topleft))
+        outputInfo("adjusted = {}".format(Vector(l=self.state.center)-Vector(l=self.state.size)//2))
+        # assert self.state.topleft == (Vector(l=self.state.center) - Vector(l=self.state.size)).components
 
 
 def simple_camera(camera, target_rect):
-    l, t, _, _ = target_rect
-    _, _, w, h = camera
-    return Rect(-l+constants.HALF_WIDTH, -t+constants.HALF_HEIGHT, w, h)
+    # l, t, w, h = target_rect
+    # _, _, W, H = camera
+    camera.center = target_rect.center
+    # return Rect(-(l+w//2)+W//2, -(t+h//2)+H//2, W, H)
 
 
 def complex_camera(camera, target_rect):
@@ -188,115 +315,6 @@ def complex_camera(camera, target_rect):
     return Rect(l, t, w, h)
 
 
-def load_basic_resources(resources):
-    """loads basic resources into ram"""
-    print(dir(DotDict))
-    with open("resources.json", 'r') as fd:
-        _resources = DotDict(json.load(fd))
-    print(dir(_resources.playerimage))
-    for name, data in _resources.items():
-        if data["type"] == constants.IMAGE:
-            with open(data["path"], 'rb') as fd:
-                resources[name] = pygame.image.load(fd)
-        elif data["type"] in [constants.SFX, constants.MUSIC]:
-            with open(data["path"], 'rb') as fd:
-                resources[name] = sound.load(fd)
-
-
-def get_resource(name):
-    global resources
-    return resources[name]
-
-
-def do_prep():
-    pygame.init()
-    global resources
-    load_basic_resources(resources)
-    prep_screen(resources)
-    prep_background(resources)
-    prep_font(resources)
-
-
-def prep_screen(resources):
-    winstyle = 0
-    bestdepth = pygame.display.mode_ok(constants.SCREEN_SIZE, winstyle, 32)
-    screen = pygame.display.set_mode(constants.SCREEN_SIZE,
-                                     winstyle, bestdepth)
-    resources["screen"] = screen
-
-
-def prep_background(resources):
-    bg = get_resource("background1")
-    truebg = pygame.Surface((constants.LEVEL_WIDTH, constants.LEVEL_HEIGHT)).convert()
-
-    bg = pygame.transform.scale2x(bg)
-    truebg.fill((255, 255, 255))
-    truebg.blit(bg, (0, 0))
-
-    pygame.draw.rect(truebg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
-    resources["truebg"] = truebg
-
-
-def prep_font(resources):
-    font = pygame.font.Font(None, 16)  # 16 pt font
-    resources["font"] = font
-
-offset = 0
-text_to_render = []
-
-
-def render_text(text, color=(0, 0, 0)):
-    global offset
-    global text_to_render
-    font = get_resource("font")
-    size = font.size(text)
-    h = size[1]
-    size = pygame.Rect((0, offset), size)
-    offset += h
-    text = font.render(text, False, color)
-    text_to_render.append((text, size))
-
-
-def clear_text_buffer():
-    global offset
-    global text_to_render
-    offset = 0
-    text_to_render = []
-
-
-def make_enemies(resources):
-    w2, h2 = constants.SCREEN_WIDTH//2, constants.SCREEN_HEIGHT//2
-    locations = []
-
-    # locations should be like this
-    # *______________*______________*
-    # |                             |
-    # |                             |
-    # |                             |
-    # |                             |
-    # *                             *
-    # |                             |
-    # |                             |
-    # |                             |
-    # *______________*______________*
-    # thus
-    locations.append((0, 0))
-    locations.append((w2, 0))
-    locations.append((w2*2-16, 0))
-
-    locations.append((0, h2))
-    locations.append((w2*2-16, h2))
-
-    locations.append((0, h2*2-16))
-    locations.append((w2, h2*2-16))
-    locations.append((w2*2-16, h2*2-16))
-
-    enemies = []
-    for location in locations:
-        enemies.append(Enemy(location))
-    return enemies
-
-
 def main():
     do_prep()
     dt = 1000/constants.FRAMERATE
@@ -305,16 +323,17 @@ def main():
 
     screen = get_resource("screen")
 
-    # camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
-    camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height),
-                    constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+    camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
+    # camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height),
+    #                 constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
 
     truebg = get_resource("truebg")
     screen.blit(truebg, (0, 0), screen.get_rect())
 
     All = kwargsGroup.UserGroup()
 
-    player = Player((50, constants.LEVEL_HEIGHT-50))
+    player = Player((500, constants.LEVEL_HEIGHT-500))
+    player.notify(Event("toggle_gravity", {}))
 
     camera.update(player.rect)
     All.add(player)
@@ -349,11 +368,13 @@ def main():
 
             pygame.event.pump()
 
-            render_text(str(player.rect.topleft))
+            render_text("player rect topleft = {}".format(player.rect.topleft))
+            render_text("transformed = {}".format(camera.apply(player.rect)))
+            render_text("bg topleft transformed = {}".format(camera.apply(screen.get_rect())))
 
             screen.fill((255, 255, 255))
 
-            screen.blit(truebg, (0, 0), camera.apply(screen.get_rect()))
+            screen.blit(truebg, camera.apply(screen.get_rect()))
 
             for text_surface, pos in text_to_render:
                 screen.blit(text_surface, pos)
