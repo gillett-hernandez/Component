@@ -304,13 +304,11 @@ class PhysicsComponent(Component):
             self.gravity = g
 
     def outside_top(self):
-        if self.p.pos[1] > constants.LEVEL_HEIGHT:
-            self.change_gravity(constants.GRAVITY*4)
+        self.change_gravity(constants.GRAVITY*4)
 
     def outside_bottom(self):
         # self.p.pos = [self.p.xstart, self.p.ystart]
-        if self.p.pos[1] < 0:
-            self.change_gravity(-constants.GRAVITY*4)
+        self.change_gravity(-constants.GRAVITY*4)
 
     def outside_sides(self):
         self.p.reset()
@@ -329,9 +327,16 @@ class PhysicsComponent(Component):
         self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
         self.obj.render_text("direction = {0.dir}".format(self))
         if y < 0:
-            self.outside_top()
-        elif y > constants.LEVEL_HEIGHT:
+            # print("outside bottom")
             self.outside_bottom()
+        elif y > constants.LEVEL_HEIGHT:
+            # print("outside top")
+            self.outside_top()
+        else:
+            if not self.obj.accelerating:
+                self.change_gravity()
+            else:
+                self.change_gravity(constants.FLIGHTGRAVITY)
 
         # if self is outside screen side barriers
         if not (0 < x < constants.LEVEL_WIDTH):
