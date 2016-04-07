@@ -1,6 +1,4 @@
 # TODO LIST:
-# |-> fix broken acceleration
-# |
 # |-> add altered turn speed when boosting
 # |
 # |-> add swappable engine parts
@@ -8,7 +6,4 @@
 # |-> add slight graphical acceleration effect
 # |  |
 # |  -> find a way to display graphical effects. try the pygame.gfxdraw or pygame.draw modules
-# |-> scrolling screen effects
-# |-> fix water and cloud level
-# |-> make it so the coordinates are all based on the level locations, not the screen's.
-# --> swappable engine parts
+# --> fix water and cloud level
