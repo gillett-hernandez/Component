@@ -5,14 +5,13 @@ import sys
 import json
 import logging
 
-from composite import *
-import sound
+from component import *
+# import sound
 import kwargsGroup
-
-# import miscfunc
 
 import pygame
 from pygame.locals import *
+
 
 class DotDict:
     def __init__(self, d={}):
@@ -31,9 +30,10 @@ with open("./constants.json", 'r') as fd:
 with open("./keyconfig.json", 'r') as fd:
     keyconfig = DotDict(json.load(fd))
 
-logging.basicConfig(**constants.logging_setup)
-
+VERSION = [0, 0, 0]
 POSTMESSAGE = USEREVENT+1
+
+logging.basicConfig(**constants.logging_setup)
 
 
 def outputInfo(info, pos=None, color=(0, 0, 0)):
@@ -182,8 +182,10 @@ def main():
         pygame.display.update()
 
         dt = clock.tick(constants.FRAMERATE)
-        assert dt < 34, dt
-        # logging.info(str(dt)+' dt\n')d
+        if dt > 34:
+            dt = 34
+        # assert dt < 34, dt
+        # logging.info(str(dt)+' dt\n')
 
 
 if __name__ == '__main__':

@@ -1,16 +1,5 @@
 #!/usr/bin/python
 
-# TODO LIST:
-# |-> fix broken acceleration
-# |
-# |-> add altered turn speed when boosting
-# |
-# |-> add slight graphical acceleration effect
-# |  |
-# |  -> find a way to display graphical effects. try the pygame.gfxdraw or pygame.draw modules
-# |-> scrolling screen effects
-# --> swappable engine parts
-
 import sys
 import os
 import logging
@@ -46,6 +35,7 @@ def outputInfo(info, pos=None, color=(0, 0, 0)):
 
 def translate_event(event):
     # print(pygame.event.event_name(event.type))
+    """pure"""
     if event.type == pygame.KEYDOWN:
         return Event('keydown', {'key': event.key})
     elif event.type == pygame.KEYUP:
@@ -164,6 +154,7 @@ def make_enemies(resources):
     enemies = []
     for location in locations:
         enemies.append(Enemy(location))
+    # all.add([Enemy(locations[i]) for i in range(len(locations))])
     return enemies
 
 
@@ -178,6 +169,23 @@ class ScreenLocator(object):
     def provide(screen, camera):
         ScreenLocator._screen = screen
         ScreenLocator._camera = camera
+
+
+# class Bullet(Composite):
+#     def __init__(self, pos, **kwargs):
+#         super(Bullet, self).__init__(pos)
+#         self.attach_component('position', PositionComponent, pos)
+#         if 'vector' in kwargs:
+#             vector = kwargs['vector']
+#             assert isinstance(vector, list), "vector is "+str(vector)
+#             assert all(isinstance(elem, (float, int)) for elem in vector)
+#         elif 'velocity' in kwargs:
+#             vector = [lengthdir_x(kwargs['velocity'][0], kwargs['velocity'][1]),
+#                       lengthdir_y(kwargs['velocity'][0], kwargs['velocity'][1])]
+#         elif 'speed' in kwargs and 'direction' in kwargs:
+#             vector = [lengthdir_x(kwargs['speed'], kwargs['direction']), lengthdir_y(kwargs['speed'], kwargs['direction'])]
+#         self.attach_component('physics', PhysicsComponent, vector)
+#         self.attach_component('sprite', SimpleSprite)
 
 
 class PlayerEventHandler(EventHandler):
@@ -257,9 +265,53 @@ class Player(Object, pygame.sprite.Sprite):
                          (Vector(l=acenter)+Vector(l=vec)).components)
         self.notify(Event("update", kwargs))
 
+    # def add_collision_check(self, group, **kwargs):
+    #     proximity = kwargs.get('proximity', self.height+10)
+    #     self.attach_component('proximity_{group.__class__.__name__}'.format(group=group),
+    #                           ProximitySensor, group, proximity)
+
     @property
     def pos(self):
         return self.get_component('position').pos
+
+
+# class AIComponent(Component):
+#     def __init__(self, obj):
+#         super(AIComponent, self).__init__(obj)
+#         self.attach_event("update", self.update)
+
+#     def update(self, dt):
+#         # raise NotImplementedError
+#         # playerangle = direction(self, player)
+#         # self.turn()  # find player and turn towards him
+#         # if abs(self.dir-direction(self, player)) < 10:
+#             # self.accel()  # accel toward player.
+#         pass
+
+
+# class Enemy(Composite, pygame.sprite.Sprite):
+#     width, height = 16, 16
+
+#     def __init__(self, pos):
+#         super(Enemy, self).__init__()
+#         self.attach_component('position', PositionComponent, pos)
+#         self.attach_component('physics', PhysicsComponent)
+#         self.attach_component('image', SpriteFromImage, (os.path.join('.', 'resources', 'images', 'playerimage.png')))
+#         self.attach_component('ai', AIComponent)
+#         # self.get_component('image').image = pygame.transform.scale(self.get_component('image').image, (self.get_component('image').rect.width//4*3, self.get_component('image').rect.height))
+#         self.mask = pygame.mask.from_surface(self.image)
+#         assert(self.mask.count() > 0)
+
+#     def __getattr__(self, name):
+#         return getattr(self.spriteref, name)
+
+#     def update(self, **kwargs):
+#         dt = kwargs['dt']
+#         self.dispatch_event(Event("update", {"dt": dt}))
+
+#     @property
+#     def pos(self):
+#         return self.get_component('position').pos
 
 
 class Camera(object):
@@ -311,7 +363,7 @@ def complex_camera(camera, target_rect):
     l = min(0, l)                                        # stop scrolling at the left edge
     l = max(-(camera.width-constants.LEVEL_WIDTH), l)    # stop scrolling at the right edge
     t = max(-(camera.height-constants.LEVEL_HEIGHT), t)  # stop scrolling at the bottom
-    t = min(0, t)                                        # stop scrolling at the top
+    t = min(0, t)
     return Rect(l, t, w, h)
 
 

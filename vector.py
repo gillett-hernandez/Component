@@ -222,7 +222,6 @@ def test():
 
     v3 / 10
     v3 /= 20
-
     assert ev2.magnitude == 10
     ev2.magnitude = 100
     assert ev2.magnitude == 100

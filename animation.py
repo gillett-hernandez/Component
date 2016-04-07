@@ -96,7 +96,7 @@ class Animation(Sprite):
 
 def test():
 
-    screen = pygame.display.set_mode((64, 64))
+    screen = pygame.display.set_mode((64, 64), pygame.RESIZABLE)
 
     sprite_sheet = pygame.image.load("./resources/images/spritesheet.png").convert()
 
