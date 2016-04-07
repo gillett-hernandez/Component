@@ -1,9 +1,0 @@
-# TODO LIST:
-# |-> add altered turn speed when boosting
-# |
-# |-> add swappable engine parts
-# |
-# |-> add slight graphical acceleration effect
-# |  |
-# |  -> find a way to display graphical effects. try the pygame.gfxdraw or pygame.draw modules
-# --> fix water and cloud level
