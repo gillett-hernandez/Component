@@ -3,7 +3,7 @@
 import logging
 import json
 import math
-
+import os
 import pygame
 import pygame.locals
 
@@ -23,10 +23,10 @@ class DotDict:
     def items(self):
         return self.__dict__.items()
 
-with open("./lf_constants.json", 'r') as fd:
+with open(os.path.join("json", "lf_constants.json"), 'r') as fd:
     constants = DotDict(json.load(fd))
 
-with open("./lf_keyconfig.json", 'r') as fd:
+with open(os.path.join("json", "lf_keyconfig.json"), 'r') as fd:
     keyconfig = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)

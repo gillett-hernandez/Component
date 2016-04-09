@@ -1,8 +1,6 @@
 from component import Component
 
 
-import constants
-import logging
 
 logging.basicConfig(**constants.logging_setup)
 

@@ -1,6 +1,7 @@
 
 import pygame
 import json
+import os
 import sound
 from component import DotDict, constants
 global resources
@@ -10,7 +11,7 @@ resources = {}
 def load_basic_resources(resources):
     """loads basic resources into ram"""
     print(dir(DotDict))
-    with open("resources.json", 'r') as fd:
+    with open(os.path.join("json", "resources.json"), 'r') as fd:
         _resources = DotDict(json.load(fd))
     print(dir(_resources.playerimage))
     for name, data in _resources.items():
