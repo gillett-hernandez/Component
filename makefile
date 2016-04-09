@@ -11,3 +11,4 @@ test:
 
 clean:
 	rm *.pyc *.log
+	rm -r ./__pycache__
