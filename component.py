@@ -60,7 +60,6 @@ class Component(object):
     def __init__(self, obj):
         super(Component, self).__init__()
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
-        self.attached_events = []
         self.obj = obj
         self.callbacks = {}
 
@@ -90,6 +89,8 @@ class Component(object):
         return _id
 
     def detach_event(self, _hash):
+        # volatile list length?
+        # no bc return statement right after del
         for keyword in self.callbacks:
             for _id in self.callbacks[keyword]:
                 if _id == _hash:
@@ -116,16 +117,26 @@ class Component(object):
     def remove_events(self):
         logging.debug("called remove_events from " +
                       "{self.__class__.__name__}".format(self=self))
-        for eventid in self.attached_events:
-            self.obj.detach_event(eventid)
+        for _ in self.callbacks:
+            for eventid in self.callbacks[_]:
+                self.callbacks[_][eventid] = None
+                # should be equivalent to `del`ing the function
 
     def notify(self, event):
         self.dispatch_event(event)
 
+    def dumpstate(self):
+        for keyword in self.callbacks:
+            for eventid in self.callbacks[keyword]:
+                logging.debug("        {} callback {}".format(keyword, self.callbacks[keyword][eventid]))
+
+        for varname in dir(self):
+            if varname not in dir(self.__class__):
+                logging.debug("        {}={}".format(varname, getattr(self, varname)))
+
 
 class Object(object):
     def __init__(self):
-        super(Object, self).__init__()
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.components = {}
 
@@ -176,6 +187,13 @@ class Object(object):
 
     def notify(self, event):
         self.dispatch_event(event)
+
+    def dumpstate(self):
+        # components
+        logging.debug("    start of Object dumpstate")
+        for name, component in self.components.items():
+            logging.debug("    {} component dumpstate".format(name))
+            component.dumpstate()
 
     def __repr__(self):
         return self.__class__.__name__

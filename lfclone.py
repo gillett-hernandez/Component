@@ -445,10 +445,13 @@ def main():
 
             clear_text_buffer()
             logging.debug("at bottom of main loop\n")
-    except NotImplementedError:
+    except:
+        raise
+    finally:
+        logging.debug("------------------------------------------")
+        logging.debug("start of dumpstate")
         for sprite in iter(All):
             sprite.dumpstate()
-        raise
 
 if __name__ == '__main__':
     try:
