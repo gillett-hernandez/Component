@@ -214,7 +214,7 @@ class PlayerEventHandler(EventHandler):
             if self.obj.accelerating:
                 return {"d0": constants.accelturnspeed}
             return {"d0": constants.turnspeed}
-        print(turnleft.start)
+        # print(turnleft.start)
         self.add_hold("left", "turn", turnleft)
 
         @Reaction
@@ -394,14 +394,14 @@ def main():
     clock = pygame.time.Clock()
     pygame.display.update()  # update with no args is equivalent to flip
 
-    print(player.image, player.rect, "player image and rect")
+    # print(player.image, player.rect, "player image and rect")
     try:
         while True:
             logging.debug("at top of main loop")
             events = pygame.event.get()
             for event in events:
                 if event.type is QUIT:
-                    print("got event quit")
+                    # print("got event quit")
                     logging.info('event QUIT')
                     sys.exit(0)
                     return

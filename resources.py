@@ -10,10 +10,10 @@ resources = {}
 
 def load_basic_resources(resources):
     """loads basic resources into ram"""
-    print(dir(DotDict))
+    # print(dir(DotDict))
     with open(os.path.join("json", "resources.json"), 'r') as fd:
         _resources = DotDict(json.load(fd))
-    print(dir(_resources.playerimage))
+    # print(dir(_resources.playerimage))
     for name, data in _resources.items():
         if data["type"] == constants.IMAGE:
             with open(data["path"], 'rb') as fd:
