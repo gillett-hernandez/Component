@@ -247,7 +247,8 @@ class Player(Object, pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         assert(self.mask.count() > 0)
 
-    def render_text(self, text):
+    @staticmethod
+    def render_text(text):
         outputInfo(text)
 
     def __getattr__(self, name):
