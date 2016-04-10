@@ -12,17 +12,17 @@ assumes that they are uniformly sized and lexicographically ordered.
 puts the spritesheet in folder/..
 returns the path of the saved spritesheet"""
     root = os.path.realpath(os.path.join(folder, ".."))
-    fns = []
-    for _, _, filenames in os.walk(os.path.join(folder)):
-        fns = filenames
-    fns.sort()
-    fns = [os.path.join(folder, fn) for fn in fns]
-    with open(fns[0], 'rb') as fd:
+    filenames = []
+    for _, _, _filenames in os.walk(os.path.join(folder)):
+        filenames = _filenames
+    filenames.sort()
+    filenames = [os.path.join(folder, filename) for filename in filenames]
+    with open(filenames[0], 'rb') as fd:
         first = pygame.image.load(fd)
         width, height = first.get_size()
-    whole = pygame.Surface((width*len(fns), height))
-    for i, fn in enumerate(fns):
-        image = pygame.image.load(fn)
+    whole = pygame.Surface((width*len(filenames), height))
+    for i, filename in enumerate(filenames):
+        image = pygame.image.load(filename)
         whole.blit(image, (i*width, 0))
     spritesheet_path = os.path.join(root, name)
     pygame.image.save(whole, spritesheet_path)
