@@ -49,7 +49,7 @@ def translate_event(event):
 def load_basic_resources(resources):
     """loads basic resources into ram"""
     print(dir(DotDict))
-    with open("resources.json", 'r') as fd:
+    with open("json/resources.json", 'r') as fd:
         _resources = DotDict(json.load(fd))
     print(dir(_resources.playerimage))
     for name, data in _resources.items():
