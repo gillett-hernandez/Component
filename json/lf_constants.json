@@ -15,7 +15,7 @@
     "turnspeed": 4,
     "accelturnspeed": 2,
     "always_restrict_velocity": false,
-    "maxspeed": 500,
+    "maxspeed": 700,
     "accel": 20,
     "logging_setup": {"filename": "./lfclone.log",
                       "filemode": "w",

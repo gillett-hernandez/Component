@@ -304,11 +304,11 @@ class PhysicsComponent(Component):
             self.gravity = g
 
     def outside_top(self):
-        self.change_gravity(constants.GRAVITY*4)
+        self.change_gravity(constants.GRAVITY*8)
 
     def outside_bottom(self):
         # self.p.pos = [self.p.xstart, self.p.ystart]
-        self.change_gravity(-constants.GRAVITY*4)
+        self.change_gravity(-constants.GRAVITY*8)
 
     def outside_sides(self):
         self.p.reset()
