@@ -10,6 +10,7 @@
     "LEVEL_WIDTH": 6000,
     "LEVEL_HEIGHT": 1500,
     "FRAMERATE": 60,
+    "WATER_LEVEL": 100,
     "bulletspeed": 10,
     "friction": 0.002,
     "turnspeed": 4,

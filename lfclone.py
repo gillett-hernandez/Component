@@ -89,7 +89,7 @@ def prep_background(resources):
     truebg.fill((255, 255, 255))
     truebg.blit(bg, (0, 0))
 
-    pygame.draw.rect(truebg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-100, constants.LEVEL_WIDTH, 100))
+    pygame.draw.rect(truebg, (128, 128, 128), pygame.Rect(0, constants.LEVEL_HEIGHT-constants.WATER_LEVEL, constants.LEVEL_WIDTH, 100))
     resources["truebg"] = truebg
 
 

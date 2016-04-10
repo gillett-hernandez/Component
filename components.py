@@ -326,10 +326,10 @@ class PhysicsComponent(Component):
         self.obj.render_text("gravity = {0.gravity}".format(self))
         self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
         self.obj.render_text("direction = {0.dir}".format(self))
-        if y < 0:
+        if y-32 < constants.WATER_LEVEL:
             # print("outside bottom")
             self.outside_bottom()
-        elif y > constants.LEVEL_HEIGHT:
+        elif y-32 > constants.LEVEL_HEIGHT:
             # print("outside top")
             self.outside_top()
         else:
@@ -339,7 +339,7 @@ class PhysicsComponent(Component):
                 self.change_gravity(constants.FLIGHTGRAVITY)
 
         # if self is outside screen side barriers
-        if not (0 < x < constants.LEVEL_WIDTH):
+        if not (0 < x+32 < constants.LEVEL_WIDTH):
             self.outside_sides()
 
         if not self.weightless:
