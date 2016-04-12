@@ -374,12 +374,15 @@ def main():
 
     screen = get_resource("screen")
 
+    screenrect = screen.get_rect()
+
     camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
     # camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height),
     #                 constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
 
     truebg = get_resource("truebg")
-    screen.blit(truebg, (0, 0), screen.get_rect())
+    bgrect = truebg.get_rect()
+    screen.blit(truebg, (0, 0), screenrect)
 
     All = kwargsGroup.UserGroup()
 
@@ -414,6 +417,8 @@ def main():
                     logging.info("notifying player of {event} from mainloop".format(
                                  event=event))
                     player.notify(translate_event(event))
+                    if event.type is MOUSEBUTTONDOWN:
+                        player.notify(Event("move", {"dr": [-constants.SCREEN_WIDTH//2 + event.pos[0], constants.SCREEN_HEIGHT//2 - event.pos[1]]}))
                 elif event.type is POSTMESSAGE:
                     render_text(event.info, event.color)
 
@@ -421,18 +426,34 @@ def main():
 
             render_text("player rect topleft = {}".format(player.rect.topleft))
             render_text("transformed = {}".format(camera.apply(player.rect)))
-            render_text("bg topleft transformed = {}".format(camera.apply(screen.get_rect())))
+            render_text("bg topleft transformed = {}".format(camera.apply(screenrect)))
 
             screen.fill((255, 255, 255))
 
-            screen.blit(truebg, camera.apply(screen.get_rect()))
+            newpos = camera.apply(screenrect)
+            # maybe clip a certain rect
+
+            # fix this. this code works but there is an expensive rect calculation every frame
+
+            # tplx = newpos.topleft[0]
+            # tply = newpos.topleft[1]
+            # nptplx = bgrect.width
+            # nptply = bgrect.height
+            # topleft1 = max(0, -tplx), max(0, -tply)
+            # topleft2 = max(0, tplx), max(0, tply)
+            # bottomright1 = 800-max(0, tplx), 640-max(0, tply)
+            # bottomright2 = min(800, tplx + nptplx), min(640, tply + nptply)
+            # bottomright = max(0, min(bottomright1[0], bottomright2[0])), max(0, min(bottomright1[1], bottomright2[1]))
+            # screen.blit(truebg, topleft2, pygame.Rect(topleft1, bottomright))
+
+            screen.blit(truebg, newpos)
 
             for text_surface, pos in text_to_render:
                 screen.blit(text_surface, pos)
 
             camera.update(player.rect)
 
-            All.update(dt=dt)
+            All.update(dt=dt)  # contained in here is player.update
 
             for e in All:
                 screen.blit(e.image, camera.apply(e))

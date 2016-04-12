@@ -311,8 +311,9 @@ class PhysicsComponent(Component):
         self.change_gravity(-constants.GRAVITY*8)
 
     def outside_sides(self):
-        self.p.reset()
-        self.vector = Vector(0, 0)
+        # self.p.reset()
+        # self.vector = Vector(0, 0)
+        pass
 
     def update(self, **kwargs):
         logging.debug("top of physics update call")
