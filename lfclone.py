@@ -383,6 +383,7 @@ def main():
     truebg = get_resource("truebg")
     bgrect = truebg.get_rect()
     screen.blit(truebg, (0, 0), screenrect)
+    _screenrect = screenrect.copy()
 
     All = kwargsGroup.UserGroup()
 
@@ -431,55 +432,14 @@ def main():
             screen.fill((255, 255, 255))
 
             newpos = camera.apply(screenrect)
-            # maybe clip a certain rect
-
-            # fix this. this code works but there is an expensive rect calculation every frame
-            # screen.blit(truebg, newpos)
 
             x = newpos.topleft[0]
             y = newpos.topleft[1]
             pos = max(0, x), max(0, y)
             topleft = max(0, -x), max(0, -y)
-            # bottomright = (max(0,
-            #                    min(constants.SCREEN_WIDTH-pos[0],
-            #                        min(constants.SCREEN_WIDTH,
-            #                            x + bgrect.width)
-            #                        )
-            #                    ),
-            #                max(0,
-            #                    min(constants.SCREEN_HEIGHT-pos[1],
-            #                        min(constants.SCREEN_HEIGHT,
-            #                            y + bgrect.height)
-            #                        )
-            #                    )
-            #                )
-            # area = pygame.Rect(topleft, bottomright)
-            area = pygame.Rect(topleft, (constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)).clip(bgrect)
-            screen.blit(truebg, pos, area)
-
-            # pos = max(0, tplx), max(0, tply)
-            # topleft = max(0, -tplx), max(0, -tply)
-
-            # pos = [0, 0]
-            # topleft = [0, 0]
-            # if tplx > 0:
-            #     pos[0] = tplx
-            # else:
-            #     topleft[0] = tplx
-
-            # if tply > 0:
-            #     pos[1] = tply
-            # else:
-            #     topleft[1] = tply
-
-            # brx = max(0,
-            #           min(constants.SCREEN_WIDTH - pos[0],
-            #               min(constants.SCREEN_WIDTH, tplx + bgrect.width)
-            #               )
-            #           )
-            # bry = max(0, min(constants.SCREEN_HEIGHT - pos[1], min(constants.SCREEN_HEIGHT, tply + bgrect.height)))
-            # bottomright = brx, bry
-            # screen.blit(truebg, pos, pygame.Rect(topleft, bottomright))
+            _screenrect.topleft = topleft
+            _area = _screenrect.clip(bgrect)
+            screen.blit(truebg, pos, _area)
 
             for text_surface, pos in text_to_render:
                 screen.blit(text_surface, pos)
