@@ -96,6 +96,38 @@ def prep_font(resources):
     font = pygame.font.Font(None, 16)  # 16 pt font
     resources["font"] = font
 
+def prep_map(resources):
+    text_map = resources["map1"]
+    assert all([all([isinstance(C, str) for C in row]) for row in _map])
+
+    translate_chara_table = {
+        " ": (None, None),
+        "B": (Block, None),
+        "P": (Player, None),
+        "E": (Enemy, None)
+    }
+
+    entities = []
+    blocks = []
+    enemies = []
+    player = None
+    for y, row in enumerate(_map):
+        for x, chara in enumerate(row):
+            e = list(translate_chara_table[chara])
+            if e[0] is not None:
+                e[1] = (x*16, y*16)
+                entity = e[0](e[1])
+            else:
+                continue
+            if isinstance(entity, Player):
+                player = entity
+            elif isinstance(entity, Enemy):
+                enemies.append(entity)
+            elif isinstance(entity, Block):
+                blocks.append(entity)
+            entities.append(entity)
+    return player, blocks, enemies, entities
+
 offset = 0
 text_to_render = []
 
