@@ -330,17 +330,6 @@ class PhysicsComponent(Component):
         self.obj.render_text("gravity = {0.gravity}".format(self))
         self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
         self.obj.render_text("direction = {0.dir}".format(self))
-        if y-32 < constants.WATER_LEVEL:
-            # print("outside bottom")
-            self.outside_bottom()
-        elif y-32 > constants.LEVEL_HEIGHT:
-            # print("outside top")
-            self.outside_top()
-        else:
-            if not self.obj.accelerating:
-                self.change_gravity()
-            else:
-                self.change_gravity(constants.FLIGHTGRAVITY)
 
         # if self is outside screen side barriers
         if not (0 < x+32 < constants.LEVEL_WIDTH):
@@ -376,7 +365,7 @@ class PhysicsComponent(Component):
         logging.debug("bottom of physics update call")
 
 
-class SimpleSprite(Component):
+class SimpleSprite(Component, pygame.sprite.Sprite):
     def __init__(self, obj, size, color=(128, 128, 128)):
         super(SimpleSprite, self).__init__(obj)
         self.p = self.obj.get_component('position')
@@ -387,7 +376,8 @@ class SimpleSprite(Component):
         self.attach_event('update', self.update)
 
     def update(self, **kwargs):
-        self.obj.rect.topleft = self.p.pos.components
+        x, y = self.p.pos.components
+        self.obj.rect.topleft = [x, constants.LEVEL_HEIGHT-y]
 
 
 class SpriteFromImage(Component):
