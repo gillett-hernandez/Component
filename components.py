@@ -7,6 +7,9 @@ from vector import Vector
 
 import pygame
 
+from DotDict import DotDict
+
+
 logging.basicConfig(**constants.logging_setup)
 
 
@@ -380,11 +383,11 @@ class SimpleSprite(Component):
         self.obj.image = pygame.Surface(size).convert()
         self.obj.image.fill(pygame.Color(*color))
         self.obj.rect = self.obj.image.get_rect()
-        self.obj.rect.topleft = self.p.pos
+        self.obj.rect.topleft = self.p.pos.components
         self.attach_event('update', self.update)
 
     def update(self, **kwargs):
-        self.obj.rect.topleft = self.p.pos
+        self.obj.rect.topleft = self.p.pos.components
 
 
 class SpriteFromImage(Component):

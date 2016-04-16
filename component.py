@@ -4,24 +4,12 @@ import logging
 import json
 import math
 import os
-import pygame
-import pygame.locals
 
 from vector import Vector
+from DotDict import DotDict
 
-
-class DotDict:
-    def __init__(self, d={}):
-        self.__dict__.update(d)
-
-    def __getitem__(self, key):
-        return self.__dict__[key]
-
-    def __setitem__(self, key, item):
-        self.__dict__[key] = item
-
-    def items(self):
-        return self.__dict__.items()
+import pygame
+import pygame.locals
 
 with open(os.path.join("json", "lf_constants.json"), 'r') as fd:
     constants = DotDict(json.load(fd))
@@ -159,12 +147,14 @@ class Object(object):
         else:
             raise AttributeError("Object has no attribute {name}".format(name=name))
 
-    def attach_component(self, name, component, *initargs):
+    def attach_component(self, name, component, *initargs, **kwinitargs):
         assert(issubclass(component, Component))
-        logging.debug("attaching component with name: " +
-                      "{name} {component!r}{initargs!s}".format(
-                          name=name, component=component, initargs=initargs))
-        self[name] = component(self, *initargs)
+        logging.debug("attaching component with name {}".format(name))
+        logging.debug("and type {!r}{!s}{!s}".format(name,
+                                                     component,
+                                                     initargs,
+                                                     kwinitargs))
+        self[name] = component(self, *initargs, **kwinitargs)
 
     def get_component(self, name):
         return self[name]

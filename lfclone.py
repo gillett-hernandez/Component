@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 import sys
-import os
+# import os
 import logging
-import math
+# import math
 
 from component import *
 # import sound
@@ -19,10 +19,10 @@ resources = {}
 
 POSTMESSAGE = USEREVENT+1
 
-# with open("./lf_constants.json", 'r') as fd:
+# with open("json/lf_constants.json", 'r') as fd:
 #     constants = DotDict(json.load(fd))
 
-# with open("./lf_keyconfig.json", 'r') as fd:
+# with open("json/lf_keyconfig.json", 'r') as fd:
 #     keyconfig = DotDict(json.load(fd))
 
 logging.basicConfig(**constants.logging_setup)
@@ -48,7 +48,7 @@ def translate_event(event):
 
 def load_basic_resources(resources):
     """loads basic resources into ram"""
-    with open("json/resources.json", 'r') as fd:
+    with open("json/lf_resources.json", 'r') as fd:
         _resources = DotDict(json.load(fd))
     for name, data in _resources.items():
         if data["type"] == constants.IMAGE:
@@ -231,7 +231,7 @@ class PlayerEventHandler(EventHandler):
 
 
 class Player(Object, pygame.sprite.Sprite):
-    width, height = 16, 16
+    width, height = 64, 64
 
     def __init__(self, pos):
         super(Player, self).__init__()

@@ -5,7 +5,7 @@ from pygame.locals import *
 import sys
 
 from component import Component, constants
-
+from DotDict import DotDict
 
 class Sprite(object):
     def __init__(self, strip, uwidth=None, uheight=None, sprite_count=None):
