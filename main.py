@@ -5,8 +5,20 @@ import math
 import json
 import logging
 
-from vector import Vector
 from DotDict import DotDict
+import config
+
+with open("json/constants.json", 'r') as fd:
+    constants = DotDict(json.load(fd))
+
+with open("json/keyconfig.json", 'r') as fd:
+    keyconfig = DotDict(json.load(fd))
+
+config.supply("constants", constants)
+config.supply("keyconfig", keyconfig)
+logging.basicConfig(**constants.logging_setup)
+
+from vector import Vector
 from component import *
 import kwargsGroup
 
@@ -18,14 +30,7 @@ resources = {}
 
 POSTMESSAGE = USEREVENT+1
 
-
-with open("json/constants.json", 'r') as fd:
-    constants = DotDict(json.load(fd))
-
-with open("json/keyconfig.json", 'r') as fd:
-    keyconfig = DotDict(json.load(fd))
-
-logging.basicConfig(**constants.logging_setup)
+logging.debug("start of logging file, platformer instance")
 
 
 def outputInfo(info, pos=None, color=(0, 0, 0)):
@@ -57,6 +62,9 @@ def load_basic_resources(resources):
         elif data["type"] in [constants.SFX, constants.MUSIC]:
             with open(data["path"], 'rb') as fd:
                 resources[name] = sound.load(fd)
+        elif data["type"] == constants.MAP:
+            with open(data["path"], 'r') as fd:
+                resources[name] = fd.read().splitlines()
 
 
 def get_resource(name):
@@ -96,6 +104,7 @@ def prep_font(resources):
     font = pygame.font.Font(None, 16)  # 16 pt font
     resources["font"] = font
 
+
 def prep_map(resources):
     text_map = resources["map1"]
     assert all([all([isinstance(C, str) for C in row]) for row in _map])
@@ -111,7 +120,7 @@ def prep_map(resources):
     blocks = []
     enemies = []
     player = None
-    for y, row in enumerate(_map):
+    for y, row in enumerate(text_map):
         for x, chara in enumerate(row):
             e = list(translate_chara_table[chara])
             if e[0] is not None:
@@ -187,6 +196,26 @@ class PlayerEventHandler(EventHandler):
         # def accel(**kwargs):
         #     self.obj.dispatch_event(Event("change_gravity", {}))
         #     self.obj.accelerating = False
+        #
+        # self.add_hold("accelerate", "accel", accel)
+
+        # @Reaction
+        def jump(**kwargs):
+            return {"dv": [0, constants.JUMPSPEED]}
+
+        self.add_tap("jump", "kick", jump)
+
+        @Reaction
+        def left(**kwargs):
+            return {"dv": [-constants.runaccel, 0]}
+
+        self.add_hold("left", "kick", left)
+
+        @Reaction
+        def right(**kwargs):
+            return {"dv": [constants.runaccel, 0]}
+
+        self.add_hold("right", "kick", right)
 
 
 class Player(Object, pygame.sprite.Sprite):
@@ -293,8 +322,6 @@ def main():
     screenrect = screen.get_rect()
 
     camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
-    # camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height),
-    #                 constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
 
     truebg = get_resource("truebg")
     bgrect = truebg.get_rect()

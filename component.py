@@ -5,20 +5,17 @@ import json
 import math
 import os
 
+# import config
 from vector import Vector
 from DotDict import DotDict
 
 import pygame
 import pygame.locals
 
-with open(os.path.join("json", "lf_constants.json"), 'r') as fd:
-    constants = DotDict(json.load(fd))
-
-with open(os.path.join("json", "lf_keyconfig.json"), 'r') as fd:
-    keyconfig = DotDict(json.load(fd))
-
-logging.basicConfig(**constants.logging_setup)
-
+logger = logging.getLogger(__name__)
+import config
+constants = config.get("constants")
+keyconfig = config.get("keyconfig")
 
 def void(*args, **kwargs):
     return
@@ -32,11 +29,17 @@ def vproj(v1, v2):
     return distance(v1)*math.cos((math.atan2(v2[1], v2[0])-math.atan2(v1[1], v1[0])))
 
 
+def loggable_class(cls):
+    cls.logger = logging.getLogger(__name__ + "." + cls.__name__)
+    return cls
+
+
+@loggable_class
 class Event:
     def __init__(self, keyword, data):
         self.keyword = keyword
         self.data = data
-        logging.debug("created {0!r}".format(self))
+        self.logger.debug("created {0!r}".format(self))
 
     def __repr__(self):
         return ("<Event instance with keyword:"
@@ -44,10 +47,11 @@ class Event:
                                                       data=str(self.data)))
 
 
+@loggable_class
 class Component(object):
     def __init__(self, obj):
         super(Component, self).__init__()
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.obj = obj
         self.callbacks = {}
 
@@ -71,7 +75,7 @@ class Component(object):
         #     },
         #     "etc"
         # }
-        logging.debug(("attaching event {keyword} " +
+        self.logger.debug(("attaching event {keyword} " +
                        "with callback {callback}").format(
                       keyword=keyword, callback=callback))
         return _id
@@ -82,28 +86,28 @@ class Component(object):
         for keyword in self.callbacks:
             for _id in self.callbacks[keyword]:
                 if _id == _hash:
-                    logging.debug("calling detach_event on {callback}".format(callback=self.callbacks[keyword][_id]))
+                    self.logger.debug("calling detach_event on {callback}".format(callback=self.callbacks[keyword][_id]))
                     del self.callbacks[keyword][_id]
                     return
 
     def dispatch_event(self, event):
         func = None
-        try:
-            assert event.data is not None
-            if event.keyword not in self.callbacks:
-                return
-            if event.keyword is not "update":
-                logging.debug("dispatching event {event!r}".format(event=event))
-            if len(self.callbacks[event.keyword]) == 0:
-                return -1
-            for func in self.callbacks[event.keyword].values():
-                func(**event.data)
-        except AttributeError as e:
-            print(event, func)
-            raise e
+        # try:
+        assert event.data is not None
+        if event.keyword not in self.callbacks:
+            return
+        if event.keyword is not "update":
+            self.logger.debug("dispatching event {event!r}".format(event=event))
+        if len(self.callbacks[event.keyword]) == 0:
+            return -1
+        for func in self.callbacks[event.keyword].values():
+            func(**event.data)
+        # except AttributeError as e:
+            # print(event, event.data, func)
+            # raise e
 
     def remove_events(self):
-        logging.debug("called remove_events from " +
+        self.logger.debug("called remove_events from " +
                       "{self.__class__.__name__}".format(self=self))
         for _ in self.callbacks:
             for eventid in self.callbacks[_]:
@@ -116,16 +120,17 @@ class Component(object):
     def dumpstate(self):
         for keyword in self.callbacks:
             for eventid in self.callbacks[keyword]:
-                logging.debug("        {} callback {}".format(keyword, self.callbacks[keyword][eventid]))
+                self.logger.debug("        {} callback {}".format(keyword, self.callbacks[keyword][eventid]))
 
         for varname in dir(self):
             if varname not in dir(self.__class__):
-                logging.debug("        {}={}".format(varname, getattr(self, varname)))
+                self.logger.debug("        {}={}".format(varname, getattr(self, varname)))
 
 
+@loggable_class
 class Object(object):
     def __init__(self):
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.components = {}
 
     def __getitem__(self, key):
@@ -149,8 +154,8 @@ class Object(object):
 
     def attach_component(self, name, component, *initargs, **kwinitargs):
         assert(issubclass(component, Component))
-        logging.debug("attaching component with name {}".format(name))
-        logging.debug("and type {!r}{!s}{!s}".format(name,
+        self.logger.debug("attaching component with name {}".format(name))
+        self.logger.debug("and type {!r}{!s}{!s}".format(name,
                                                      component,
                                                      initargs,
                                                      kwinitargs))
@@ -162,16 +167,16 @@ class Object(object):
     def dispatch_event(self, event):
         assert(event.data is not None)
         c = 0
-        logging.debug("dispatching event {event!r}".format(event=event))
+        self.logger.debug("dispatching event {event!r}".format(event=event))
         for component in self.components.values():
-            rvalue = component.dispatch_event(event)
-            if rvalue == -1:
+            returnv = component.dispatch_event(event)
+            if returnv == -1:
                 c += 1
         if c == len(self.components):
             raise RuntimeError("CallbackNotFoundError")
 
     def detach_component(self, name):
-        logging.debug("calling detach_component on {name}".format(name=name))
+        self.logger.debug("calling detach_component on {name}".format(name=name))
         self[name].remove_events()
         del self[name]
 
@@ -180,13 +185,14 @@ class Object(object):
 
     def dumpstate(self):
         # components
-        logging.debug("    start of Object dumpstate")
+        self.logger.debug("    start of Object dumpstate")
         for name, component in self.components.items():
-            logging.debug("    {} component dumpstate".format(name))
+            self.logger.debug("    {} component dumpstate".format(name))
             component.dumpstate()
 
     def __repr__(self):
         return self.__class__.__name__
+
 
 from components import *
 
@@ -232,10 +238,10 @@ def test():
             self.add_hold("right", "turn", turnright)
 
         def update(self, **kwargs):
-            logging.debug('update in Player')
+            self.logger.debug('update in Player')
             vector = self.obj.get_component('physics').vector
             # start of wonky code
-            logging.info("vector = {0!r}, {1}, {2}".format(vector.components,
+            self.logger.info("vector = {0!r}, {1}, {2}".format(vector.components,
                                                            self.obj.get_component("physics").gravity,
                                                            self.obj.pos))
 

@@ -14,8 +14,8 @@
     "strength_or_speed": "strength",
     "runspeed": 200,
     "runaccel": 10,
-    "jumpstrength": 80,
-    "jumpspeed": 70,
+    "JUMPSTRENGTH": 100,
+    "JUMPSPEED": 100,
     "logging_setup": {"filename": "./platformer.log",
                       "filemode": "w",
                       "level": "DEBUG",
@@ -23,5 +23,6 @@
     "IMAGE": "data.image",
     "SFX": "data.sfx",
     "MUSIC": "data.music",
-    "TEXT": "data.text"
+    "TEXT": "data.text",
+    "MAP": "data.map"
 }

@@ -2,7 +2,7 @@
 import math
 import logging
 
-from component import Component, Event, constants, keyconfig
+from component import Component, Event, loggable_class
 from vector import Vector
 
 import pygame
@@ -10,20 +10,24 @@ import pygame
 from DotDict import DotDict
 
 
-logging.basicConfig(**constants.logging_setup)
+logger = logging.getLogger(__name__)
+import config
+constants = config.get("constants")
+keyconfig = config.get("keyconfig")
 
 
 class EventHandler(Component):
     """Handles events. A collection of reactions"""
     def __init__(self, obj):
         super(EventHandler, self).__init__(obj)
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
 
         # obj.attach_event('update', self.update)
 
     def add_tap(self, hear, react, func):
+        print(hear, react, func)
         def reaction(**kwargs):
-            if kwargs['press'] is True:
+            if kwargs['press']:
 
                 self.obj.dispatch_event(Event(react, func(**kwargs)))
                 return
@@ -33,11 +37,11 @@ class EventHandler(Component):
     def add_hold(self, hear, react, reaction):
         def holdreaction(**kwargs):
             pressed = kwargs['press']
-            logging.debug("reaction with pressed as {pressed}".format(
+            self.logger.debug("reaction with pressed as {pressed}".format(
                           pressed=pressed))
             if pressed:
 
-                logging.debug(
+                self.logger.debug(
                     "reaction if branch right before attach_component")
                 # print(reaction)
                 reaction.start(**kwargs)
@@ -48,7 +52,7 @@ class EventHandler(Component):
                 )
             else:
 
-                logging.debug(
+                self.logger.debug(
                     "reaction else branch right before detach_component")
                 reaction.end(**kwargs)
                 self.obj.detach_component(
@@ -61,7 +65,7 @@ class Repeater(Component):
     """Repeatedly broadcasts an event every n ticks"""
     def __init__(self, obj, keyword, n=1, data={}):
         super(Repeater, self).__init__(obj)
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.i = 0
         self.keyword = keyword
         self.n = n  # default 1
@@ -77,9 +81,10 @@ class Repeater(Component):
                 self.obj.dispatch_event(Event(self.keyword, self.data))
 
 
+@loggable_class
 class Reaction(object):
     def __init__(self, f):
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.defhold(f)
         self.start = self.void
         self.end = self.void
@@ -107,7 +112,7 @@ class Delay(Component):
 assuming that update gets called every frame."""
     def __init__(self, obj, timeout, event, data={}):
         super(Delay, self).__init__(obj)
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.event = event
         self.data = data
         self.t = timeout
@@ -123,9 +128,9 @@ assuming that update gets called every frame."""
 class InputController(Component):
     def __init__(self, obj):
         super(InputController, self).__init__(obj)
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.reactions = {}
-        logging.debug("reactions = {0.reactions}".format(self))
+        self.logger.debug("reactions = {0.reactions}".format(self))
         for key, data in keyconfig.keys.items():
             self.reactions[getattr(pygame.locals, key)] = data
         self.attach_event('keydown', self.keydown)
@@ -134,29 +139,31 @@ class InputController(Component):
     def keydown(self, **kwargs):
         key = kwargs["key"]
         keyname = pygame.key.name(key)
-        logging.debug(("keydown {key} from " +
-                      "InputController.keydown").format(key=(keyname, key)))
+        self.logger.debug(("keydown {key} from " +
+                            "InputController.keydown").format(key=(keyname, key)))
         if key not in self.reactions:
-            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(keyname, key)))
+            self.logger.warn("{key} does not have a mapped reaction in InputController".format(key=(keyname, key)))
         if key in self.reactions:
-            logging.debug(self.reactions[key])
+            self.logger.debug(self.reactions[key])
             reaction = self.reactions[key]
             reaction[1].update({'press': True})
-            logging.debug(reaction)
+            print(reaction)
+            self.logger.debug(reaction)
             self.obj.dispatch_event(Event(reaction[0], reaction[1]))
 
     def keyup(self, **kwargs):
         key = kwargs['key']
         keyname = pygame.key.name(key)
-        logging.debug(("keydown {key} from " +
-                      "InputController.keydown").format(key=(keyname, key)))
+        self.logger.debug(("keydown {key} from " +
+                           "InputController.keydown").format(key=(keyname, key)))
         if key not in self.reactions:
-            logging.warn("{key} does not have a mapped reaction in InputController".format(key=(keyname, key)))
+            self.logger.warn("{key} does not have a mapped reaction in InputController".format(key=(keyname, key)))
         if key in self.reactions:
-            logging.debug(self.reactions[key])
+            self.logger.debug(self.reactions[key])
             reaction = self.reactions[key]
             reaction[1].update({'press': False})
-            logging.debug(reaction)
+            print(reaction)
+            self.logger.debug(reaction)
             self.obj.dispatch_event(Event(reaction[0], reaction[1]))
 
     # def update(self, **kwargs):
@@ -166,7 +173,7 @@ class InputController(Component):
 class PositionComponent(Component):
     def __init__(self, obj, pos=(0, 0)):
         super(PositionComponent, self).__init__(obj)
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.pos = Vector(*pos)
         self.xstart, self.ystart = pos
 
@@ -193,7 +200,7 @@ class PositionComponent(Component):
 class ProximitySensor(Component):
     def __init__(self, obj, group, r):
         super(ProximitySensor, self).__init__(obj)
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.group = group
         self.r = r
         self.attach_event('update', self.update)
@@ -208,7 +215,7 @@ class ProximitySensor(Component):
 class PhysicsComponent(Component):
     def __init__(self, obj, **kwargs):
         super(PhysicsComponent, self).__init__(obj)
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.p = obj.get_component('position')
         assert self.p is not None
         self.gravity = kwargs.get("gravity", constants.GRAVITY)
@@ -241,7 +248,7 @@ class PhysicsComponent(Component):
         if dr is None:
             dr = Vector(0, 0)
 
-        logging.debug(("move called in {self.__class__.__name__}" +
+        self.logger.debug(("move called in {self.__class__.__name__}" +
                       " with kwargs as {kwargs}").format(
                       self=self, kwargs=kwargs))
 
@@ -261,24 +268,24 @@ class PhysicsComponent(Component):
     def kick(self, dv=Vector(0, 0), restrict_velocity=True):
         if isinstance(dv, (list, tuple)):
             dv = Vector(l=dv)
-        logging.debug("vector before kick is {}".format(self.vector))
+        self.logger.debug("vector before kick is {}".format(self.vector))
         self.vector += dv
         if restrict_velocity:
             if self.vector.magnitude > constants.maxspeed - Vector(l=dv).magnitude:
-                logging.debug("normalized velocity")
+                self.logger.debug("normalized velocity")
                 self.vector.normalize_ip()
                 self.vector *= constants.maxspeed
-        logging.info("kick called in PhysicsComponent {dv}".format(dv=dv))
-        logging.info("current vector is {v}".format(v=self.vector))
+        self.logger.info("kick called in PhysicsComponent {dv}".format(dv=dv))
+        self.logger.info("current vector is {v}".format(v=self.vector))
 
     def turn(self, d0):
-        logging.debug("calling turn from PhysicsComponent, d0={0}, current angle is {1}".format(d0, self.dir))
+        self.logger.debug("calling turn from PhysicsComponent, d0={0}, current angle is {1}".format(d0, self.dir))
         self.dir += d0
         self.dir %= 360
 
     def accel(self, dv=None, dir=None):
         assert dv is not None
-        logging.debug("before kick current angle is {}".format(self.dir))
+        self.logger.debug("before kick current angle is {}".format(self.dir))
         if dir is None:
             dir = self.dir
 
@@ -288,7 +295,7 @@ class PhysicsComponent(Component):
         # direction of +270 degrees has a sin of 0 and cos of -1
 
         v = Vector(dv * math.cos(math.radians(self.dir)), dv * math.sin(math.radians(self.dir)))
-        logging.debug("accel {}".format(v))
+        self.logger.debug("accel {}".format(v))
         self.kick(dv=v)
 
     def bounce_horizontal(self):
@@ -319,13 +326,13 @@ class PhysicsComponent(Component):
         pass
 
     def update(self, **kwargs):
-        logging.debug("top of physics update call")
+        self.logger.debug("top of physics update call")
         dt = kwargs['dt']
         x, y = self.p.pos
-        # logging.debug("physics xy: {}".format((x, y)))
-        # logging.debug("gravity   : {}".format(self.gravity))
-        # logging.debug("vector    : {}".format(self.vector))
-        # logging.debug("dir       : {}".format(self.dir))
+        # self.logger.debug("physics xy: {}".format((x, y)))
+        # self.logger.debug("gravity   : {}".format(self.gravity))
+        # self.logger.debug("vector    : {}".format(self.vector))
+        # self.logger.debug("dir       : {}".format(self.dir))
         self.obj.render_text("x, y = ({:3.1f}, {:3.1f})".format(x, y))
         self.obj.render_text("gravity = {0.gravity}".format(self))
         self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
@@ -362,7 +369,7 @@ class PhysicsComponent(Component):
         self.vector[1] = round(self.vector[1], 9)
         # only restrict when accellerating due to key input,
         # and dont set it to maxspeed, but instead, don't apply the speed
-        logging.debug("bottom of physics update call")
+        self.logger.debug("bottom of physics update call")
 
 
 class SimpleSprite(Component, pygame.sprite.Sprite):

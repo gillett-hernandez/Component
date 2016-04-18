@@ -4,6 +4,19 @@ import sys
 # import os
 import logging
 # import math
+import json
+from DotDict import DotDict
+import config
+
+with open("json/lf_constants.json", 'r') as fd:
+    constants = DotDict(json.load(fd))
+
+with open("json/lf_keyconfig.json", 'r') as fd:
+    keyconfig = DotDict(json.load(fd))
+
+config.supply("constants", constants)
+config.supply("keyconfig", keyconfig)
+logging.basicConfig(**constants.logging_setup)
 
 from component import *
 # import sound
@@ -16,16 +29,7 @@ from pygame.locals import *
 global resources
 resources = {}
 
-
 POSTMESSAGE = USEREVENT+1
-
-# with open("json/lf_constants.json", 'r') as fd:
-#     constants = DotDict(json.load(fd))
-
-# with open("json/lf_keyconfig.json", 'r') as fd:
-#     keyconfig = DotDict(json.load(fd))
-
-logging.basicConfig(**constants.logging_setup)
 
 
 def outputInfo(info, pos=None, color=(0, 0, 0)):

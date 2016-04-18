@@ -1,0 +1,9 @@
+{
+    "gravity": 10,
+    "friction": 0.02,
+    "logging_setup": {
+        "filename": "game1.log",
+        "filemode": "w",
+        "level": "DEBUG"
+    }
+}

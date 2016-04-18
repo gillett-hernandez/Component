@@ -4,7 +4,7 @@
         "path": "./resources/images/clouds2.jpg"
     },
     "map1": {
-        "type": "data.text",
+        "type": "data.map",
         "path": "resources/maps/map1.txt"
     }
 }

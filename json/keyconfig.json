@@ -1,9 +1,13 @@
 {
-    "keys":{
-        "K_w":     "up",
-        "K_s":     "down",
-        "K_a":     "left",
-        "K_d":     "right",
-        "K_SPACE": "jump"
+    "keys": {
+        "K_UP": ["up", {}],
+        "K_DOWN": ["down", {}],
+        "K_LEFT": ["left", {}],
+        "K_RIGHT": ["right", {}],
+        "K_w": ["up", {}],
+        "K_s": ["down", {}],
+        "K_a": ["left", {}],
+        "K_d": ["right", {}],
+        "K_SPACE": ["jump", {}]
     }
 }
