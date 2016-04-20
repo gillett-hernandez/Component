@@ -229,6 +229,7 @@ class PhysicsComponent(Component):
         self.attach_event('nearby', self.collidelist)
         self.attach_event('move', self.move)
         self.attach_event('kick', self.kick)
+        self.attach_event('run', self.run)
         self.attach_event('turn', self.turn)
         self.attach_event('accel', self.accel)
         self.attach_event('toggle_gravity', self.toggle_gravity)
@@ -240,8 +241,8 @@ class PhysicsComponent(Component):
         for s in slist:
             self.collide(sprite=s)
 
-    def collide(self, **kwargs):
-        raise NotImplementedError
+    def collide(self, sprite, **kwargs):
+        self.logger.info("about to be near {}".format(sprite))
 
     def move(self, dx=None, dy=None, dr=None, **kwargs):
         # legacy capturing **kwargs until its purged
@@ -277,6 +278,23 @@ class PhysicsComponent(Component):
                 self.vector *= constants.maxspeed
         self.logger.info("kick called in PhysicsComponent {dv}".format(dv=dv))
         self.logger.info("current vector is {v}".format(v=self.vector))
+
+    def run(self, dv=0):
+        # what strange behavior might happen if you move laterally while free-falling
+        # and then you reach your maximum speed.
+        # would your vertical speed decrease to make your horizontal speed increase?
+        # or would you just not be able to move further horizontally
+
+        if dv > 0:
+            if self.vector.x > constants.runspeed:
+                self.vector.x = constants.runspeed
+            else:
+                self.kick(dv=[dv, 0])
+        elif dv < 0:
+            if self.vector.x < -constants.runspeed:
+                self.vector.x = -constants.runspeed
+            else:
+                self.kick(dv=[dv, 0])
 
     def turn(self, d0):
         self.logger.debug("calling turn from PhysicsComponent, d0={0}, current angle is {1}".format(d0, self.dir))
@@ -375,7 +393,7 @@ class PhysicsComponent(Component):
 class SimpleSprite(Component, pygame.sprite.Sprite):
     def __init__(self, obj, size, color=(128, 128, 128)):
         super(SimpleSprite, self).__init__(obj)
-        self.p = self.obj.get_component('position')
+        self.p = self.obj['position']
         self.obj.image = pygame.Surface(size).convert()
         self.obj.image.fill(pygame.Color(*color))
         self.obj.rect = self.obj.image.get_rect()
@@ -394,8 +412,8 @@ class SpriteFromImage(Component):
 
         self.attach_event('update', self.update)
 
-        self.p = self.obj.get_component('position')
-        self.a = self.obj.get_component('physics')
+        self.p = self.obj['position']
+        self.a = self.obj['physics']
         self.image = pygame.image.load(imagepath).convert_alpha()
         self.rect = self.image.get_rect()
         self.obj.image = self.image

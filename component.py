@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import logging
-import json
 import math
 import os
 
@@ -16,6 +15,7 @@ logger = logging.getLogger(__name__)
 import config
 constants = config.get("constants")
 keyconfig = config.get("keyconfig")
+
 
 def void(*args, **kwargs):
     return
@@ -205,9 +205,9 @@ def test():
 
             @Reaction
             def accel(**kwargs):
-                # print("gravity is {g}".format(g=self.obj.get_component("physics").gravity))
-                if distance(self.obj.get_component("physics").vector) > constants.maxspeed:
-                    if not vproj(self.obj.get_component("physics").vector, miscfunc.vector_transform(constants.accel, self.obj.get_component("physics").dir)) < 0:
+                # print("gravity is {g}".format(g=self.obj["physics"].gravity))
+                if distance(self.obj["physics"].vector) > constants.maxspeed:
+                    if not vproj(self.obj["physics"].vector, miscfunc.vector_transform(constants.accel, self.obj["physics"].dir)) < 0:
                         return {"dv": 0}
                 return {"dv": constants.accel}
 
@@ -239,10 +239,10 @@ def test():
 
         def update(self, **kwargs):
             self.logger.debug('update in Player')
-            vector = self.obj.get_component('physics').vector
+            vector = self.obj['physics'].vector
             # start of wonky code
             self.logger.info("vector = {0!r}, {1}, {2}".format(vector.components,
-                                                           self.obj.get_component("physics").gravity,
+                                                           self.obj["physics"].gravity,
                                                            self.obj.pos))
 
     class Player(Object, pygame.sprite.Sprite):

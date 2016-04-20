@@ -107,7 +107,7 @@ def prep_font(resources):
 
 def prep_map(resources):
     text_map = resources["map1"]
-    assert all([all([isinstance(C, str) for C in row]) for row in _map])
+    assert all([all([isinstance(C, str) for C in row]) for row in text_map])
 
     translate_chara_table = {
         " ": (None, None),
@@ -124,17 +124,19 @@ def prep_map(resources):
         for x, chara in enumerate(row):
             e = list(translate_chara_table[chara])
             if e[0] is not None:
-                e[1] = (x*16, y*16)
-                entity = e[0](e[1])
+                e[1] = (x*16, constants.LEVEL_HEIGHT - y*16)
+                if e[0] is not Player:
+                    entity = e[0](e[1])
+                else:
+                    player = e[1]
             else:
                 continue
-            if isinstance(entity, Player):
-                player = entity
-            elif isinstance(entity, Enemy):
+            if isinstance(entity, Enemy):
                 enemies.append(entity)
+                entities.append(entity)
             elif isinstance(entity, Block):
                 blocks.append(entity)
-            entities.append(entity)
+                entities.append(entity)
     return player, blocks, enemies, entities
 
 offset = 0
@@ -201,33 +203,36 @@ class PlayerEventHandler(EventHandler):
 
         # @Reaction
         def jump(**kwargs):
+            # kindof direct, huh.
+            self.obj["physics"].vector[1] = 0
             return {"dv": [0, constants.JUMPSPEED]}
 
         self.add_tap("jump", "kick", jump)
 
         @Reaction
         def left(**kwargs):
-            return {"dv": [-constants.runaccel, 0]}
+            return {"dv": -constants.runaccel}
 
-        self.add_hold("left", "kick", left)
+        self.add_hold("left", "run", left)
 
         @Reaction
         def right(**kwargs):
-            return {"dv": [constants.runaccel, 0]}
+            return {"dv": constants.runaccel}
 
-        self.add_hold("right", "kick", right)
+        self.add_hold("right", "run", right)
 
 
 class Player(Object, pygame.sprite.Sprite):
     width, height = 16, 32
 
-    def __init__(self, pos):
+    def __init__(self, pos, walls):
         super(Player, self).__init__()
         self.attach_component('position', PositionComponent, pos)
         self.attach_component('physics', PhysicsComponent)
         self.attach_component('input', InputController)
         self.attach_component('handler', PlayerEventHandler)
-        self.attach_component('sprite', SimpleSprite, size=(16, 32), color=(128, 128, 128))
+        self.attach_component('sprite', SimpleSprite, size=(16, 32), color=(255, 128, 128))
+        self.attach_component('proximity', ProximitySensor, walls, 30)
 
     @staticmethod
     def render_text(text):
@@ -235,13 +240,13 @@ class Player(Object, pygame.sprite.Sprite):
 
     def __getattr__(self, name):
         if name == "pos" or name == "x" or name == "y":
-            return getattr(self.get_component("position"), name)
+            return getattr(self["position"], name)
         return super(Player, self).__getattr__(name)
 
     def update(self, **kwargs):
         screen, camera = ScreenLocator.getScreen()
         acenter = camera.apply(self.rect).center
-        vec = self.get_component("physics").vector.components[:]
+        vec = self["physics"].vector.components[:]
         vec[1] = -vec[1]
         pygame.draw.line(screen, (255, 0, 0),
                          acenter,
@@ -255,7 +260,28 @@ class Player(Object, pygame.sprite.Sprite):
 
     @property
     def pos(self):
-        return self.get_component('position').pos
+        return self['position'].pos
+
+
+class Enemy(Object, pygame.sprite.Sprite):
+    def __init__(self, pos):
+        super(Enemy, self).__init__()
+        self.attach_component('position', PositionComponent, pos)
+        self.attach_component('physics', PhysicsComponent)
+        self.attach_component('handler', EnemyEventHandler)
+        self.attach_component('sprite', SimpleSprite, size=(16, 32), color=(128, 128, 128))
+
+
+class Block(Object, pygame.sprite.Sprite):
+    def __init__(self, pos):
+        super(Block, self).__init__()
+        self.attach_component('position', PositionComponent, pos)
+        # self.attach_component('handler', EnemyEventHandler)
+        self.attach_component('sprite', SimpleSprite, size=(16, 16), color=(128, 128, 128))
+        self.notify(Event("update", {}))
+
+    def update(self, **kwargs):
+        pass
 
 
 class Camera(object):
@@ -328,14 +354,23 @@ def main():
     screen.blit(truebg, (0, 0), screenrect)
     _screenrect = screenrect.copy()
 
-    All = kwargsGroup.UserGroup()
+    # strangely calling a prep_* function separately from all the other ones.
+    # fix?
+    playercoor, blocks, enemies, entities = prep_map(resources)
 
-    player = Player((500, constants.LEVEL_HEIGHT-500))
+    All = kwargsGroup.UserGroup()
+    Walls = pygame.sprite.Group()
+
+    # player = Player((500, constants.LEVEL_HEIGHT-500))
     # player.notify(Event("toggle_gravity", {}))
 
-    camera.update(player.rect)
+    for obj in blocks:
+        All.add(obj)
+        Walls.add(obj)
+    player = Player(playercoor, Walls)
     All.add(player)
 
+    camera.update(player.rect)
     ScreenLocator.provide(screen, camera)
 
     clock = pygame.time.Clock()
