@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import sys
-import math
-import json
+import math # lint:ok
+import json  # lint:ok
 import logging
 
 from DotDict import DotDict
@@ -28,7 +28,7 @@ from pygame.locals import *
 global resources
 resources = {}
 
-POSTMESSAGE = USEREVENT+1
+POSTMESSAGE = USEREVENT + 1
 
 logging.debug("start of logging file, platformer instance")
 
@@ -91,7 +91,8 @@ def prep_screen(resources):
 
 def prep_background(resources):
     bg = get_resource("background1")
-    truebg = pygame.Surface((constants.LEVEL_WIDTH, constants.LEVEL_HEIGHT)).convert()
+    truebg = pygame.Surface((constants.LEVEL_WIDTH,
+                             constants.LEVEL_HEIGHT)).convert()
 
     bg = pygame.transform.scale2x(bg)
     truebg.fill((255, 255, 255))
@@ -124,7 +125,7 @@ def prep_map(resources):
         for x, chara in enumerate(row):
             e = list(translate_chara_table[chara])
             if e[0] is not None:
-                e[1] = (x*16, constants.LEVEL_HEIGHT - y*16)
+                e[1] = (x * 16, constants.LEVEL_HEIGHT - y * 16)
                 if e[0] is not Player:
                     entity = e[0](e[1])
                 else:
@@ -181,7 +182,8 @@ class PlayerEventHandler(EventHandler):
     def __init__(self, obj):
         super(PlayerEventHandler, self).__init__(obj)
 
-        # reactions and everything in the code below manage events through this object
+        # reactions and everything in the code below
+        # manage events through this object
 
         # use @Reaction to specify something to be a reaction
         # e.g.
@@ -191,7 +193,8 @@ class PlayerEventHandler(EventHandler):
 
         # @accel.defstart
         # def accel(**kwargs):
-        #     self.obj.dispatch_event(Event("change_gravity", {'g': constants.FLIGHTGRAVITY}))
+        #     self.obj.dispatch_event(Event("change_gravity",
+        #                                   {'g': constants.FLIGHTGRAVITY}))
         #     self.obj.accelerating = True
 
         # @accel.defend
@@ -231,7 +234,8 @@ class Player(Object, pygame.sprite.Sprite):
         self.attach_component('physics', PhysicsComponent)
         self.attach_component('input', InputController)
         self.attach_component('handler', PlayerEventHandler)
-        self.attach_component('sprite', SimpleSprite, size=(16, 32), color=(255, 128, 128))
+        self.attach_component('sprite', SimpleSprite, size=(16, 32),
+                              color=(255, 128, 128))
         self.attach_component('proximity', ProximitySensor, walls, 30)
 
     @staticmethod
@@ -251,7 +255,7 @@ class Player(Object, pygame.sprite.Sprite):
         pygame.draw.line(screen, (255, 0, 0),
                          acenter,
                          (Vector(l=acenter)+Vector(l=vec)).components)
-        self.notify(Event("update", kwargs))
+        self.notify("update", **kwargs)
 
     # def add_collision_check(self, group, **kwargs):
     #     proximity = kwargs.get('proximity', self.height+10)
@@ -278,7 +282,7 @@ class Block(Object, pygame.sprite.Sprite):
         self.attach_component('position', PositionComponent, pos)
         # self.attach_component('handler', EnemyEventHandler)
         self.attach_component('sprite', SimpleSprite, size=(16, 16), color=(128, 128, 128))
-        self.notify(Event("update", {}))
+        self.notify("update", dt=0)
 
     def update(self, **kwargs):
         pass
@@ -409,10 +413,10 @@ def main():
 
             screen.fill((255, 255, 255))
 
-            newpos = camera.apply(screenrect)
+            new_pos = camera.apply(screenrect)
 
-            x = newpos.topleft[0]
-            y = newpos.topleft[1]
+            x = new_pos.topleft[0]
+            y = new_pos.topleft[1]
             pos = max(0, x), max(0, y)
             topleft = max(0, -x), max(0, -y)
             _screenrect.topleft = topleft

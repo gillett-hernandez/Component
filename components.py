@@ -35,7 +35,7 @@ class EventHandler(Component):
         self.attach_event(hear, reaction)
 
     def add_hold(self, hear, react, reaction):
-        def holdreaction(**kwargs):
+        def hold_reaction(**kwargs):
             pressed = kwargs['press']
             self.logger.debug("reaction with pressed as {pressed}".format(
                           pressed=pressed))
@@ -57,8 +57,8 @@ class EventHandler(Component):
                 reaction.end(**kwargs)
                 self.obj.detach_component(
                     "{hear}_{react}_repeater".format(hear=hear, react=react))
-        holdreaction.__name__ = "{hear}_{react}_repeater".format(hear=hear, react=react)
-        self.attach_event(hear, holdreaction)
+        hold_reaction.__name__ = "{hear}_{react}_repeater".format(hear=hear, react=react)
+        self.attach_event(hear, hold_reaction)
 
 
 class Repeater(Component):

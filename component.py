@@ -76,21 +76,24 @@ class Component(object):
         #     "etc"
         # }
         self.logger.debug(("attaching event {keyword} " +
-                       "with callback {callback}").format(
-                      keyword=keyword, callback=callback))
+                          "with callback {callback}").format(keyword=keyword,
+                                                             callback=callback))
         return _id
 
     def detach_event(self, _hash):
+        """detaches an event-based callback based on its hash"""
         # volatile list length?
         # no bc return statement right after del
         for keyword in self.callbacks:
             for _id in self.callbacks[keyword]:
                 if _id == _hash:
-                    self.logger.debug("calling detach_event on {callback}".format(callback=self.callbacks[keyword][_id]))
+                    self.logger.debug("calling detach_event"
+                                      " on {callback}".format(callback=self.callbacks[keyword][_id]))
                     del self.callbacks[keyword][_id]
                     return
 
     def dispatch_event(self, event):
+        """dispatches an event through this component"""
         func = None
         # try:
         assert event.data is not None
@@ -150,21 +153,25 @@ class Object(object):
             if hasattr(component, name):
                 return getattr(component, name)
         else:
-            raise AttributeError("Object has no attribute {name}".format(name=name))
+            raise AttributeError("Object has no "
+                                 "attribute named {name}".format(name=name))
 
     def attach_component(self, name, component, *initargs, **kwinitargs):
-        assert(issubclass(component, Component))
+        """attaches a component to self given its name, type, and initial args"""
+        assert issubclass(component, Component)
         self.logger.debug("attaching component with name {}".format(name))
         self.logger.debug("and type {!r}{!s}{!s}".format(name,
-                                                     component,
-                                                     initargs,
-                                                     kwinitargs))
+                                                         component,
+                                                         initargs,
+                                                         kwinitargs))
         self[name] = component(self, *initargs, **kwinitargs)
 
     def get_component(self, name):
+        """gets a component by name"""
         return self[name]
 
     def dispatch_event(self, event):
+        """dispatches an event through this object, propogating downward through the components"""
         assert(event.data is not None)
         c = 0
         self.logger.debug("dispatching event {event!r}".format(event=event))
@@ -180,8 +187,11 @@ class Object(object):
         self[name].remove_events()
         del self[name]
 
-    def notify(self, event):
-        self.dispatch_event(event)
+    def notify(self, keyword, *args, **kwargs):
+        if isinstance(keyword, Event):
+            self.logger.debug("notify called with deprecated function arguments")
+            self.dispatch_event(keyword)
+        self.dispatch_event(Event(keyword, kwargs))
 
     def dumpstate(self):
         # components
@@ -242,8 +252,8 @@ def test():
             vector = self.obj['physics'].vector
             # start of wonky code
             self.logger.info("vector = {0!r}, {1}, {2}".format(vector.components,
-                                                           self.obj["physics"].gravity,
-                                                           self.obj.pos))
+                                                               self.obj["physics"].gravity,
+                                                               self.obj.pos))
 
     class Player(Object, pygame.sprite.Sprite):
         width, height = 16, 16
