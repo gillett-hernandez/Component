@@ -1,0 +1,8 @@
+{
+    "keys": {
+        "K_UP": ["snap", {}],
+        "K_DOWN": ["down", {}],
+        "K_LEFT": ["left", {}],
+        "K_RIGHT": ["right", {}],
+    }
+}

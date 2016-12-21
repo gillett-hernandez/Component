@@ -17,7 +17,7 @@ keyconfig = config.get("keyconfig")
 
 
 class EventHandler(Component):
-    """Handles events. A collection of reactions"""
+    """Handles events. A collection of reactions."""
     def __init__(self, obj):
         super(EventHandler, self).__init__(obj)
         self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
@@ -25,44 +25,38 @@ class EventHandler(Component):
         # obj.attach_event('update', self.update)
 
     def add_tap(self, hear, react, func):
+        """adds a tap based reaction, which is a reaciton that fires the callback when "pressed" and when "released" """
         print(hear, react, func)
-        def reaction(**kwargs):
-            if kwargs['press']:
-
+        def reaction(press=False, **kwargs):
+            if press:
                 self.obj.dispatch_event(Event(react, func(**kwargs)))
                 return
 
         self.attach_event(hear, reaction)
 
     def add_hold(self, hear, react, reaction):
-        def hold_reaction(**kwargs):
-            pressed = kwargs['press']
-            self.logger.debug("reaction with pressed as {pressed}".format(
-                          pressed=pressed))
-            if pressed:
-
+        identifier = "{hear}_{react}_repeater".format(hear=hear, react=react)
+        def hold_reaction(press=False, **kwargs):
+            self.logger.debug("{identifier} triggered with pressed={pressed}".format(
+                                identifier=identifier, pressed=press))
+            if press:
                 self.logger.debug(
                     "reaction if branch right before attach_component")
                 # print(reaction)
                 reaction.start(**kwargs)
                 # timing for a hold reaction goes here
-                self.obj.attach_component(
-                    "{hear}_{react}_repeater".format(hear=hear, react=react),
-                    Repeater, react, 1, reaction.hold
-                )
+                self.obj.attach_component(identifier,
+                                          Repeater, react, 1, reaction.hold)
             else:
-
-                self.logger.debug(
-                    "reaction else branch right before detach_component")
+                self.logger.debug("reaction else branch right before detach_component")
                 reaction.end(**kwargs)
-                self.obj.detach_component(
-                    "{hear}_{react}_repeater".format(hear=hear, react=react))
-        hold_reaction.__name__ = "{hear}_{react}_repeater".format(hear=hear, react=react)
+                self.obj.detach_component(identifier)
+        hold_reaction.__name__ = identifier
         self.attach_event(hear, hold_reaction)
 
 
 class Repeater(Component):
-    """Repeatedly broadcasts an event every n ticks"""
+    """Repeatedly broadcasts an event every n ticks, which defaults to one.\nif data is callable then it will be broadcasted as an event with data as the callback\nif not, it will just be broadcasted with data as the packaged data"""
     def __init__(self, obj, keyword, n=1, data={}):
         super(Repeater, self).__init__(obj)
         self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
@@ -83,6 +77,7 @@ class Repeater(Component):
 
 @loggable_class
 class Reaction(object):
+    """defines a Reaction class that functions as a decorator and contains 3 callbacks, 2 possibly being void, with 1 being a "hold" callback that happens every frame """
     def __init__(self, f):
         self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.defhold(f)
@@ -108,8 +103,7 @@ class Reaction(object):
 
 
 class Delay(Component):
-    """Causes an event after a specified delay,
-assuming that update gets called every frame."""
+    """Causes an event after a specified delay and becomes inactive afterwards\nassuming that update gets called every frame.\n"""
     def __init__(self, obj, timeout, event, data={}):
         super(Delay, self).__init__(obj)
         self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
@@ -119,13 +113,18 @@ assuming that update gets called every frame."""
         self.attach_event('update', self.update)
 
     def update(self, **kwargs):
-        if self.t > 0:
+        if self.t >= 1:
             self.t -= 1
             return
-        self.obj.dispatch_event(self.event, self.data)
+        elif t == 0:
+            self.obj.dispatch_event(self.event, self.data)
+            self.t -= 1
+        else:
+            pass
 
 
 class InputController(Component):
+    """defines an InputController as a collection of reactions"""
     def __init__(self, obj):
         super(InputController, self).__init__(obj)
         self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
@@ -141,6 +140,7 @@ class InputController(Component):
         keyname = pygame.key.name(key)
         self.logger.debug(("keydown {key} from " +
                             "InputController.keydown").format(key=(keyname, key)))
+        # self.reactions shall be a dict of class<Reaction> indexed by strings?
         if key not in self.reactions:
             self.logger.warn("{key} does not have a mapped reaction in InputController".format(key=(keyname, key)))
         if key in self.reactions:
@@ -347,14 +347,14 @@ class PhysicsComponent(Component):
         self.logger.debug("top of physics update call")
         dt = kwargs['dt']
         x, y = self.p.pos
-        # self.logger.debug("physics xy: {}".format((x, y)))
-        # self.logger.debug("gravity   : {}".format(self.gravity))
-        # self.logger.debug("vector    : {}".format(self.vector))
-        # self.logger.debug("dir       : {}".format(self.dir))
-        self.obj.render_text("x, y = ({:3.1f}, {:3.1f})".format(x, y))
-        self.obj.render_text("gravity = {0.gravity}".format(self))
-        self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
-        self.obj.render_text("direction = {0.dir}".format(self))
+        self.logger.debug("physics xy: {}".format((x, y)))
+        self.logger.debug("gravity   : {}".format(self.gravity))
+        self.logger.debug("vector    : {}".format(self.vector))
+        self.logger.debug("dir       : {}".format(self.dir))
+        # self.obj.render_text("x, y = ({:3.1f}, {:3.1f})".format(x, y))
+        # self.obj.render_text("gravity = {0.gravity}".format(self))
+        # self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
+        # self.obj.render_text("direction = {0.dir}".format(self))
 
         # if self is outside screen side barriers
         if not (0 < x+32 < constants.LEVEL_WIDTH):

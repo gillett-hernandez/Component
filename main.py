@@ -57,14 +57,17 @@ def load_basic_resources(resources):
         _resources = DotDict(json.load(fd))
     for name, data in _resources.items():
         if data["type"] == constants.IMAGE:
-            with open(data["path"], 'rb') as fd:
-                resources[name] = pygame.image.load(fd)
+            opentype = 'rb'
+            function = pygame.image.load
         elif data["type"] in [constants.SFX, constants.MUSIC]:
-            with open(data["path"], 'rb') as fd:
-                resources[name] = sound.load(fd)
+            opentype = 'rb'
+            function = sound.load
         elif data["type"] == constants.MAP:
-            with open(data["path"], 'r') as fd:
-                resources[name] = fd.read().splitlines()
+            opentype = 'r'
+            function = lambda fd: fd.read().splitlines()
+
+        with open(data["path"], opentype) as fd:
+            resources[name] = function(fd)
 
 
 def get_resource(name):
@@ -204,7 +207,7 @@ class PlayerEventHandler(EventHandler):
         #
         # self.add_hold("accelerate", "accel", accel)
 
-        # @Reaction
+        @Reaction
         def jump(**kwargs):
             # kindof direct, huh.
             self.obj["physics"].vector[1] = 0
@@ -212,15 +215,20 @@ class PlayerEventHandler(EventHandler):
 
         self.add_tap("jump", "kick", jump)
 
-        @Reaction
-        def left(**kwargs):
-            return {"dv": -constants.runaccel}
+        # Reaction
+        # def left(**kwargs):
+        #     return {"dv": -constants.runaccel}
 
+        left = Reaction(void)
+        left.defhold({"dv": -constants.runaccel})
         self.add_hold("left", "run", left)
 
-        @Reaction
-        def right(**kwargs):
-            return {"dv": constants.runaccel}
+        # @Reaction
+        # def right(**kwargs):
+        #     return {"dv": constants.runaccel}
+
+        right = Reaction(void)
+        right.defhold({"dv": constants.runaccel})
 
         self.add_hold("right", "run", right)
 

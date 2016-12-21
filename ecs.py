@@ -10,7 +10,7 @@ import sys
 from collections import namedtuple
 
 import pygame
-from pygame.locals import *
+import pygame.locals as pgl
 
 
 class Namespace(object):
@@ -23,8 +23,11 @@ class Namespace(object):
         else:
             return self.__dict__[name]
 
+    def __setattr__(self, name, value):
+        self.__dict__[name] = value
+
 C = Namespace()
-C.G = 3
+C.G = 3 # type: int
 C.SCREEN = pygame.Rect((0, 0), (640, 480))
 C.PHYSICS = 'PHYSICS'
 C.INPUT = 'INPUT'
@@ -69,23 +72,31 @@ class _EventSystem(System):
         super(_EventSystem, self).__init__()
         self.callbacks = {}
 
-    def register():  # are "register" and "listen" one and the same
+    def register(self):  # are "register" and "listen" one and the same
         pass
 
-    def trigger():  # "raise" or "notify"?
+    def trigger(self):  # "raise" or "notify"?
         pass
 
 
 class PhysicsSystem(System):
-    events = ['update']
+    events = ['update'] # type: List[str]
 
     def __init__(self):
         super(PhysicsSystem, self).__init__()
-        PhysicsSystem.events
+        # PhysicsSystem.events
+
+    # still called self because it will be called on components so its useful to have the "self" mindset
+    @staticmethod
+    def update(self, **kwargs):
+        self.pos[1] += 1
+
+    def add(self, component):
+        self.components.append(component)
 
 
 class InputSystem(System):
-    events = []
+    events = [] # type: List[str]
 
     def __init__(self):
         super(InputSystem, self).__init__()
@@ -93,11 +104,15 @@ class InputSystem(System):
 
 
 class SpriteSystem(System):
-    events = ['update']
+    events = ['update'] # type: List[str]
 
     def __init__(self):
         super(SpriteSystem, self).__init__()
         SpriteSystem.events
+
+    @staticmethod
+    def update(self, **kwargs):
+        self.rect.topleft = self.physics.pos
 
 
 class PhysicsComponent(Component):
@@ -106,9 +121,8 @@ class PhysicsComponent(Component):
 
     def __init__(self, obj, pos):
         super(PhysicsComponent, self).__init__(obj)
-        self.pos = pos
-        self.vec = [0, 0]
-        self.weightless = False
+        self.pos = list(pos)
+        PhysicsComponent.system.add(self)
 
 
 class InputController(Component):
@@ -129,15 +143,31 @@ class SpriteComponent(Component):
 
         # Create an image of the block, and fill it with a color.
         # This could also be an image loaded from the disk.
-        self.image = pygame.Surface([20, 20])
-        self.image.fill(pygame.Color(255, 0, 0))
+
+        self.chunks = []
 
         # Fetch the rectangle object that has the dimensions of the image
         # Update the position of this object by setting the values of rect.x and rect.y
-        self.rect = self.image.get_rect()
 
-    def update(self):
-        self.rect.topleft = self.physics.pos
+        self.rect = pygame.Rect((0,0),(0,0))
+
+    def set_type(self, type):
+        grid = get_grid_for(type)
+        color = get_color_for(type)
+        for y in range(4):
+            for x in range(4):
+                if grid[y][x]:
+                    image = pygame.Surface([16, 16])
+                    image.fill(color)
+                    rect = pygame.image.get_rect()
+                    rect.topleft = (x, y)
+                    sprite = pygame.Sprite(image, rect)
+                    self.chunks.append(sprite)
+
+    def blit(self, surface):
+        for sprite in self.chunks:
+            surface.blit(sprite.image, sprite.rect)
+
 
 
 class Player(Entity):
@@ -172,23 +202,24 @@ if __name__ == '__main__':
 
     player = Player([120, 120])
 
-    i = 0
-    dt = 1/60
+    # i = 0
+    dt = 1.0/6.0
 
     while True:
         for event in pygame.event.get():
-            if event.type == QUIT:
+            if event.type == pgl.QUIT:
                 sys.exit()
                 pygame.quit()
-            elif event.type == KEYDOWN:
-                if event.key in [K_ESCAPE, K_Q]:
+            elif event.type == pgl.KEYDOWN:
+                if event.key in [pgl.K_ESCAPE, pgl.K_q]:
                     sys.exit()
                     pygame.quit()
 
         for system in systems:
             update = getattr(system, "update", False)
             if update is not False:
-                update(dt=dt)
+                for component in system.components:
+                    update(component)
         screen.blit(bg.image, bg.rect)
         screen.blit(player.image, player.rect)
         pygame.display.flip()

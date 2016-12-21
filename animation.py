@@ -3,10 +3,13 @@
 import pygame
 from pygame.locals import *
 import sys
+import os
 
 from component import Component
 from DotDict import DotDict
+import config
 
+constants = config.get("constants")
 
 class Sprite(object):
     def __init__(self, strip, uwidth=None, uheight=None, sprite_count=None):
@@ -99,7 +102,12 @@ def test():
 
     screen = pygame.display.set_mode((64, 64), pygame.RESIZABLE)
 
-    sprite_sheet = pygame.image.load("./resources/images/spritesheet.png").convert()
+    try:
+        sprite_sheet = pygame.image.load("./resources/images/spritesheet.png").convert()
+    except pygame.error as e:
+        print(os.getcwd())
+        print(os.path.isfile("./resources/images/spritesheet.png"))
+        raise
 
     swidth, sheight = sprite_sheet.get_size()
 

@@ -1,0 +1,15 @@
+{
+    "SCREEN_SIZE": [352, 160],
+    "SCREEN_WIDTH": 352,
+    "SCREEN_HEIGHT": 160,
+    "HALF_WIDTH": 176,
+    "HALF_HEIGHT": 80,
+    "FRAMERATE": 60,
+    "logging_setup": {"filename": "./lfclone.log",
+                      "filemode": "w",
+                      "level": "DEBUG",
+                      "format": "%(name)s %(filename)15s %(lineno)4s %(levelname)5s  %(message)s"},
+    "IMAGE": "data.image",
+    "SFX": "data.sfx",
+    "MUSIC": "data.music"
+}

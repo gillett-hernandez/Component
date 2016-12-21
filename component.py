@@ -3,8 +3,8 @@
 import logging
 import math
 import os
+import json
 
-# import config
 from vector import Vector
 from DotDict import DotDict
 
@@ -13,6 +13,17 @@ import pygame.locals
 
 logger = logging.getLogger(__name__)
 import config
+if __name__ == "__main__":
+
+    with open("json/constants.json", 'r') as fd:
+        constants = DotDict(json.load(fd))
+
+    with open("json/keyconfig.json", 'r') as fd:
+        keyconfig = DotDict(json.load(fd))
+
+    config.supply("constants", constants)
+    config.supply("keyconfig", keyconfig)
+
 constants = config.get("constants")
 keyconfig = config.get("keyconfig")
 
@@ -63,6 +74,7 @@ class Component(object):
         return repr(self)
 
     def attach_event(self, keyword, callback):
+        """attaches an event-based callback and returns it's hash as an identifier\nthe callbacks must accept keyword arguments and have no positional arguments"""
         if keyword not in self.callbacks:
             self.callbacks[keyword] = {}
         _id = hash(callback)
@@ -84,37 +96,45 @@ class Component(object):
         """detaches an event-based callback based on its hash"""
         # volatile list length?
         # no bc return statement right after del
+        keyword = ""
+        _id = ""
         for keyword in self.callbacks:
             for _id in self.callbacks[keyword]:
                 if _id == _hash:
                     self.logger.debug("calling detach_event"
                                       " on {callback}".format(callback=self.callbacks[keyword][_id]))
-                    del self.callbacks[keyword][_id]
-                    return
+                    break
+            else:
+                continue
+            break
+        else:
+            self.logger.error("could not find component")
+        del self.callbacks[keyword][_id]
 
     def dispatch_event(self, event):
         """dispatches an event through this component"""
         func = None
-        # try:
-        assert event.data is not None
-        if event.keyword not in self.callbacks:
-            return
-        if event.keyword is not "update":
-            self.logger.debug("dispatching event {event!r}".format(event=event))
-        if len(self.callbacks[event.keyword]) == 0:
-            return -1
-        for func in self.callbacks[event.keyword].values():
-            func(**event.data)
-        # except AttributeError as e:
-            # print(event, event.data, func)
-            # raise e
+        try:
+            assert event.data is not None
+            if event.keyword not in self.callbacks:
+                return
+            if event.keyword is not "update":
+                self.logger.debug("dispatching event {event!r}".format(event=event))
+            if len(self.callbacks[event.keyword]) == 0:
+                return -1
+            for func in self.callbacks[event.keyword].values():
+                func(**event.data)
+        except AttributeError as e:
+            print(event, event.data, func)
+            raise e
 
     def remove_events(self):
         self.logger.debug("called remove_events from " +
                       "{self.__class__.__name__}".format(self=self))
-        for _ in self.callbacks:
-            for eventid in self.callbacks[_]:
-                self.callbacks[_][eventid] = None
+        for keyword in self.callbacks:
+            for eventid in self.callbacks[keyword]:
+                self.logger.debug("deleting {} with keyword of {} and id of {}".format(self.callbacks[keyword][eventid], keyword, eventid))
+                self.callbacks[keyword][eventid] = None
                 # should be equivalent to `del`ing the function
 
     def notify(self, event):
@@ -132,6 +152,7 @@ class Component(object):
 
 @loggable_class
 class Object(object):
+    """representable as a collection of components"""
     def __init__(self):
         self.logger.debug("{0.__class__.__name__} being instantiated now".format(self))
         self.components = {}
@@ -175,7 +196,7 @@ class Object(object):
         assert(event.data is not None)
         c = 0
         self.logger.debug("dispatching event {event!r}".format(event=event))
-        for component in self.components.values():
+        for component in list(self.components.values()):
             returnv = component.dispatch_event(event)
             if returnv == -1:
                 c += 1
@@ -217,7 +238,7 @@ def test():
             def accel(**kwargs):
                 # print("gravity is {g}".format(g=self.obj["physics"].gravity))
                 if distance(self.obj["physics"].vector) > constants.maxspeed:
-                    if not vproj(self.obj["physics"].vector, miscfunc.vector_transform(constants.accel, self.obj["physics"].dir)) < 0:
+                    if vproj(self.obj["physics"].vector, miscfunc.vector_transform(constants.accel, self.obj["physics"].dir)) >= 0:
                         return {"dv": 0}
                 return {"dv": constants.accel}
 
