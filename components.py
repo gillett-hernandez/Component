@@ -98,6 +98,9 @@ class Reaction(object):
         self.end = f
         return self
 
+    def __call__(self, *args, **kwargs):
+        return self.hold(*args, **kwargs)
+
     def __str__(self):
         return " ".join([str(self.start), str(self.hold), str(self.end)])
 

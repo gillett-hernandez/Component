@@ -1,8 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import sys
 import math # lint:ok
 import json  # lint:ok
+from typing import *
 import logging
 
 from DotDict import DotDict
@@ -18,21 +19,37 @@ config.supply("constants", constants)
 config.supply("keyconfig", keyconfig)
 logging.basicConfig(**constants.logging_setup)
 
-from vector import Vector
-from component import *
-import kwargsGroup
+
 
 import pygame
+import json
+import config
+
 from pygame.locals import *
 
-global resources
-resources = {}
+constants = config.get("constants")
+keyconfig = config.get("keyconfig")
+from vector import Vector
+from component import Object, Event
+POSTMESSAGE = USEREVENT + 1 # lint:ok
 
-POSTMESSAGE = USEREVENT + 1
+from DotDict import DotDict
+
+global resources
+
+from vector import Vector
+from component import *
+from components import *
+import kwargsGroup
+
+import pygame # lint:ok
+from pygame.locals import * # lint:ok
 
 logging.debug("start of logging file, platformer instance")
 
 
+global resources
+resources = {} # type: Dict[str,Any]
 def outputInfo(info, pos=None, color=(0, 0, 0)):
     pygame.event.post(pygame.event.Event(POSTMESSAGE,
                       {'info': info, 'pos': pos, 'color': color}))
@@ -97,7 +114,7 @@ def prep_background(resources):
     truebg = pygame.Surface((constants.LEVEL_WIDTH,
                              constants.LEVEL_HEIGHT)).convert()
 
-    bg = pygame.transform.scale2x(bg)
+    # bg = pygame.transform.scale2x(bg)
     truebg.fill((255, 255, 255))
     truebg.blit(bg, (0, 0))
 
@@ -108,40 +125,6 @@ def prep_font(resources):
     font = pygame.font.Font(None, 16)  # 16 pt font
     resources["font"] = font
 
-
-def prep_map(resources):
-    text_map = resources["map1"]
-    assert all([all([isinstance(C, str) for C in row]) for row in text_map])
-
-    translate_chara_table = {
-        " ": (None, None),
-        "B": (Block, None),
-        "P": (Player, None),
-        "E": (Enemy, None)
-    }
-
-    entities = []
-    blocks = []
-    enemies = []
-    player = None
-    for y, row in enumerate(text_map):
-        for x, chara in enumerate(row):
-            e = list(translate_chara_table[chara])
-            if e[0] is not None:
-                e[1] = (x * 16, constants.LEVEL_HEIGHT - y * 16)
-                if e[0] is not Player:
-                    entity = e[0](e[1])
-                else:
-                    player = e[1]
-            else:
-                continue
-            if isinstance(entity, Enemy):
-                enemies.append(entity)
-                entities.append(entity)
-            elif isinstance(entity, Block):
-                blocks.append(entity)
-                entities.append(entity)
-    return player, blocks, enemies, entities
 
 offset = 0
 text_to_render = []
@@ -166,6 +149,95 @@ def clear_text_buffer():
     global text_to_render
     offset = 0
     text_to_render = []
+
+
+class Camera(object):
+    def __init__(self, camera_func, width, height):
+        self.camera_func = camera_func
+        self.state = Rect(0, 0, width, height)
+
+    def apply(self, target):
+        if isinstance(target, pygame.Rect):
+            rect = target
+            topleft = rect.topleft
+            w, h = rect.size
+        elif isinstance(target, pygame.Surface):
+            rect = target.get_rect()
+            topleft = rect.topleft
+            w, h = rect.size
+        elif isinstance(target, (pygame.sprite.Sprite, Object)):
+            rect = target.rect
+            topleft = rect.topleft
+            w, h = rect.size
+        elif isinstance(target, list):
+            topleft = target
+            w, h = 0, 0
+        else:
+            raise ValueError("target is not something that can be 'move'd")
+        vector = (Vector(l=topleft) - Vector(l=self.state.topleft)).components
+        rect = pygame.Rect(vector, (w, h))
+        return rect
+
+    def update(self, target):
+        self.camera_func(self.state, target)
+        outputInfo("state topleft = {}".format(self.state.topleft))
+        outputInfo("adjusted = {}".format(Vector(l=self.state.center)-Vector(l=self.state.size)//2))
+        # assert self.state.topleft == (Vector(l=self.state.center) - Vector(l=self.state.size)).components
+
+
+def simple_camera(camera, target_rect):
+    # l, t, w, h = target_rect
+    # _, _, W, H = camera
+    camera.center = target_rect.center
+    # return Rect(-(l+w//2)+W//2, -(t+h//2)+H//2, W, H)
+
+
+def complex_camera(camera, target_rect):
+    l, t, _, _ = target_rect
+    _, _, w, h = camera
+    l, t = -l+constants.LEVEL_WIDTH//2, -t+constants.LEVEL_HEIGHT//2
+
+    l = min(0, l)                                        # stop scrolling at the left edge
+    l = max(-(camera.width-constants.LEVEL_WIDTH), l)    # stop scrolling at the right edge
+    t = max(-(camera.height-constants.LEVEL_HEIGHT), t)  # stop scrolling at the bottom
+    t = min(0, t)
+    return Rect(l, t, w, h)
+
+
+def prep_map(resources):
+    text_map = resources["map1"]
+    assert all([all([isinstance(C, str) for C in row]) for row in text_map])
+
+    translate_chara_table = {
+        " ": (None, None),
+        "B": (Block, None),
+        "P": (Player, None),
+        "E": (Enemy, None)
+    }
+
+    entities = []
+    blocks = []
+    enemies = []
+    player = None
+    scale = constants.SCALE
+    for y, row in enumerate(text_map):
+        for x, chara in enumerate(row):
+            e = list(translate_chara_table[chara])
+            if e[0] is not None:
+                e[1] = (x * scale, constants.LEVEL_HEIGHT - y * scale)
+                if e[0] is not Player:
+                    entity = e[0](e[1])
+                else:
+                    player = e[1]
+            else:
+                continue
+            if isinstance(entity, Enemy):
+                enemies.append(entity)
+                entities.append(entity)
+            elif isinstance(entity, Block):
+                blocks.append(entity)
+                entities.append(entity)
+    return player, blocks, enemies, entities
 
 
 class ScreenLocator(object):
@@ -209,11 +281,12 @@ class PlayerEventHandler(EventHandler):
 
         @Reaction
         def jump(**kwargs):
-            # kindof direct, huh.
+            # kinda direct, huh.
             self.obj["physics"].vector[1] = 0
+            self.logger.debug("reaction jump called")
             return {"dv": [0, constants.JUMPSPEED]}
 
-        self.add_tap("jump", "kick", jump)
+        self.add_tap("up", "kick", jump)
 
         # Reaction
         # def left(**kwargs):
@@ -296,59 +369,6 @@ class Block(Object, pygame.sprite.Sprite):
         pass
 
 
-class Camera(object):
-    def __init__(self, camera_func, width, height):
-        self.camera_func = camera_func
-        self.state = Rect(0, 0, width, height)
-
-    def apply(self, target):
-        if isinstance(target, pygame.Rect):
-            rect = target
-            topleft = rect.topleft
-            w, h = rect.size
-        elif isinstance(target, pygame.Surface):
-            rect = target.get_rect()
-            topleft = rect.topleft
-            w, h = rect.size
-        elif isinstance(target, (pygame.sprite.Sprite, Object)):
-            rect = target.rect
-            topleft = rect.topleft
-            w, h = rect.size
-        elif isinstance(target, list):
-            topleft = target
-            w, h = 0, 0
-        else:
-            raise ValueError("target is not something that can be 'move'd")
-        vector = (Vector(l=topleft) - Vector(l=self.state.topleft)).components
-        rect = pygame.Rect(vector, (w, h))
-        return rect
-
-    def update(self, target):
-        self.camera_func(self.state, target)
-        outputInfo("state topleft = {}".format(self.state.topleft))
-        outputInfo("adjusted = {}".format(Vector(l=self.state.center)-Vector(l=self.state.size)//2))
-        # assert self.state.topleft == (Vector(l=self.state.center) - Vector(l=self.state.size)).components
-
-
-def simple_camera(camera, target_rect):
-    # l, t, w, h = target_rect
-    # _, _, W, H = camera
-    camera.center = target_rect.center
-    # return Rect(-(l+w//2)+W//2, -(t+h//2)+H//2, W, H)
-
-
-def complex_camera(camera, target_rect):
-    l, t, _, _ = target_rect
-    _, _, w, h = camera
-    l, t = -l+constants.LEVEL_WIDTH//2, -t+constants.LEVEL_HEIGHT//2
-
-    l = min(0, l)                                        # stop scrolling at the left edge
-    l = max(-(camera.width-constants.LEVEL_WIDTH), l)    # stop scrolling at the right edge
-    t = max(-(camera.height-constants.LEVEL_HEIGHT), t)  # stop scrolling at the bottom
-    t = min(0, t)
-    return Rect(l, t, w, h)
-
-
 def main():
     do_prep()
     dt = 1000/constants.FRAMERATE
@@ -418,6 +438,7 @@ def main():
             render_text("player rect topleft = {}".format(player.rect.topleft))
             render_text("transformed = {}".format(camera.apply(player.rect)))
             render_text("bg topleft transformed = {}".format(camera.apply(screenrect)))
+            render_text("framerate: {}".format(round(1000/dt,1)))
 
             screen.fill((255, 255, 255))
 
@@ -444,18 +465,19 @@ def main():
             pygame.display.update()
 
             dt = clock.tick(constants.FRAMERATE)
-            if dt > 16:
-                dt = 16
 
             clear_text_buffer()
             logging.debug("at bottom of main loop\n")
     except:
         raise
     finally:
-        logging.debug("------------------------------------------")
-        logging.debug("start of dumpstate")
+        logging.debug("--------------------------------------------------------------------------------")
+        logging.debug("START OF DUMPSTATE")
         for sprite in iter(All):
-            sprite.dumpstate()
+            try:
+                sprite.dumpstate()
+            except:
+                pass
 
 if __name__ == '__main__':
     try:

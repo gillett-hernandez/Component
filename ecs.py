@@ -32,10 +32,22 @@ C.SCREEN = pygame.Rect((0, 0), (640, 480))
 C.PHYSICS = 'PHYSICS'
 C.INPUT = 'INPUT'
 C.SPRITE = 'SPRITE'
+C.keybinding = "keyconfig.json"
+C.blocksize = 16
 
 print(C.G)
 
-systems = []
+ENTITY_COUNT = 1000
+COMPONENT_NONE          = 0
+COMPONENT_POSITION      = 1 << 0
+COMPONENT_PHYSICS       = 1 << 1
+COMPONENT_INPUT         = 1 << 2
+COMPONENT_SPRITE        = 1 << 3
+COMPONENT_LAYEREDSPRITE = 1 << 4
+
+class EntityAllocationError(Exception):
+    def __init__(self, msg):
+        super(EntityAllocationError, self).__init__(msg)
 
 
 class Sprite(pygame.sprite.DirtySprite):
@@ -43,28 +55,51 @@ class Sprite(pygame.sprite.DirtySprite):
         self.image = pygame.Surface(size)
         self.rect = self.image.get_rect().move(pos)
 
-
 class Entity(object):
-    def __init__(self):
-        self.components = {}
+    __slots__ = ["id"]
+    def __init__(self, e_id, mask):
+        self.id = e_id
+        World.mask[self.id] = mask
 
-    def get_component(self, name):
-        return self.components[name]
+    @staticmethod
+    def static_get_component(e_id, cname):
+        return World.components[cname][e_id]
+
+    def get_component(self, cname):
+        return self.static_get_component(self.id, cname)
+
+    @staticmethod
+    def static_set_component(e_id, cname, component):
+        assert component.id == e_id, (e_id, cname, component)
+        World.components[cname][e_id] = component
+
+    def set_component(self, cname, component):
+        self.static_set_component(self.id, cname, component)
+
+    @classmethod
+    def makeEntity(cls):
+        for entity in range(ENTITY_COUNT):
+            if World.mask[entity] == COMPONENT_NONE:
+                return entity
+        else:
+            raise EntityAllocationError()
 
 
 class Component(object):
-    def __init__(self, obj):
-        self.system.add_component(self)
-        self.obj = obj
+    __slots__ = ["id"]
+    def __init__(self, id, **data):
+        self.id = id
+        for k, v in data.items():
+            setattr(self, k, v)
 
 
 class System(object):
-    def __init__(self):
-        systems.append(self)
-        self.components = []
-
-    def add_component(self, component):
-        self.components.append(component)
+    @classmethod
+    def update(cls):
+        for entity in range(ENTITY_COUNT):
+            if (World.mask[entity] & cls.mask == cls.mask):
+                # quick wrapper for convenience
+                cls.c_update(Entity(entity, World.mask[entity]))
 
 
 class _EventSystem(System):
@@ -79,117 +114,169 @@ class _EventSystem(System):
         pass
 
 
+class PositionSystem(System):
+    mask = COMPONENT_POSITION
+
+    @staticmethod
+    def c_update(entity):
+        pass
+
+
 class PhysicsSystem(System):
     events = ['update'] # type: List[str]
+    mask = COMPONENT_POSITION | COMPONENT_PHYSICS
 
-    def __init__(self):
-        super(PhysicsSystem, self).__init__()
-        # PhysicsSystem.events
-
-    # still called self because it will be called on components so its useful to have the "self" mindset
     @staticmethod
-    def update(self, **kwargs):
-        self.pos[1] += 1
+    def c_update(entity):
+        p = entity.get_component("position")
+        v = entity.get_component("physics")
 
-    def add(self, component):
-        self.components.append(component)
+        v.y -= v.grav
+
+        p.x += v.x
+        p.y += v.y
 
 
 class InputSystem(System):
     events = [] # type: List[str]
+    mask = COMPONENT_INPUT
+    queue = []
 
-    def __init__(self):
-        super(InputSystem, self).__init__()
-        InputSystem.events
+    @staticmethod
+    def c_update(entity):
+        pass
 
 
 class SpriteSystem(System):
     events = ['update'] # type: List[str]
-
-    def __init__(self):
-        super(SpriteSystem, self).__init__()
-        SpriteSystem.events
+    mask = COMPONENT_SPRITE | COMPONENT_POSITION
 
     @staticmethod
-    def update(self, **kwargs):
-        self.rect.topleft = self.physics.pos
+    def c_update(entity):
+        s = entity.get_component("sprite")
+        p = entity.get_component("position")
+        s.rect.topleft = p.pos
+
+    @staticmethod
+    def c_draw(entity, surface):
+        s = entity.get_component("sprite")
+        p = entity.get_component("position")
+        surface.blit(s.image, (p.x, p.y))
 
 
-class PhysicsComponent(Component):
+class LayeredSpriteSystem(SpriteSystem):
+    events = ["update"]
+    mask = COMPONENT_LAYEREDSPRITE | COMPONENT_POSITION
 
-    system = PhysicsSystem()
+    @staticmethod
+    def c_update(entity):
+        # component keeps the same internal name "sprite"
+        # but has multiple layers
+        s = entity.get_component("sprite")
+        p = entity.get_component("position")
+        # update each layer individually
+        for layer in s.layers:
+            layer.rect.topleft = (p.x, p.y)
 
-    def __init__(self, obj, pos):
-        super(PhysicsComponent, self).__init__(obj)
-        self.pos = list(pos)
-        PhysicsComponent.system.add(self)
+    @staticmethod
+    def c_draw(entity, surface):
+        s = entity.get_component("sprite")
+        p = entity.get_component("position")
+        # draw each layer individually
+        for layer in s.layers:
+            assert hasattr(layer, "image")
+            surface.blit(layer.image, layer.rect)
 
-
-class InputController(Component):
-
-    system = InputSystem()
-
-    def __init__(self, obj):
-        super(InputController, self).__init__(obj)
-
-
-class SpriteComponent(Component):
-
-    system = SpriteSystem()
-
-    def __init__(self, obj):
-        super(SpriteComponent, self).__init__(obj)
-        self.physics = self.obj.get_component(C.PHYSICS)
-
-        # Create an image of the block, and fill it with a color.
-        # This could also be an image loaded from the disk.
-
-        self.chunks = []
-
-        # Fetch the rectangle object that has the dimensions of the image
-        # Update the position of this object by setting the values of rect.x and rect.y
-
-        self.rect = pygame.Rect((0,0),(0,0))
-
-    def set_type(self, type):
+    @staticmethod
+    def set_type(entity, type):
+        s = entity.get_component("sprite")
         grid = get_grid_for(type)
         color = get_color_for(type)
         for y in range(4):
             for x in range(4):
                 if grid[y][x]:
-                    image = pygame.Surface([16, 16])
+                    image = pygame.Surface([C.blocksize, C.blocksize])
                     image.fill(color)
                     rect = pygame.image.get_rect()
                     rect.topleft = (x, y)
                     sprite = pygame.Sprite(image, rect)
-                    self.chunks.append(sprite)
+                    s.layers.append(sprite)
 
-    def blit(self, surface):
-        for sprite in self.chunks:
-            surface.blit(sprite.image, sprite.rect)
 
+class World(object):
+    mask = [0]*ENTITY_COUNT
+    components = {
+        "position": [None]*ENTITY_COUNT,
+        "physics": [None]*ENTITY_COUNT,
+        "sprite": [None]*ENTITY_COUNT,
+        "lsprite": [None]*ENTITY_COUNT
+    }
+    systems = {
+        "position": PositionSystem,
+        "physics": PhysicsSystem,
+        "sprite": SpriteSystem,
+        "lsprite": LayeredSpriteSystem
+    }
+
+
+
+grid_cache={}
+def get_grid_for(type):
+    pass
+
+
+color_cache = {}
+def get_color_for(type):
+    pass
+
+
+class PositionComponent(Component):
+    __slots__ = ["x", "y"]
+    @property
+    def pos(self):
+        return [self.x, self.y]
+
+    @pos.setter
+    def pos(self, value):
+        self.x, self.y = value
+
+
+class PhysicsComponent(Component):
+    __slots__ = ["x", "y", "grav"]
+    def __init__(self, id, **data):
+        super().__init__(id, **data, x=0, y=0, grav=0.1)
+
+
+class InputController(Component):
+    __slots__ = ["keybinding"]
+    def __init__(self, id, **data):
+        super(InputController, self).__init__(id, **data)
+        with open(C.keybinding, 'r') as fd:
+            self.keybinding = json.load(fd.read())
+
+
+class SpriteComponent(Component):
+    __slots__ = ["image", "rect"]
+    def __init__(self, id, pos, playersize, color, **data):
+        super().__init__(id, **data)
+        self.image = pygame.Surface(playersize)
+        self.image.fill(color)
+        self.rect = self.image.get_rect()
+        self.rect.topleft = pos
+
+
+class LayeredSpriteComponent(Component):
+    __slots__ = ["layers"]
 
 
 class Player(Entity):
+    __slots__ = []
     def __init__(self, pos):
-        super(Player, self).__init__()
-        self.components[C.PHYSICS] = PhysicsComponent(self, pos)
-        self.components[C.INPUT] = InputController(self)
-        self.components[C.SPRITE] = SpriteComponent(self)
-
-    def __getattr__(self, name):
-        candidates = []
-        for component in self.components.values():
-            try:
-                candidates.append(getattr(component, name))
-            except AttributeError:
-                pass
-        for candidate in candidates:
-            if candidate is None:
-                candidates.remove(candidate)
-        if len(candidates) < 1:
-            raise AttributeError(name)
-        return candidates[0]
+        e_id = self.makeEntity()
+        super(Player, self).__init__(e_id, COMPONENT_POSITION | COMPONENT_SPRITE | COMPONENT_PHYSICS)
+        self.set_component("position", PositionComponent(e_id, pos=pos))
+        self.set_component("physics", PhysicsComponent(e_id))
+        self.set_component("sprite", SpriteComponent(e_id, pos=pos, playersize=[16,32], color=(128,128,128)))
 
 
 if __name__ == '__main__':
@@ -215,13 +302,14 @@ if __name__ == '__main__':
                     sys.exit()
                     pygame.quit()
 
-        for system in systems:
+        screen.blit(bg.image, bg.rect)
+        World.systems["sprite"].c_draw(player, screen)
+        for _,system in World.systems.items():
             update = getattr(system, "update", False)
             if update is not False:
-                for component in system.components:
-                    update(component)
-        screen.blit(bg.image, bg.rect)
-        screen.blit(player.image, player.rect)
+                update()
+            else:
+                print("system {} did not have a update method".format(system))
         pygame.display.flip()
         dt = clock.tick(60)
     pygame.quit()

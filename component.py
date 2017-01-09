@@ -116,13 +116,14 @@ class Component(object):
         func = None
         try:
             assert event.data is not None
+            assert isinstance(event.keyword, str)
             if event.keyword not in self.callbacks:
                 return
-            if event.keyword is not "update":
-                self.logger.debug("dispatching event {event!r}".format(event=event))
+            self.logger.debug("dispatching event {event!r}".format(event=event))
             if len(self.callbacks[event.keyword]) == 0:
                 return -1
             for func in self.callbacks[event.keyword].values():
+                assert callable(func)
                 func(**event.data)
         except AttributeError as e:
             print(event, event.data, func)
@@ -197,6 +198,7 @@ class Object(object):
         c = 0
         self.logger.debug("dispatching event {event!r}".format(event=event))
         for component in list(self.components.values()):
+            self.logger.debug("dispatching event through {}".format(component))
             returnv = component.dispatch_event(event)
             if returnv == -1:
                 c += 1
@@ -208,11 +210,13 @@ class Object(object):
         self[name].remove_events()
         del self[name]
 
-    def notify(self, keyword, *args, **kwargs):
-        if isinstance(keyword, Event):
+    def notify(self, event, *args, **kwargs):
+        if not isinstance(event, str):
             self.logger.debug("notify called with deprecated function arguments")
-            self.dispatch_event(keyword)
-        self.dispatch_event(Event(keyword, kwargs))
+            self.dispatch_event(event)
+            return
+        assert isinstance(event, str), event
+        self.dispatch_event(Event(event, kwargs))
 
     def dumpstate(self):
         # components
