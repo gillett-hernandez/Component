@@ -2,8 +2,8 @@
  * @File Name: ecs.d
  * @Author: Copyright (c) 2017-01-07 17:07:54 gilletthernandez
  * @Date:   2017-01-07 17:07:54
- * @Last Modified by:   gilletthernandez
- * @Last Modified time: 2017-01-11 13:53:13
+ * @Last Modified by:   Gillett Hernandez
+ * @Last Modified time: 2017-01-12 13:59:38
  */
 import std.stdio;
 import std.math;
@@ -13,7 +13,7 @@ import std.math;
 //class SpriteComponent;
 //class EventComponent;
 
-static immutable int SYSTEM_COUNT       =      1;
+static immutable int SYSTEM_COUNT       =      2;
 static immutable int ENTITY_COUNT       =    100;
 
 static immutable int COMPONENT_NONE     =      0;
@@ -30,6 +30,7 @@ template components(string name) {
     const char[] components = "world." ~ name;
 }
 
+
 auto get_component(string name)(int id) {
     return &mixin(components!name)[id];
 }
@@ -41,7 +42,7 @@ struct World {
     int[ENTITY_COUNT] mask;
 
     PositionComponent[ENTITY_COUNT] position;
-    //PhysicsComponent[ENTITY_COUNT] physics;
+    PhysicsComponent[ENTITY_COUNT] physics;
     //SpriteComponent[ENTITY_COUNT] sprite;
     //EventComponent[ENTITY_COUNT] event;
     void update() {
@@ -113,32 +114,70 @@ class System{
 
 struct PositionComponent{
     int id;
-    real[2] pos;
+    real x;
+    real y;
     this(int _id, real[2] _pos) {
         id = _id;
         pos = _pos;
     }
+    @property real[2] pos() { return [x, y]; }
+    @property real[2] pos(real[2] val) { x = val[0]; y=val[1]; return val; }
+}
+
+struct PhysicsComponent {
+    int id;
+    real x;
+    real y;
+    real grav;
+    this(int _id, real[2] _v, real _grav){
+        id = _id;
+        v = _v;
+        grav = _grav;
+    }
+    @property real[2] v() { return [x, y]; }
+    @property real[2] v(real[2] val) { x = val[0]; y=val[1]; return val; }
 }
 
 class PositionSystem : System{
+    static int mask = COMPONENT_POSITION;
     static void c_update(int entity) {
-        writeln("in c_update in PositionSystem", "");
+        writeln("in c_update in PositionSystem");
         PositionComponent* p = &world.position[entity];
-        writeln("after get in PositionSystem", (*p).id);
-        p.pos[0] = round(p.pos[0]);
-        p.pos[1] = round(p.pos[1]);
+        writeln("after get in PositionSystem", p.id);
+        p.x = round(p.x);
+        p.y = round(p.y);
         writeln("after round in PositionSystem");
     }
 }
 
+/**
+ * PhysicsSystem
+ */
+class PhysicsSystem : System{
+    static int mask = COMPONENT_PHYSICS;
+    static void c_update(int entity) {
+        writeln("in c_update in PhysicsSystem");
+        auto p = &world.position[entity];
+        auto v = &world.physics[entity];
+        writeln(world.mask[entity], " ", entity, " ", p.id, " ", v.id);
+        assert(p.id == entity);
+        assert(v.id == entity);
+        v.y -= v.grav/2;
+        p.y += v.y;
+        v.y -= v.grav/2;
+        p.x += v.x;
+    }
+}
+
 class Player : Entity {
+    static immutable mask = COMPONENT_EVENT
+                           |COMPONENT_SPRITE
+                           |COMPONENT_PHYSICS
+                           |COMPONENT_POSITION;
     this() {
-        auto mask = COMPONENT_EVENT
-                   |COMPONENT_SPRITE
-                   |COMPONENT_PHYSICS
-                   |COMPONENT_POSITION;
         super(mask);
         this.set_component!"position"(PositionComponent(this.id, [100.1,100.1]));
+        this.set_component!"physics"(PhysicsComponent(this.id, [0,0], 3));
     }
 }
 
@@ -148,6 +187,9 @@ void main(){
     Entity.provide(&world);
     System.provide(&world);
     world.systems[0] = &System.update!PositionSystem;
+    world.systems[1] = &System.update!PhysicsSystem;
+    //world.systems[2] = &System.update!EventSystem;
+    //world.systems[0] = &System.update!SpriteSystem;
     auto player = new Player();
     writeln(player.get_component!"position".pos);
     world.update();
