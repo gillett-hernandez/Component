@@ -39,9 +39,8 @@ def load_stuff(modulename):
         keyconfig = DotDict(json.load(fd))
 
     logging.basicConfig(**constants.logging_setup)
-
-print(versionnumber.render_version(__file__))
-logging.info(versionnumber.render_version(__file__))
+    print(versionnumber.render_version(__file__))
+    logging.info(versionnumber.render_version(__file__))
 
 def void(*args, **kwargs):
     return

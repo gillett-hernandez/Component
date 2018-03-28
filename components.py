@@ -20,12 +20,11 @@ def load_stuff(modulename):
         keyconfig = DotDict(json.load(fd))
 
     logging.basicConfig(**constants.logging_setup)
+    print(versionnumber.render_version(__file__))
+    logging.info(versionnumber.render_version(__file__))
 
-# logging.basicConfig(**constants.logging_setup)
 
 
-print(versionnumber.render_version(__file__))
-logging.info(versionnumber.render_version(__file__))
 
 class EventHandler(Component):
     """Handles events. A collection of reactions"""
