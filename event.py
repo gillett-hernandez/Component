@@ -6,6 +6,7 @@ logging.basicConfig(**constants.logging_setup)
 
 
 class Event:
+    __slots__ = ["keyword", "data"]
     def __init__(self, keyword, data):
         self.keyword = keyword
         self.data = data

@@ -5,10 +5,14 @@ import os
 import logging
 import math
 
-from component import *
+from ..component import load_stuff
+load_stuff(__file__)
+from ..component import *
+from ..components import *
 # import sound
-import kwargsGroup
-from animation import SpriteComponent
+import Component.kwargsGroup as kwargsGroup
+from ..animation import SpriteComponent
+import Component.versionnumber as versionnumber
 
 import pygame
 from pygame.locals import *
@@ -48,14 +52,15 @@ def translate_event(event):
 
 def load_basic_resources(resources):
     """loads basic resources into ram"""
-    with open("json/resources.json", 'r') as fd:
+    path, base, ext = versionnumber.split(__file__)
+    with open(os.path.join(path,"json","resources.json"), 'r') as fd:
         _resources = DotDict(json.load(fd))
     for name, data in _resources.items():
         if data["type"] == constants.IMAGE:
-            with open(data["path"], 'rb') as fd:
+            with open(data["path"].replace(".",path,1), 'rb') as fd:
                 resources[name] = pygame.image.load(fd)
         elif data["type"] in [constants.SFX, constants.MUSIC]:
-            with open(data["path"], 'rb') as fd:
+            with open(data["path"].replace(".",path,1), 'rb') as fd:
                 resources[name] = sound.load(fd)
 
 
@@ -66,6 +71,8 @@ def get_resource(name):
 
 def do_prep():
     pygame.init()
+    print(versionnumber.render_version(__file__))
+    logging.info(versionnumber.render_version(__file__))
     global resources
     load_basic_resources(resources)
     prep_screen(resources)
@@ -185,6 +192,99 @@ class ScreenLocator(object):
 #         self.attach_component('physics', PhysicsComponent, vector)
 #         self.attach_component('sprite', SimpleSprite)
 
+class PlayerPhysicsComponent(PhysicsComponent):
+    def __init__(self, obj, **kwargs):
+        super(PlayerPhysicsComponent, self).__init__(obj)
+
+    def bounce_horizontal(self):
+        self.vector[0] *= -1
+
+    def bounce_vertical(self):
+        self.vector[1] *= -1
+
+    def outside_vertical(self, side="UP"):
+        dir = self.dir
+        value = constants.EJECT_TURN_SPEED
+        flag = ["DOWN","UP"].index(side.upper())
+        self.change_gravity((2*flag-1)*constants.GRAVITY*3)
+        # four cases
+        # aimed left and high, aimed right and high
+        # aimed left and low, aimed right and low
+        cos = math.cos(math.radians(dir))
+        if flag: # if up
+            if cos < -0.1:
+                self.obj.dispatch_event(Event("turn", {"d0":value}))
+            elif cos > 0.1:
+                self.obj.dispatch_event(Event("turn", {"d0":-value}))
+        else: # if down
+            if cos < -0.1:
+                self.obj.dispatch_event(Event("turn", {"d0":-value}))
+            elif cos > 0.1:
+                self.obj.dispatch_event(Event("turn", {"d0":value}))
+
+    def outside_horizontal(self):
+        # self.p.reset()
+        # self.vector = Vector(0, 0)
+        self.bounce_horizontal()
+
+    def update(self, **kwargs):
+        logging.debug("top of physics update call")
+        dt = kwargs['dt']
+        x, y = self.p.pos
+        # logging.debug("physics xy: {}".format((x, y)))
+        # logging.debug("gravity   : {}".format(self.gravity))
+        # logging.debug("vector    : {}".format(self.vector))
+        # logging.debug("dir       : {}".format(self.dir))
+        self.obj.render_text("x, y = ({:3.1f}, {:3.1f})".format(x, y))
+        self.obj.render_text("gravity = {0.gravity}".format(self))
+        self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
+        self.obj.render_text("direction = {0.dir}".format(self))
+        if y-32 < constants.WATER_LEVEL:
+            # print("outside bottom")
+            self.outside_vertical(side="DOWN")
+        elif y-32 > constants.LEVEL_HEIGHT:
+            # print("outside top")
+            self.outside_vertical(side="UP")
+        else:
+            if not self.obj.accelerating:
+                self.change_gravity()
+            else:
+                self.change_gravity(constants.FLIGHTGRAVITY)
+
+        # if self is outside screen side barriers
+        if not (0 < x+32 < constants.LEVEL_WIDTH):
+            self.outside_horizontal()
+
+        if not self.weightless:
+            # self.kick(dv=Vector(0, -self.gravity), restrict_velocity=False)
+            self.kick(dv=Vector(0, -self.gravity))
+
+        if not self.vector.is_zero_vector():
+            self.move(dr=(self.vector * dt/1000.))
+        # on ground code should not go here.
+        # if not self.place_free(x, y+1) and self.place_free(x, y):
+            # self.on_ground = True
+        # else:
+            # self.on_ground = False
+
+        # if pygame.Rect(self.obj.rect, topleft=(self.p.x, self.p.y+1)).collidelist([s.rect for s in self.nearby]):
+            # self.on_ground = True
+        # else:
+            # self.on_ground = False
+
+        # raise NotImplementedError
+        # self.obj.on_ground = whether your feet are touching the ground
+
+        if not self.frictionless:
+            self.vector[0] -= self.vector[0]*constants.friction
+            self.vector[1] -= self.vector[1]*constants.friction
+        self.vector[0] = round(self.vector[0], 9)
+        self.vector[1] = round(self.vector[1], 9)
+        # only restrict when accellerating due to key input,
+        # and dont set it to maxspeed, but instead, don't apply the speed
+        logging.debug("bottom of physics update call")
+
+
 
 class PlayerEventHandler(EventHandler):
     def __init__(self, obj):
@@ -207,7 +307,7 @@ class PlayerEventHandler(EventHandler):
             self.obj.dispatch_event(Event("change_gravity", {}))
             self.obj.accelerating = False
 
-        self.add_hold("accelerate", "accel", accel)
+        self.add_hold(hear="accelerate", react="accel", callback=accel)
 
         @Reaction
         def turnleft(**kwargs):
@@ -215,19 +315,24 @@ class PlayerEventHandler(EventHandler):
                 return {"d0": constants.accelturnspeed}
             return {"d0": constants.turnspeed}
         # print(turnleft.start)
-        self.add_hold("left", "turn", turnleft)
+        self.add_hold(hear="left", react="turn", callback=turnleft)
 
         @Reaction
         def turnright(**kwargs):
             if self.obj.accelerating:
                 return {"d0": -constants.accelturnspeed}
             return {"d0": -constants.turnspeed}
-        self.add_hold("right", "turn", turnright)
+        self.add_hold(hear="right", react="turn", callback=turnright)
 
         @Reaction
         def shoot(**kwargs):
             return {"dv": constants.bulletspeed}
-        self.add_hold("fire", "shoot", shoot)
+        self.add_hold(hear="fire", react="shoot", callback=shoot)
+
+        @Reaction
+        def reset(**kwargs):
+            return {"x":constants.LEVEL_WIDTH//2, "y":constants.LEVEL_HEIGHT//2, "vx":0, "vy":0}
+        self.add_tap(hear="space", react="reset", callback=reset)
 
 
 class Player(Object, pygame.sprite.Sprite):
@@ -236,7 +341,7 @@ class Player(Object, pygame.sprite.Sprite):
     def __init__(self, pos):
         super(Player, self).__init__()
         self.attach_component('position', PositionComponent, pos)
-        self.attach_component('physics', PhysicsComponent)
+        self.attach_component('physics', PlayerPhysicsComponent)
         self.attach_component('input', InputController)
         self.attach_component('handler', PlayerEventHandler)
         self.attach_component('sprite', SpriteComponent, get_resource("playerimage"), 64, 64)
@@ -446,16 +551,16 @@ def main():
             clear_text_buffer()
             logging.debug("at bottom of main loop\n")
     except:
-        raise
-    finally:
         logging.debug("------------------------------------------")
         logging.debug("start of dumpstate")
         for sprite in iter(All):
             sprite.dumpstate()
+        raise
 
 if __name__ == '__main__':
     try:
         main()
     finally:
+        versionnumber.increment(__file__)
         logging.info("END\n")
         pygame.quit()

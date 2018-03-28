@@ -45,3 +45,6 @@ nosetests.xml
 
 #windows specific
 Thumbs.db
+
+#Mac specific
+.DS_Store

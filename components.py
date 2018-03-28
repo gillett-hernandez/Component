@@ -4,11 +4,28 @@ import logging
 
 from component import Component, Event, constants, keyconfig
 from vector import Vector
+import versionnumber
 
 import pygame
 
-logging.basicConfig(**constants.logging_setup)
+def load_stuff(modulename):
+    print("got called")
+    global constants
+    global keyconfig
+    base, name, ext = versionnumber.split(modulename)
+    with open(os.path.join(base, "json", "constants.json"), 'r') as fd:
+        constants = DotDict(json.load(fd))
 
+    with open(os.path.join(base, "json", "keyconfig.json"), 'r') as fd:
+        keyconfig = DotDict(json.load(fd))
+
+    logging.basicConfig(**constants.logging_setup)
+
+# logging.basicConfig(**constants.logging_setup)
+
+
+print(versionnumber.render_version(__file__))
+logging.info(versionnumber.render_version(__file__))
 
 class EventHandler(Component):
     """Handles events. A collection of reactions"""
@@ -18,16 +35,29 @@ class EventHandler(Component):
 
         # obj.attach_event('update', self.update)
 
-    def add_tap(self, hear, react, func):
+    def add_tap(self, hear, react, callback):
+        if isinstance(callback, Reaction):
+            assert callback.start == Reaction.void, callback.start
+            assert callback.end == Reaction.void, callback.end
+            callback = callback.hold
+        assert callable(callback)
         def reaction(**kwargs):
             if kwargs['press'] is True:
 
-                self.obj.dispatch_event(Event(react, func(**kwargs)))
+                self.obj.dispatch_event(Event(react, callback(**kwargs)))
                 return
 
         self.attach_event(hear, reaction)
 
-    def add_hold(self, hear, react, reaction):
+    def add_hold(self, hear, react, callback):
+        if isinstance(callback, Reaction):
+            start = callback.start
+            hold = callback.hold
+            end = callback.end
+        else:
+            start = Reaction.void
+            end = Reaction.void
+            hold = callback
         def holdreaction(**kwargs):
             pressed = kwargs['press']
             logging.debug("reaction with pressed as {pressed}".format(
@@ -37,17 +67,17 @@ class EventHandler(Component):
                 logging.debug(
                     "reaction if branch right before attach_component")
                 # print(reaction)
-                reaction.start(**kwargs)
+                start(**kwargs)
                 # timing for a hold reaction goes here
                 self.obj.attach_component(
                     "{hear}_{react}_repeater".format(hear=hear, react=react),
-                    Repeater, react, 1, reaction.hold
+                    Repeater, react, 1, hold
                 )
             else:
 
                 logging.debug(
                     "reaction else branch right before detach_component")
-                reaction.end(**kwargs)
+                end(**kwargs)
                 self.obj.detach_component(
                     "{hear}_{react}_repeater".format(hear=hear, react=react))
         holdreaction.__name__ = "{hear}_{react}_repeater".format(hear=hear, react=react)
@@ -81,7 +111,8 @@ class Reaction(object):
         self.start = self.void
         self.end = self.void
 
-    def void(self, *args, **kwargs):
+    @staticmethod
+    def void(*args, **kwargs):
         pass
 
     def defhold(self, f):
@@ -223,6 +254,11 @@ class PhysicsComponent(Component):
         self.attach_event('accel', self.accel)
         self.attach_event('toggle_gravity', self.toggle_gravity)
         self.attach_event('change_gravity', self.change_gravity)
+        self.attach_event('reset', self.reset)
+
+    def reset(self, x, y, vx, vy):
+        self.p.pos = Vector(x,y)
+        self.vector = Vector(vx,vy)
 
     def collidelist(self, **kwargs):
         slist = kwargs['spritelist']
@@ -279,20 +315,14 @@ class PhysicsComponent(Component):
         if dir is None:
             dir = self.dir
 
-        # direction of 0 degrees has a sin of 1 and a cos of 0
-        # direction of +90 degrees has a sin of 0 and cos of 1
-        # direction of +180 degrees has a sin of -1 and cos of 0
-        # direction of +270 degrees has a sin of 0 and cos of -1
+        # direction of 0 degrees has a sin of 0 and a cos of 1
+        # direction of +90 degrees has a sin of 1 and cos of 0
+        # direction of +180 degrees has a sin of 0 and cos of -1
+        # direction of +270 degrees has a sin of -1 and cos of 0
 
         v = Vector(dv * math.cos(math.radians(self.dir)), dv * math.sin(math.radians(self.dir)))
         logging.debug("accel {}".format(v))
         self.kick(dv=v)
-
-    def bounce_horizontal(self):
-        self.vector[0] *= -1
-
-    def bounce_vertical(self):
-        self.vector[1] *= -1
 
     def toggle_gravity(self):
         self.weightless = not self.weightless
@@ -302,17 +332,6 @@ class PhysicsComponent(Component):
             self.gravity = constants.GRAVITY
         else:
             self.gravity = g
-
-    def outside_top(self):
-        self.change_gravity(constants.GRAVITY*8)
-
-    def outside_bottom(self):
-        # self.p.pos = [self.p.xstart, self.p.ystart]
-        self.change_gravity(-constants.GRAVITY*8)
-
-    def outside_sides(self):
-        self.p.reset()
-        self.vector = Vector(0, 0)
 
     def update(self, **kwargs):
         logging.debug("top of physics update call")
@@ -326,21 +345,6 @@ class PhysicsComponent(Component):
         self.obj.render_text("gravity = {0.gravity}".format(self))
         self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
         self.obj.render_text("direction = {0.dir}".format(self))
-        if y-32 < constants.WATER_LEVEL:
-            # print("outside bottom")
-            self.outside_bottom()
-        elif y-32 > constants.LEVEL_HEIGHT:
-            # print("outside top")
-            self.outside_top()
-        else:
-            if not self.obj.accelerating:
-                self.change_gravity()
-            else:
-                self.change_gravity(constants.FLIGHTGRAVITY)
-
-        # if self is outside screen side barriers
-        if not (0 < x+32 < constants.LEVEL_WIDTH):
-            self.outside_sides()
 
         if not self.weightless:
             # self.kick(dv=Vector(0, -self.gravity), restrict_velocity=False)
