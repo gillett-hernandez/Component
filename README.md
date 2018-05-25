@@ -1,16 +1,19 @@
-Platformer
-==========
-just a game platform engine i'm working on.
+# Component
+just a Component-based game engine.
+Example usage: `python2 -m Component.lfclone.lfclone`
 
-the important things are in:
-* component.py
-* components.py
 
-but to run lfclone.py you need:
-* animation.py
-* lf_constants.json
-* lf_keyconfig.json
-* vector.py
-and obviously, lfclone.py
+Most of the implementation of the engine is contained in:
+* `component.py`
+* `components.py`
 
-go to the wiki for the documentation
+but the example usage of that engine is within `lfclone.py`
+to run `lfclone.py` you'll need:
+* `animation.py`
+* `constants.json`
+* `keyconfig.json`
+* `vector.py`
+
+as well
+
+go to the [wiki|https://github.com/gillett-hernandez/Component/wiki] for the documentation
