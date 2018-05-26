@@ -16,4 +16,5 @@ to run `lfclone.py` you'll need:
 
 as well
 
-go to the [wiki|https://github.com/gillett-hernandez/Component/wiki] for the documentation
+go to the [wiki](https://github.com/gillett-hernandez/Component/wiki) for the documentation
+
