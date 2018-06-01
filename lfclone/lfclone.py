@@ -559,8 +559,11 @@ def main():
 
 if __name__ == '__main__':
     try:
+        if len(sys.argv) > 1:
+            print(sys.argv[1])
+            # debug = bool(sys.argv[1])
         main()
     finally:
-        versionnumber.increment(__file__)
+        # versionnumber.increment(__file__)
         logging.info("END\n")
         pygame.quit()
