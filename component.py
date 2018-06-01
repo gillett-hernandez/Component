@@ -7,6 +7,7 @@ import os
 import pygame
 import pygame.locals
 
+import versionnumber
 from vector import Vector
 
 
@@ -23,14 +24,23 @@ class DotDict:
     def items(self):
         return self.__dict__.items()
 
-with open(os.path.join("json", "lf_constants.json"), 'r') as fd:
-    constants = DotDict(json.load(fd))
+constants = None
+keyconfig = None
 
-with open(os.path.join("json", "lf_keyconfig.json"), 'r') as fd:
-    keyconfig = DotDict(json.load(fd))
+def load_stuff(modulename):
+    print("got called")
+    global constants
+    global keyconfig
+    base, name, ext = versionnumber.split(modulename)
+    with open(os.path.join(base, "json", "constants.json"), 'r') as fd:
+        constants = DotDict(json.load(fd))
 
-logging.basicConfig(**constants.logging_setup)
+    with open(os.path.join(base, "json", "keyconfig.json"), 'r') as fd:
+        keyconfig = DotDict(json.load(fd))
 
+    logging.basicConfig(**constants.logging_setup)
+    print(versionnumber.render_version(__file__))
+    logging.info(versionnumber.render_version(__file__))
 
 def void(*args, **kwargs):
     return
@@ -198,7 +208,7 @@ class Object(object):
     def __repr__(self):
         return self.__class__.__name__
 
-from components import *
+# from components import *
 
 
 def test():

@@ -6,6 +6,11 @@ import pygame
 from pygame.locals import *
 
 
+def create_rotations(sprite, subdivisions):
+    pass
+
+
+
 def make_spritesheet(folder, name):
     """takes a folder of images and makes a spritesheet out of them
 assumes that they are uniformly sized and lexicographically ordered.
