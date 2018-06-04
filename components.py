@@ -221,6 +221,18 @@ class PositionComponent(Component):
     def y(self, value):
         self.pos.y = value
 
+    @property
+    def pos(self):
+        return self._pos
+
+    @pos.setter
+    def pos(self, value):
+
+        if isinstance(value, Vector):
+            self.pos = value.copy()
+        elif isinstance(value, (tuple,list)):
+            self.pos = Vector(*value)
+
     def reset(self):
         self.pos.components = [self.xstart, self.ystart]
 
