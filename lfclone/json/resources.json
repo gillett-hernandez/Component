@@ -10,5 +10,13 @@
     "background1":{
         "type": "data.image",
         "path": "./resources/images/clouds2.jpg"
+    },
+    "loading_screen":{
+        "type": "data.image",
+        "path": "./resources/images/loading_screen.jpg"
+    },
+    "bulletimage":{
+        "type": "data.image",
+        "path": "./resources/images/bulletimage.png"
     }
 }

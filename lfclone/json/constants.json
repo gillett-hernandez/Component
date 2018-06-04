@@ -12,7 +12,7 @@
     "FRAMERATE": 60,
     "WATER_LEVEL": 100,
     "EJECT_TURN_SPEED": 2,
-    "bulletspeed": 10,
+    "bulletspeed": 500,
     "friction": 0.002,
     "turnspeed": 4,
     "accelturnspeed": 2,

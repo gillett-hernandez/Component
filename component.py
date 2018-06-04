@@ -10,25 +10,13 @@ import pygame.locals
 import versionnumber
 from vector import Vector
 
-
-class DotDict:
-    def __init__(self, d={}):
-        self.__dict__.update(d)
-
-    def __getitem__(self, key):
-        return self.__dict__[key]
-
-    def __setitem__(self, key, item):
-        self.__dict__[key] = item
-
-    def items(self):
-        return self.__dict__.items()
+from datastructures import DotDict
 
 constants = None
 keyconfig = None
 
 def load_stuff(modulename):
-    print("got called")
+    print("component.py/load_stuff got called")
     global constants
     global keyconfig
     base, name, ext = versionnumber.split(modulename)
@@ -41,6 +29,9 @@ def load_stuff(modulename):
     logging.basicConfig(**constants.logging_setup)
     print(versionnumber.render_version(__file__))
     logging.info(versionnumber.render_version(__file__))
+
+def increment():
+    versionnumber.increment(__file__)
 
 def void(*args, **kwargs):
     return
@@ -69,7 +60,7 @@ class Event:
 class Component(object):
     def __init__(self, obj):
         super(Component, self).__init__()
-        logging.debug("{0.__class__.__name__} being instantiated now".format(self))
+        logging.debug("{0.__class__.__name__} super being instantiated now".format(self))
         self.obj = obj
         self.callbacks = {}
 
@@ -122,7 +113,7 @@ class Component(object):
                 func(**event.data)
         except AttributeError as e:
             print(event, func)
-            raise e
+            raise
 
     def remove_events(self):
         logging.debug("called remove_events from " +
@@ -151,6 +142,8 @@ class Object(object):
         self.components = {}
 
     def __getitem__(self, key):
+        if not isinstance(key, str):
+            raise KeyError()
         return self.components[key]
 
     def __setitem__(self, key, value):
@@ -163,6 +156,9 @@ class Object(object):
         return len(self.components)
 
     def __getattr__(self, name):
+        for componentname in self.components.keys():
+            if name == componentname:
+                return self.components[componentname]
         for component in self.components.values():
             if hasattr(component, name):
                 return getattr(component, name)

@@ -35,7 +35,7 @@ class Sprite(object):
         self.image = self.images[ind]
 
 
-class SpriteComponent(Sprite, Component, pygame.sprite.Sprite):
+class AnimatedSpriteComponent(Sprite, Component, pygame.sprite.Sprite):
     def __init__(self, obj, strip, uwidth=None, uheight=None, sprite_count=None):
         Component.__init__(self, obj)
         Sprite.__init__(self, strip, uwidth, uheight, sprite_count)
@@ -57,7 +57,7 @@ class SpriteComponent(Sprite, Component, pygame.sprite.Sprite):
         self.dir %= 360
 
     def set_image(self, ind):
-        super(SpriteComponent, self).set_image(ind)
+        super(AnimatedSpriteComponent, self).set_image(ind)
         self.obj.image = self.image
 
 

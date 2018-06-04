@@ -1,14 +1,24 @@
 all:
-	make test
-	python main.py
+	pwd
+	make clean
+	# make test
+	make --output-sync=line lfclone
+	
 
-lfclone:
-	python lfclone.py
+# .PHONY: lfclone, platformer
+
+lfclone: lfclone/main.py
+	cd .. && python -m Component.lfclone.main
+
+platformer:
+	cd .. && python -m Component.platformer.main
 
 test:
 	python component.py --test
-	python vector.py
+	python vector.py --test
 
 clean:
-	rm *.pyc *.log
-	rm -r ./__pycache__
+	$(RM) *.pyc
+	$(RM) *.log
+	$(RM) -r ./__pycache__
+

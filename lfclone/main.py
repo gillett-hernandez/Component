@@ -3,15 +3,29 @@
 import sys
 import os
 import logging
+import time
 import math
 
-from ..component import load_stuff
-load_stuff(__file__)
+# this is loaded to basically allow for forward references and data/configuration loading in a non-breaking way
+# {
+
+from ..component import load_stuff as component_load
+from ..components import load_stuff as components_load
+component_load(__file__)
+components_load(__file__)
+# by using __file__ and some other code, the load_stuff function loads config data from the appropriate directory
+
 from ..component import *
 from ..components import *
+# }
+
+from ..component import increment as component_increment
+from ..components import increment as components_increment
+
 # import sound
-import Component.kwargsGroup as kwargsGroup
-from ..animation import SpriteComponent
+import Component.datastructures as datastructures
+from Component.datastructures import DotDict
+from ..animation import AnimatedSpriteComponent
 import Component.versionnumber as versionnumber
 
 import pygame
@@ -69,17 +83,6 @@ def get_resource(name):
     return resources[name]
 
 
-def do_prep():
-    pygame.init()
-    print(versionnumber.render_version(__file__))
-    logging.info(versionnumber.render_version(__file__))
-    global resources
-    load_basic_resources(resources)
-    prep_screen(resources)
-    prep_background(resources)
-    prep_font(resources)
-
-
 def prep_screen(resources):
     winstyle = 0
     bestdepth = pygame.display.mode_ok(constants.SCREEN_SIZE, winstyle, 32)
@@ -91,7 +94,6 @@ def prep_screen(resources):
 def prep_background(resources):
     bg = get_resource("background1")
     truebg = pygame.Surface((constants.LEVEL_WIDTH, constants.LEVEL_HEIGHT)).convert()
-
     bg = pygame.transform.scale2x(bg)
     truebg.fill((255, 255, 255))
     truebg.blit(bg, (0, 0))
@@ -106,7 +108,6 @@ def prep_font(resources):
 
 offset = 0
 text_to_render = []
-
 
 def render_text(text, color=(0, 0, 0)):
     global offset
@@ -176,21 +177,29 @@ class ScreenLocator(object):
         ScreenLocator._camera = camera
 
 
-# class Bullet(Composite):
-#     def __init__(self, pos, **kwargs):
-#         super(Bullet, self).__init__(pos)
-#         self.attach_component('position', PositionComponent, pos)
-#         if 'vector' in kwargs:
-#             vector = kwargs['vector']
-#             assert isinstance(vector, list), "vector is "+str(vector)
-#             assert all(isinstance(elem, (float, int)) for elem in vector)
-#         elif 'velocity' in kwargs:
-#             vector = [lengthdir_x(kwargs['velocity'][0], kwargs['velocity'][1]),
-#                       lengthdir_y(kwargs['velocity'][0], kwargs['velocity'][1])]
-#         elif 'speed' in kwargs and 'direction' in kwargs:
-#             vector = [lengthdir_x(kwargs['speed'], kwargs['direction']), lengthdir_y(kwargs['speed'], kwargs['direction'])]
-#         self.attach_component('physics', PhysicsComponent, vector)
-#         self.attach_component('sprite', SimpleSprite)
+class Bullet(Object, pygame.sprite.Sprite):
+    group = None
+    def __init__(self, pos, ttl=100, **kwargs):
+        super(Bullet, self).__init__()
+        self.attach_component('position', PositionComponent,list(pos))
+        self.attach_component('physics', PhysicsComponent)
+        self.attach_component('sprite', AnimatedSpriteComponent, get_resource("bulletimage"), 32, 32)
+        self.ttl = ttl
+        self.physics.toggle_gravity()
+
+    def update(self, **kwargs):
+        self.ttl -= 1
+        if self.ttl <= 0:
+            self.group.remove(self)
+        self.notify(Event("update", kwargs))
+
+
+# class BulletFactory(Factory):
+#     def __init__(self):
+#         super(BulletFactory, self).__init__(Bullet)
+#     def create(self, *args, **kwargs):
+#         bullet = super(BulletFactory, self).create(self, *args, **kwargs)
+
 
 class PlayerPhysicsComponent(PhysicsComponent):
     def __init__(self, obj, **kwargs):
@@ -261,19 +270,6 @@ class PlayerPhysicsComponent(PhysicsComponent):
 
         if not self.vector.is_zero_vector():
             self.move(dr=(self.vector * dt/1000.))
-        # on ground code should not go here.
-        # if not self.place_free(x, y+1) and self.place_free(x, y):
-            # self.on_ground = True
-        # else:
-            # self.on_ground = False
-
-        # if pygame.Rect(self.obj.rect, topleft=(self.p.x, self.p.y+1)).collidelist([s.rect for s in self.nearby]):
-            # self.on_ground = True
-        # else:
-            # self.on_ground = False
-
-        # raise NotImplementedError
-        # self.obj.on_ground = whether your feet are touching the ground
 
         if not self.frictionless:
             self.vector[0] -= self.vector[0]*constants.friction
@@ -327,7 +323,7 @@ class PlayerEventHandler(EventHandler):
         @Reaction
         def shoot(**kwargs):
             return {"dv": constants.bulletspeed}
-        self.add_hold(hear="fire", react="shoot", callback=shoot)
+        self.add_hold(hear="fire", react="shoot", callback=shoot, cooldown=10)
 
         @Reaction
         def reset(**kwargs):
@@ -344,15 +340,21 @@ class Player(Object, pygame.sprite.Sprite):
         self.attach_component('physics', PlayerPhysicsComponent)
         self.attach_component('input', InputController)
         self.attach_component('handler', PlayerEventHandler)
-        self.attach_component('sprite', SpriteComponent, get_resource("playerimage"), 64, 64)
-        # where to attach the special behavior for the sprite logic.
-        # here?
+        self.attach_component('sprite', AnimatedSpriteComponent, get_resource("playerimage"), 64, 64)
+        self.attach_event("shoot", self.shoot)
         self.mask = pygame.mask.from_surface(self.image)
         assert(self.mask.count() > 0)
 
     @staticmethod
     def render_text(text):
         outputInfo(text)
+
+    def shoot(self, dv):
+        print(self.pos)
+        bullet = Bullet(self.pos)
+        logging.info("player physics direction = {}".format(self.physics.dir))
+        bullet.physics.accel(dv=dv, dir=self.physics.dir)
+        Bullet.group.add(bullet)
 
     def __getattr__(self, name):
         if name == "pos" or name == "x" or name == "y":
@@ -362,7 +364,7 @@ class Player(Object, pygame.sprite.Sprite):
     def update(self, **kwargs):
         screen, camera = ScreenLocator.getScreen()
         acenter = camera.apply(self.rect).center
-        vec = self.get_component("physics").vector.components[:]
+        vec = self.physics.vector.components[:]
         vec[1] = -vec[1]
         pygame.draw.line(screen, (255, 0, 0),
                          acenter,
@@ -472,14 +474,29 @@ def complex_camera(camera, target_rect):
 
 
 def main():
-    do_prep()
+    global resources
+    pygame.init()
+    print(versionnumber.render_version(__file__))
+    logging.info(versionnumber.render_version(__file__))
+
+    load_basic_resources(resources)
+    prep_screen(resources)
+    prep_background(resources)
+    prep_font(resources)
     dt = 1000/constants.FRAMERATE
 
-    global resources
 
     screen = get_resource("screen")
 
+    #print(type(get_resource("loading_screen")))
     screenrect = screen.get_rect()
+
+
+    screen.blit(get_resource("loading_screen"), (0,0), screenrect)
+
+
+    pygame.display.update()
+    # time.sleep(0.1)
 
     camera = Camera(simple_camera, constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
     # camera = Camera(lambda camera, tr: Rect(0, 0, camera.width, camera.height),
@@ -490,7 +507,9 @@ def main():
     screen.blit(truebg, (0, 0), screenrect)
     _screenrect = screenrect.copy()
 
-    All = kwargsGroup.UserGroup()
+    All = datastructures.UserGroup()
+
+    Bullet.group=All
 
     player = Player((500, constants.LEVEL_HEIGHT-500))
     # player.notify(Event("toggle_gravity", {}))
@@ -523,8 +542,8 @@ def main():
                     logging.info("notifying player of {event} from mainloop".format(
                                  event=event))
                     player.notify(translate_event(event))
-                    if event.type is MOUSEBUTTONDOWN:
-                        player.notify(Event("move", {"dr": [-constants.SCREEN_WIDTH//2 + event.pos[0], constants.SCREEN_HEIGHT//2 - event.pos[1]]}))
+                    # if event.type is MOUSEBUTTONDOWN:
+                    #     player.notify(Event("move", {"dr": [-constants.SCREEN_WIDTH//2 + event.pos[0], constants.SCREEN_HEIGHT//2 - event.pos[1]]}))
                 elif event.type is POSTMESSAGE:
                     render_text(event.info, event.color)
 
@@ -573,11 +592,17 @@ def main():
 
 if __name__ == '__main__':
     try:
-        if len(sys.argv) > 1:
-            print(sys.argv[1])
-            # debug = bool(sys.argv[1])
+        print("woos")
         main()
+    except SystemExit:
+        print("exception", sys.exc_info())
+        versionnumber.increment(__file__)
+        component_increment()
+        components_increment()
+        raise
+    else:
+        print("woo else")
     finally:
-        # versionnumber.increment(__file__)
+        print("woo finally")
         logging.info("END\n")
         pygame.quit()

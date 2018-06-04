@@ -1,7 +1,10 @@
 
 import math
 import logging
+import os
+import json
 
+from datastructures import DotDict
 from component import Component, Event, constants, keyconfig
 from vector import Vector
 import versionnumber
@@ -9,7 +12,7 @@ import versionnumber
 import pygame
 
 def load_stuff(modulename):
-    print("got called")
+    print("components.py/load_stuff got called")
     global constants
     global keyconfig
     base, name, ext = versionnumber.split(modulename)
@@ -24,6 +27,8 @@ def load_stuff(modulename):
     logging.info(versionnumber.render_version(__file__))
 
 
+def increment():
+    versionnumber.increment(__file__)
 
 
 class EventHandler(Component):
@@ -48,7 +53,7 @@ class EventHandler(Component):
 
         self.attach_event(hear, reaction)
 
-    def add_hold(self, hear, react, callback):
+    def add_hold(self, hear, react, callback, cooldown=1):
         if isinstance(callback, Reaction):
             start = callback.start
             hold = callback.hold
@@ -70,7 +75,7 @@ class EventHandler(Component):
                 # timing for a hold reaction goes here
                 self.obj.attach_component(
                     "{hear}_{react}_repeater".format(hear=hear, react=react),
-                    Repeater, react, 1, hold
+                    Repeater, react, cooldown, hold
                 )
             else:
 
@@ -194,7 +199,10 @@ class PositionComponent(Component):
     def __init__(self, obj, pos=(0, 0)):
         super(PositionComponent, self).__init__(obj)
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
-        self.pos = Vector(*pos)
+        if isinstance(pos,Vector):
+            self.pos = pos
+        else:
+            self.pos = Vector(*pos)
         self.xstart, self.ystart = pos
 
     @property
@@ -319,7 +327,7 @@ class PhysicsComponent(Component):
         # direction of +180 degrees has a sin of 0 and cos of -1
         # direction of +270 degrees has a sin of -1 and cos of 0
 
-        v = Vector(dv * math.cos(math.radians(self.dir)), dv * math.sin(math.radians(self.dir)))
+        v = Vector(dv * math.cos(math.radians(dir)), dv * math.sin(math.radians(dir)))
         logging.debug("accel {}".format(v))
         self.kick(dv=v)
 
@@ -340,10 +348,11 @@ class PhysicsComponent(Component):
         # logging.debug("gravity   : {}".format(self.gravity))
         # logging.debug("vector    : {}".format(self.vector))
         # logging.debug("dir       : {}".format(self.dir))
-        self.obj.render_text("x, y = ({:3.1f}, {:3.1f})".format(x, y))
-        self.obj.render_text("gravity = {0.gravity}".format(self))
-        self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
-        self.obj.render_text("direction = {0.dir}".format(self))
+        if hasattr(self.obj, "render_text"):
+            self.obj.render_text("x, y = ({:3.1f}, {:3.1f})".format(x, y))
+            self.obj.render_text("gravity = {0.gravity}".format(self))
+            self.obj.render_text("vector = ({self.vector[0]:3.1f}, {self.vector[1]:3.1f})".format(self=self))
+            self.obj.render_text("direction = {0.dir}".format(self))
 
         if not self.weightless:
             # self.kick(dv=Vector(0, -self.gravity), restrict_velocity=False)
