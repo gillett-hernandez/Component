@@ -200,7 +200,7 @@ class PositionComponent(Component):
         super(PositionComponent, self).__init__(obj)
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
         if isinstance(pos,Vector):
-            self.pos = pos
+            self.pos = Vector(*list(pos))
         else:
             self.pos = Vector(*pos)
         self.xstart, self.ystart = pos
