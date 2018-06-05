@@ -221,14 +221,14 @@ class PlayerPhysicsComponent(PhysicsComponent):
         # aimed left and low, aimed right and low
         cos = math.cos(math.radians(dir))
         if flag: # if up
-            if cos < -0.1:
+            if cos < -0.4:
                 self.obj.dispatch_event(Event("turn", {"d0":value}))
-            elif cos > 0.1:
+            elif cos > 0.4:
                 self.obj.dispatch_event(Event("turn", {"d0":-value}))
         else: # if down
-            if cos < -0.1:
+            if cos < -0.4:
                 self.obj.dispatch_event(Event("turn", {"d0":-value}))
-            elif cos > 0.1:
+            elif cos > 0.4:
                 self.obj.dispatch_event(Event("turn", {"d0":value}))
 
     def outside_horizontal(self):
@@ -323,12 +323,17 @@ class PlayerEventHandler(EventHandler):
         @Reaction
         def shoot(**kwargs):
             return {"dv": constants.bulletspeed}
-        self.add_hold(hear="fire", react="shoot", callback=shoot, cooldown=10)
+        self.add_hold(hear="fire", react="shoot", callback=shoot, cooldown=constants.rof_cooldown)
 
         @Reaction
         def reset(**kwargs):
             return {"x":constants.LEVEL_WIDTH//2, "y":constants.LEVEL_HEIGHT//2, "vx":0, "vy":0}
         self.add_tap(hear="space", react="reset", callback=reset)
+
+        @Reaction
+        def toggle_gravity(**kwargs):
+            return {}
+        self.add_tap(hear="gravity", react="toggle_gravity", callback=toggle_gravity)
 
 
 class Player(Object, pygame.sprite.Sprite):
@@ -350,9 +355,9 @@ class Player(Object, pygame.sprite.Sprite):
         outputInfo(text)
 
     def shoot(self, dv):
-        print(self.pos)
-        bullet = Bullet(self.pos)
-        logging.info("player physics direction = {}".format(self.physics.dir))
+        logging.debug("shot at pos {}".format(self.pos))
+        bullet = Bullet(self.pos+Vector(16,-16))
+        logging.debug("player physics direction = {}".format(self.physics.dir))
         bullet.physics.accel(dv=dv, dir=self.physics.dir)
         Bullet.group.add(bullet)
 

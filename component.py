@@ -106,7 +106,7 @@ class Component(object):
             if event.keyword not in self.callbacks:
                 return
             if event.keyword is not "update":
-                logging.debug("dispatching event {event!r}".format(event=event))
+                logging.debug("dispatching event {event!r} through Component".format(event=event))
             if len(self.callbacks[event.keyword]) == 0:
                 return -1
             for func in self.callbacks[event.keyword].values():
@@ -178,7 +178,7 @@ class Object(object):
     def dispatch_event(self, event):
         assert(event.data is not None)
         c = 0
-        logging.debug("dispatching event {event!r}".format(event=event))
+        logging.debug("dispatching event {event!r} through Object".format(event=event))
         for component in self.components.values():
             rvalue = component.dispatch_event(event)
             if rvalue == -1:

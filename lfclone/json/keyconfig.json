@@ -5,6 +5,7 @@
         "K_LEFT": ["left", {}],
         "K_RIGHT": ["right", {}],
         "K_SPACE": ["space", {}],
-        "K_x": ["fire", {}]
+        "K_x": ["fire", {}],
+        "K_g": ["gravity", {}]
     }
 }
