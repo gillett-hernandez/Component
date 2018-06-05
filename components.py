@@ -200,26 +200,26 @@ class PositionComponent(Component):
         super(PositionComponent, self).__init__(obj)
         logging.debug("{0.__class__.__name__} being instantiated now".format(self))
         if isinstance(pos,Vector):
-            self.pos = Vector(*list(pos))
-        else:
-            self.pos = Vector(*pos)
+            self._pos = Vector(*list(pos))
+        elif isinstance(pos, (tuple,list)):
+            self._pos = Vector(*pos)
         self.xstart, self.ystart = pos
 
     @property
     def x(self):
-        return self.pos.x
+        return self._pos.x
 
     @x.setter
     def x(self, value):
-        self.pos.x = value
+        self._pos.x = value
 
     @property
     def y(self):
-        return self.pos.y
+        return self._pos.y
 
     @y.setter
     def y(self, value):
-        self.pos.y = value
+        self._pos.y = value
 
     @property
     def pos(self):
@@ -229,9 +229,9 @@ class PositionComponent(Component):
     def pos(self, value):
 
         if isinstance(value, Vector):
-            self.pos = value.copy()
+            self._pos = value.copy()
         elif isinstance(value, (tuple,list)):
-            self.pos = Vector(*value)
+            self._pos = Vector(*value)
 
     def reset(self):
         self.pos.components = [self.xstart, self.ystart]

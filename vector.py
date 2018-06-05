@@ -120,6 +120,9 @@ class Vector(object):
         m = self.magnitude
         self /= m
 
+    def copy(self):
+        return Vector(*self.components)
+
     def __getitem__(self, key):
         return self.components[key]
 

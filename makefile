@@ -2,7 +2,7 @@ all:
 	pwd
 	make clean
 	# make test
-	make --output-sync=line lfclone
+	make --output-sync=line -B lfclone
 	
 
 # .PHONY: lfclone, platformer
