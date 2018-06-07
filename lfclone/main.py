@@ -25,7 +25,7 @@ from ..components import increment as components_increment
 # import sound
 import Component.datastructures as datastructures
 from Component.datastructures import DotDict
-from ..animation import AnimatedSpriteComponent
+from ..animation import AnimatedSpriteComponent, AngledSpriteComponent
 import Component.versionnumber as versionnumber
 
 import pygame
@@ -345,7 +345,7 @@ class Player(Object, pygame.sprite.Sprite):
         self.attach_component('physics', PlayerPhysicsComponent)
         self.attach_component('input', InputController)
         self.attach_component('handler', PlayerEventHandler)
-        self.attach_component('sprite', AnimatedSpriteComponent, get_resource("playerimage"), 64, 64)
+        self.attach_component('sprite', AngledSpriteComponent, get_resource("playerimage"), 64, 64)
         self.attach_event("shoot", self.shoot)
         self.mask = pygame.mask.from_surface(self.image)
         assert(self.mask.count() > 0)
